@@ -1122,10 +1122,29 @@ The best way to learn is by doing. Pick a real problem and solve it with Sheets.
   }
 ];
 
-export function getGuideBySlug(slug: string): Guide | undefined {
-  return guides.find(guide => guide.slug === slug);
+// Helper function to check if content is published
+function isPublished(publishedAt: string): boolean {
+  const publishDate = new Date(publishedAt);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return publishDate <= today;
 }
 
+// Get only published guides
+export function getPublishedGuides(): Guide[] {
+  return guides.filter(guide => isPublished(guide.publishedAt));
+}
+
+// Get guide by slug (only if published)
+export function getGuideBySlug(slug: string): Guide | undefined {
+  const guide = guides.find(g => g.slug === slug);
+  if (guide && isPublished(guide.publishedAt)) {
+    return guide;
+  }
+  return undefined;
+}
+
+// Get all published guide slugs
 export function getAllGuideSlugs(): string[] {
-  return guides.map(guide => guide.slug);
+  return getPublishedGuides().map(guide => guide.slug);
 }

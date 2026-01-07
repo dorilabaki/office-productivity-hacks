@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
-import { articles } from '@/data/articles';
-import { guides } from '@/data/guides';
+import { getPublishedArticles } from '@/data/articles';
+import { getPublishedGuides } from '@/data/guides';
 import { glossaryTerms } from '@/data/glossary';
 
 const baseUrl = 'https://officeproductivityhacks.com';
@@ -63,14 +63,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const articlePages = articles.map((article) => ({
+  const articlePages = getPublishedArticles().map((article) => ({
     url: `${baseUrl}/resources/${article.slug}`,
     lastModified: new Date(article.publishedAt),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
 
-  const guidePages = guides.map((guide) => ({
+  const guidePages = getPublishedGuides().map((guide) => ({
     url: `${baseUrl}/guides/${guide.slug}`,
     lastModified: new Date(guide.publishedAt),
     changeFrequency: 'monthly' as const,

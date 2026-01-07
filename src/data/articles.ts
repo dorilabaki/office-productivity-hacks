@@ -15,6 +15,432 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "office-services-that-come-to-you",
+    title: "Office Services That Come to You: Save Time with Convenience-First Solutions",
+    description: "From mobile notaries to on-site IT support, discover the services that eliminate commutes and waiting rooms. Work smarter by bringing the office to you.",
+    category: "general",
+    readTime: "7 min read",
+    publishedAt: "2025-01-20",
+    howToSteps: [
+      { name: "Audit Your Errands", text: "List all regular tasks that require you to leave the office or home. Include notarization, banking, tech support, printing, and administrative tasks." },
+      { name: "Research Mobile Alternatives", text: "Search for 'mobile [service]' or '[service] that comes to you' in your area. Many traditional services now offer on-site options for a small premium." },
+      { name: "Calculate True Time Cost", text: "Compare the mobile service fee against your hourly rate multiplied by travel and waiting time. Often the premium pays for itself." },
+      { name: "Build Your Service Network", text: "Keep contact information for reliable mobile service providers. Having trusted options ready saves research time when you need help." },
+      { name: "Batch and Schedule Strategically", text: "Group similar on-site services together when possible. Schedule during low-productivity hours to minimize disruption to focused work." }
+    ],
+    content: \`# Office Services That Come to You: Save Time with Convenience-First Solutions
+
+The math is simple: every trip to an office, bank, or service center costs you twice. Once in travel time, and again in the mental switching cost of interrupting your work.
+
+The productivity revolution isn't just about better software. It's about eliminating unnecessary movement from your day entirely.
+
+## The Hidden Cost of "Quick Errands"
+
+Let's do the math on a "quick" trip to the notary:
+
+- 15 minutes to get there
+- 20 minutes waiting (because there's always a wait)
+- 10 minutes for the actual service
+- 15 minutes back
+- 30 minutes to regain focus on your work
+
+**Total: Nearly 90 minutes for a 10-minute task.**
+
+If your time is worth $50/hour, that "free" notary trip just cost you $75 in productivity. A mobile notary charging $25 extra is actually saving you $50.
+
+## Services That Now Come to You
+
+### Mobile Notary Services
+
+Notarization used to mean finding a bank with a notary, during banking hours, and hoping they weren't busy. Now mobile notaries come to your office, home, or local coffee shop.
+
+**When to use them:**
+- Real estate documents
+- Legal paperwork
+- Power of attorney forms
+- Business contracts
+- Any document requiring witnesses
+
+**Cost:** Typically $25-75 above standard notary fees, depending on location and urgency.
+
+**How to find them:** Search "mobile notary [your city]" or use apps like Notarize for remote online notarization when allowed.
+
+### On-Site IT Support
+
+Your computer dies at 2 PM. Do you pack it up, drive to the repair shop, wait for a diagnosis, drive home, and repeat when it's fixed? Or does someone come to you?
+
+**Services available:**
+- Computer repair and diagnostics
+- Network setup and troubleshooting
+- Data recovery
+- Hardware upgrades
+- Printer and peripheral setup
+
+**Best options:**
+- Local IT service companies offering house calls
+- Geek Squad and similar services
+- Freelance IT professionals (often more flexible and affordable)
+
+**Pro tip:** Build a relationship with a reliable IT professional before emergencies happen. Having someone you trust on speed dial is invaluable.
+
+### Mobile Car Services
+
+Your car needs service, but spending half a day at the dealership isn't an option.
+
+**What's available:**
+- Oil changes
+- Tire rotation and replacement
+- Basic maintenance
+- Detailing
+- Battery replacement
+
+**How it works:** Services like YourMechanic, Wrench, or local mobile mechanics come to your parking lot. You keep working while they handle the car.
+
+**Best for:** Routine maintenance that doesn't require a lift or specialized shop equipment.
+
+### Professional Printing and Shipping
+
+Need documents printed, bound, and shipped—but FedEx Office is 20 minutes away?
+
+**Options:**
+- Courier services that pick up and deliver
+- Virtual assistants who handle print jobs and shipping
+- Concierge services at co-working spaces
+- Print services with pickup (you send files, they deliver)
+
+**For regular needs:** Consider establishing an account with a local print shop that offers delivery. The convenience premium usually pays for itself.
+
+### Mobile Health Services
+
+Doctor's visits don't always require a doctor's office.
+
+**Available services:**
+- Mobile flu shots and vaccinations
+- Blood draws for lab work
+- Basic health screenings
+- Telehealth for many consultations
+- Mobile optometry in some areas
+
+**For companies:** Many of these services offer corporate packages, bringing wellness checks to your office.
+
+### On-Site Personal Services
+
+Time spent on personal maintenance is time not spent on work. Some services now come to you:
+
+**Hair and grooming:** Mobile barbers and hair stylists serve offices and homes.
+
+**Fitness:** Personal trainers, yoga instructors, and massage therapists often offer in-home or in-office sessions.
+
+**Dry cleaning:** Pickup and delivery services are now standard in most urban areas.
+
+**Pet care:** Mobile grooming, mobile vets, and dog walking services.
+
+## Building Your Convenience Infrastructure
+
+### Step 1: Audit Your Time Leaks
+
+Track for two weeks: every time you leave your workspace for a service, note:
+- What was the task?
+- How long did the entire process take?
+- What work was interrupted?
+
+You'll likely find 3-5 recurring time drains that could be eliminated.
+
+### Step 2: Research Alternatives
+
+For each identified time leak, search for mobile or delivery alternatives:
+- "Mobile [service] near me"
+- "[Service] pickup and delivery"
+- "[Service] at-home service"
+
+Save the best options—don't research from scratch every time.
+
+### Step 3: Calculate Break-Even
+
+For each service, determine your break-even point:
+
+**If the mobile premium is $30...**
+- At $30/hour effective rate: Breaks even at 1 hour saved
+- At $50/hour: Breaks even at 36 minutes saved
+- At $100/hour: Breaks even at 18 minutes saved
+
+Most mobile services save you 1-2 hours. The premium almost always pays for itself.
+
+### Step 4: Establish Relationships
+
+Don't just use these services randomly. Build relationships:
+- Keep a list of reliable providers
+- Schedule recurring services when possible
+- Tip well—you want them to prioritize you
+- Leave reviews—it helps them and builds goodwill
+
+## When to Avoid Mobile Services
+
+Not every situation calls for convenience services:
+
+**When price matters most:** If you're on a tight budget and have flexible time, traditional services are cheaper.
+
+**For complex needs:** Some services require specialized equipment only available in dedicated facilities.
+
+**When face-to-face relationships matter:** Banking relationships, legal consultations, and medical issues often benefit from in-person rapport.
+
+**For very time-sensitive needs:** Mobile services may have limited immediate availability. Sometimes driving yourself is faster.
+
+## The Mindset Shift
+
+Paying for convenience feels like a luxury. But it's actually an investment in your most valuable asset: focused work time.
+
+The question isn't "Can I afford the extra $30 for mobile service?"
+
+It's "Can I afford to lose 90 minutes of productive time?"
+
+For knowledge workers, entrepreneurs, and anyone whose output depends on focused attention, the answer is almost always no.
+
+## Implementation Checklist
+
+- [ ] List your 5 most common service-related interruptions
+- [ ] Research mobile alternatives for each
+- [ ] Calculate break-even for premium services
+- [ ] Save contact info for reliable providers
+- [ ] Schedule first mobile service as a test
+- [ ] Track time saved over one month
+- [ ] Expand to additional services as needed
+
+## The Compound Effect
+
+Every hour you reclaim from errands is an hour available for meaningful work—or meaningful rest. Over a year, optimizing even 3-4 hours per month adds up to nearly a full work week.
+
+Your office doesn't need to go anywhere. The world comes to you.
+
+---
+
+*Transform how you work. Follow Office Productivity Hacks for more strategies to reclaim your time.*
+\`,
+  },
+  {
+    slug: "decision-fatigue-productivity",
+    title: "Decision Fatigue: How to Make Fewer Choices and Get More Done",
+    description: "Every decision drains mental energy. Learn how to systematically eliminate unnecessary choices, automate routines, and protect your brain for decisions that actually matter.",
+    category: "general",
+    readTime: "9 min read",
+    publishedAt: "2025-01-27",
+    howToSteps: [
+      { name: "Track Your Decisions", text: "For one week, note every decision you make—from what to eat to what to work on next. Awareness is the first step to reduction." },
+      { name: "Create Standard Operating Procedures", text: "Document your recurring decisions: meal plans, workout routines, email templates, outfit formulas. Write them once, follow them automatically." },
+      { name: "Implement Decision Batching", text: "Group similar decisions together. Plan your week on Sunday. Choose outfits for the week. Prep meals in advance. Batch decisions to reduce daily drain." },
+      { name: "Set Default Choices", text: "Establish defaults for low-stakes decisions: same breakfast, same work start routine, same first task. Defaults eliminate the need to choose." },
+      { name: "Protect Peak Decision Hours", text: "Schedule important decisions for your high-energy hours (usually morning). Save routine tasks for afternoon when decision quality declines." }
+    ],
+    content: \`# Decision Fatigue: How to Make Fewer Choices and Get More Done
+
+You wake up. What do you wear? What's for breakfast? Check email first or start with deep work? Take this call or let it go to voicemail? Regular or decaf?
+
+It's 9 AM and you've already made dozens of decisions. Each one costs something.
+
+Decision fatigue is real, measurable, and undermining your productivity every single day. Here's how to fight back.
+
+## What Is Decision Fatigue?
+
+Decision fatigue is the deteriorating quality of decisions made after a long session of decision-making. Research shows that our ability to make good choices is a finite resource that depletes throughout the day.
+
+The famous study: Judges making parole decisions were significantly more likely to grant parole at the beginning of the day (65%) than just before lunch (nearly 0%), and the pattern repeated after breaks.
+
+**Key insight:** The decisions weren't getting harder. The judges were getting tired.
+
+This applies to you. Your willpower, judgment, and decision quality decline with every choice you make—important or trivial.
+
+## Why Small Decisions Drain Big Energy
+
+Your brain doesn't distinguish between choosing a font and choosing a career. Every decision activates the same mental processes:
+
+1. Identify options
+2. Evaluate trade-offs
+3. Imagine outcomes
+4. Commit to a choice
+5. Handle doubt about whether you chose correctly
+
+The difference is that big decisions justify the energy expense. Small decisions don't—but they cost you anyway.
+
+**The tyranny of the trivial:** Spending mental energy deciding what to have for lunch leaves less for deciding how to handle a difficult client conversation.
+
+## Signs You're Experiencing Decision Fatigue
+
+- Defaulting to the easiest option rather than the best one
+- Procrastinating on decisions (which paradoxically requires more decisions)
+- Making impulsive choices without proper evaluation
+- Feeling exhausted by simple everyday decisions
+- Avoiding situations that require choices
+- Irritability when asked to decide something
+- Analysis paralysis on even minor issues
+
+## The Science of Decision Depletion
+
+Your prefrontal cortex handles executive functions including decision-making. It runs on glucose and rest. When depleted:
+
+- Risk assessment gets worse
+- Long-term thinking diminishes
+- Impulse control weakens
+- Creative problem-solving suffers
+- Emotional regulation declines
+
+This is why evening decisions are often regrettable, and why "sleeping on it" actually works—you're restoring decision-making capacity.
+
+## Strategies to Reduce Decision Volume
+
+### 1. Eliminate Unnecessary Decisions
+
+The most powerful approach: remove the decision entirely.
+
+**Wardrobe simplification:** Steve Jobs' black turtleneck wasn't about style—it was about not deciding. You don't need to go that extreme, but consider:
+- A "uniform" for work (variations on the same outfit)
+- Pre-planned outfits for each day
+- Fewer clothes overall (paradox of choice: more options = more stress)
+
+**Meal standardization:** Eating the same breakfast every day sounds boring. But "boring breakfast" + "mental energy for important work" is a great trade.
+- Standard weekday breakfast
+- Rotating dinner menu (Monday is always pasta)
+- Meal prep on Sundays
+
+**Routine automation:** Make your morning routine automatic:
+- Same wake time
+- Same sequence of activities
+- Same pre-work ritual
+
+### 2. Create Systems and Rules
+
+Rules eliminate decisions by pre-deciding.
+
+**If-then protocols:**
+- If it takes less than 2 minutes, do it now
+- If I'm not sure I need it, I don't buy it
+- If the meeting has no agenda, I decline
+- If I've been checking email for 10 minutes, I stop
+
+**Standard responses:**
+- Template emails for common situations
+- Scripted answers for frequent questions
+- Default responses for routine requests
+
+**Binary constraints:**
+- I don't drink on weekdays
+- I don't work weekends
+- I don't check email before 9 AM
+
+These sound restrictive. They're actually liberating—no mental debate required.
+
+### 3. Batch Similar Decisions
+
+Grouping decisions reduces context-switching overhead.
+
+**Examples:**
+- Plan your week's schedule on Sunday (not daily morning decisions)
+- Choose a week's worth of outfits at once
+- Review all invoices on one day instead of as they arrive
+- Handle all calls in a designated window
+
+**Meeting batching:** Rather than deciding per-meeting whether to attend, establish rules:
+- All meetings on Tuesday/Thursday
+- No meetings before 11 AM
+- Maximum 3 meetings per day
+
+### 4. Establish Defaults
+
+Defaults are pre-made decisions you follow unless there's a strong reason not to.
+
+**Productivity defaults:**
+- Default first task of the day: Most important project
+- Default meeting length: 25 minutes (not 30)
+- Default response to new commitments: "Let me check my schedule"
+- Default lunch: Same restaurant or meal prep
+
+**Life defaults:**
+- Default weekend plans: Specific recurring activities
+- Default vacation destinations: Places you know you enjoy
+- Default gift-giving: Specific categories per person
+
+### 5. Delegate Decisions
+
+Not every decision needs to be yours.
+
+**At work:**
+- Empower team members to decide within parameters
+- Create decision-making frameworks others can use
+- Set budgets within which choices don't need approval
+
+**At home:**
+- Let your partner choose restaurants, or alternate
+- Let subscriptions auto-renew (for things you consistently want)
+- Use recommendations (from algorithms or trusted sources)
+
+### 6. Protect Your Decision Capacity
+
+Even with reduction strategies, some days require many decisions. Protect yourself:
+
+**Front-load important decisions:** Handle critical choices early when you're fresh.
+
+**Take decision breaks:** A short walk, a snack, or simply changing context helps restore capacity.
+
+**Recognize depletion:** When you notice decision fatigue, postpone important choices if possible.
+
+**Sleep and nutrition:** Your brain literally needs glucose for decision-making. Stay fueled.
+
+## The Three-Decision Framework
+
+For unavoidable decisions, this framework reduces mental load:
+
+**Will this matter in 10 minutes? 10 months? 10 years?**
+
+- 10 minutes: Decide instantly, move on
+- 10 months: Worth some thought, but set a time limit
+- 10 years: Invest appropriate energy, but recognize it's still just information + intuition
+
+Most decisions fall in the "10 minutes" category. Treat them accordingly.
+
+## Implementation: The 30-Day Decision Diet
+
+### Week 1: Awareness
+- Track every decision you make
+- Note which ones feel draining
+- Identify patterns in decision timing and quality
+
+### Week 2: Elimination
+- Standardize one meal per day
+- Simplify your morning routine
+- Create one if-then rule to eliminate a recurring decision
+
+### Week 3: Systematization
+- Batch one category of decisions
+- Create templates for common communications
+- Establish one decision default
+
+### Week 4: Protection
+- Schedule important decisions for peak hours
+- Build in decision breaks
+- Practice quick resolution for small choices
+
+## The Compound Effect
+
+Eliminating 10 small decisions per day saves you:
+- 70 decisions per week
+- 300+ per month
+- 3,600+ per year
+
+More importantly, it preserves mental energy for what actually matters: the creative work, the relationship conversations, the strategic choices that shape your life.
+
+## The Paradox of Constraints
+
+This approach might feel limiting. In reality, it's liberating.
+
+When you don't have to decide what to wear, what to eat, or how to start your day, you free up mental bandwidth for the decisions only you can make.
+
+The goal isn't to eliminate all decisions. It's to eliminate the unimportant ones so you can be fully present for the important ones.
+
+---
+
+*Protect your mental energy. Follow Office Productivity Hacks for more strategies to work smarter, not harder.*
+\`,
+  },
+  {
     slug: "20-excel-shortcuts-that-save-hours",
     title: "20 Excel Shortcuts That Save Hours Every Week",
     description: "Master these essential Excel keyboard shortcuts to dramatically boost your productivity. From navigation to formatting, these shortcuts will transform how you work with spreadsheets.",
@@ -1041,10 +1467,29 @@ Start with the basics: TRIM, Remove Duplicates, Find & Replace. Graduate to Powe
   }
 ];
 
-export function getArticleBySlug(slug: string): Article | undefined {
-  return articles.find(article => article.slug === slug);
+// Helper function to check if content is published
+function isPublished(publishedAt: string): boolean {
+  const publishDate = new Date(publishedAt);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return publishDate <= today;
 }
 
+// Get only published articles (filters out future-dated content)
+export function getPublishedArticles(): Article[] {
+  return articles.filter(article => isPublished(article.publishedAt));
+}
+
+// Get article by slug (only if published)
+export function getArticleBySlug(slug: string): Article | undefined {
+  const article = articles.find(a => a.slug === slug);
+  if (article && isPublished(article.publishedAt)) {
+    return article;
+  }
+  return undefined;
+}
+
+// Get all published article slugs
 export function getAllArticleSlugs(): string[] {
-  return articles.map(article => article.slug);
+  return getPublishedArticles().map(article => article.slug);
 }

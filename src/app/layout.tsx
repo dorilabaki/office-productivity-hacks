@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/logo.jpeg",
+        width: 400,
+        height: 400,
         alt: siteConfig.name,
       },
     ],
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ["/og-image.png"],
+    images: ["/logo.jpeg"],
   },
   robots: {
     index: true,

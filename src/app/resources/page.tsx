@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 import { FadeInUp, StaggerContainer, StaggerItem } from '@/components/MotionWrapper';
 import ArticleCard from '@/components/ArticleCard';
-import { articles } from '@/data/articles';
+import { getPublishedArticles } from '@/data/articles';
 
 export const metadata: Metadata = {
   title: 'Resources & Articles',
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function ResourcesPage() {
+  const articles = getPublishedArticles();
   return (
     <>
       <section className="gradient-hero py-16 md:py-20">

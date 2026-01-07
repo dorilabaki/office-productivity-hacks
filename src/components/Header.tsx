@@ -31,9 +31,9 @@ export default function Header() {
               height={44}
               className="rounded-lg shadow-md group-hover:shadow-lg transition-shadow"
             />
-            <div className="hidden sm:block">
-              <span className="font-bold text-slate-900 text-lg">Office Productivity</span>
-              <span className="block text-xs text-primary-600 font-medium -mt-1">Hacks</span>
+            <div className="flex flex-col">
+              <span className="font-bold text-slate-900 text-sm sm:text-lg leading-tight">Office Productivity</span>
+              <span className="text-[10px] sm:text-xs text-primary-600 font-medium">Hacks</span>
             </div>
           </Link>
 
