@@ -28,7 +28,7 @@ export const articles: Article[] = [
       { name: "Build Your Service Network", text: "Keep contact information for reliable mobile service providers. Having trusted options ready saves research time when you need help." },
       { name: "Batch and Schedule Strategically", text: "Group similar on-site services together when possible. Schedule during low-productivity hours to minimize disruption to focused work." }
     ],
-    content: \`# Office Services That Come to You: Save Time with Convenience-First Solutions
+    content: `# Office Services That Come to You: Save Time with Convenience-First Solutions
 
 The math is simple: every trip to an office, bank, or service center costs you twice. Once in travel time, and again in the mental switching cost of interrupting your work.
 
@@ -215,7 +215,7 @@ Your office doesn't need to go anywhere. The world comes to you.
 ---
 
 *Transform how you work. Follow Office Productivity Hacks for more strategies to reclaim your time.*
-\`,
+`,
   },
   {
     slug: "decision-fatigue-productivity",
@@ -231,7 +231,7 @@ Your office doesn't need to go anywhere. The world comes to you.
       { name: "Set Default Choices", text: "Establish defaults for low-stakes decisions: same breakfast, same work start routine, same first task. Defaults eliminate the need to choose." },
       { name: "Protect Peak Decision Hours", text: "Schedule important decisions for your high-energy hours (usually morning). Save routine tasks for afternoon when decision quality declines." }
     ],
-    content: \`# Decision Fatigue: How to Make Fewer Choices and Get More Done
+    content: `# Decision Fatigue: How to Make Fewer Choices and Get More Done
 
 You wake up. What do you wear? What's for breakfast? Check email first or start with deep work? Take this call or let it go to voicemail? Regular or decaf?
 
@@ -438,7 +438,7 @@ The goal isn't to eliminate all decisions. It's to eliminate the unimportant one
 ---
 
 *Protect your mental energy. Follow Office Productivity Hacks for more strategies to work smarter, not harder.*
-\`,
+`,
   },
   {
     slug: "20-excel-shortcuts-that-save-hours",
