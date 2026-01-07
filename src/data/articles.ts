@@ -20,7 +20,7 @@ export const articles: Article[] = [
     description: "From mobile notaries to on-site IT support, discover the services that eliminate commutes and waiting rooms. Work smarter by bringing the office to you.",
     category: "general",
     readTime: "7 min read",
-    publishedAt: "2025-01-20",
+    publishedAt: "2026-01-13",
     howToSteps: [
       { name: "Audit Your Errands", text: "List all regular tasks that require you to leave the office or home. Include notarization, banking, tech support, printing, and administrative tasks." },
       { name: "Research Mobile Alternatives", text: "Search for 'mobile [service]' or '[service] that comes to you' in your area. Many traditional services now offer on-site options for a small premium." },
@@ -223,7 +223,7 @@ Your office doesn't need to go anywhere. The world comes to you.
     description: "Every decision drains mental energy. Learn how to systematically eliminate unnecessary choices, automate routines, and protect your brain for decisions that actually matter.",
     category: "general",
     readTime: "9 min read",
-    publishedAt: "2025-01-27",
+    publishedAt: "2026-01-27",
     howToSteps: [
       { name: "Track Your Decisions", text: "For one week, note every decision you make—from what to eat to what to work on next. Awareness is the first step to reduction." },
       { name: "Create Standard Operating Procedures", text: "Document your recurring decisions: meal plans, workout routines, email templates, outfit formulas. Write them once, follow them automatically." },
