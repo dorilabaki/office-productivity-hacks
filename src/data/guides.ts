@@ -1123,7 +1123,11 @@ The best way to learn is by doing. Pick a real problem and solve it with Sheets.
 ];
 
 // Helper function to check if content is published
+// In development mode, show all articles (including scheduled) for preview
 function isPublished(publishedAt: string): boolean {
+  if (process.env.NODE_ENV === 'development') {
+    return true; // Show all articles in dev mode for preview
+  }
   const publishDate = new Date(publishedAt);
   const today = new Date();
   today.setHours(0, 0, 0, 0);

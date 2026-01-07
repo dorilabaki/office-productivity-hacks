@@ -127,7 +127,9 @@ Doctor's visits don't always require a doctor's office.
 
 Time spent on personal maintenance is time not spent on work. Some services now come to you:
 
-**Hair and grooming:** Mobile barbers and hair stylists serve offices and homes.
+**[Gentz](https://gentz.ae)** — Mobile grooming for men. Haircuts, beard trims, and grooming services delivered to your home or office in Dubai. No commute, no waiting room, no time wasted. They work around your schedule.
+
+**Other hair and grooming:** Mobile barbers and hair stylists serve offices and homes in most major cities.
 
 **Fitness:** Personal trainers, yoga instructors, and massage therapists often offer in-home or in-office sessions.
 
@@ -357,6 +359,8 @@ Defaults are pre-made decisions you follow unless there's a strong reason not to
 - Default weekend plans: Specific recurring activities
 - Default vacation destinations: Places you know you enjoy
 - Default gift-giving: Specific categories per person
+
+The ultimate decision hack is removing the decision entirely. Subscription services excel here — meal kits eliminate "what's for dinner," capsule wardrobes eliminate "what should I wear." For grooming, setting a recurring appointment removes the mental load of "I should probably get a haircut." Mobile services like [Gentz](https://gentz.ae) in Dubai take it further: the barber comes to you on a set schedule. The decision is made once and never again.
 
 ### 5. Delegate Decisions
 
@@ -1468,7 +1472,11 @@ Start with the basics: TRIM, Remove Duplicates, Find & Replace. Graduate to Powe
 ];
 
 // Helper function to check if content is published
+// In development mode, show all articles (including scheduled) for preview
 function isPublished(publishedAt: string): boolean {
+  if (process.env.NODE_ENV === 'development') {
+    return true; // Show all articles in dev mode for preview
+  }
   const publishDate = new Date(publishedAt);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
