@@ -5,6 +5,7 @@ import { Clock, ArrowLeft, Linkedin, BookOpen } from 'lucide-react';
 import { FadeInUp } from '@/components/MotionWrapper';
 import { guides, getGuideBySlug, getAllGuideSlugs } from '@/data/guides';
 import { siteConfig } from '@/data/site';
+import { marked } from 'marked';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -85,7 +86,7 @@ export default async function GuidePage({ params }: Props) {
             <div className="max-w-4xl mx-auto">
               <div className="grid lg:grid-cols-[1fr_250px] gap-8">
                 <FadeInUp>
-                  <div className="prose prose-slate max-w-none prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-p:text-slate-600 prose-a:text-primary-600 prose-code:text-primary-700 prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-slate-900 prose-pre:text-slate-100" dangerouslySetInnerHTML={{ __html: guide.content.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>').replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\n\n/g, '</p><p>').replace(/^# (.+)$/gm, '').replace(/^## (.+)$/gm, '<h2 id="$1">$1</h2>').replace(/^### (.+)$/gm, '<h3>$1</h3>').replace(/^\- (.+)$/gm, '<li>$1</li>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/<section id="([^"]+)">/g, '<section id="$1">').replace(/<\/section>/g, '</section>') }} />
+                  <div className="prose prose-slate max-w-none prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-p:text-slate-600 prose-p:mb-4 prose-a:text-primary-600 prose-li:text-slate-600 prose-ul:my-4 prose-ol:my-4 prose-code:text-primary-700 prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-hr:my-8" dangerouslySetInnerHTML={{ __html: marked(guide.content) }} />
                 </FadeInUp>
 
                 <aside className="hidden lg:block">
