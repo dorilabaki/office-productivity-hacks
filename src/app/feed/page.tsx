@@ -1,39 +1,12 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
-import { Rss, Clock, ArrowRight } from 'lucide-react';
+import { Rss, Clock, ArrowRight, ThumbsUp, MessageCircle, Repeat2 } from 'lucide-react';
 import { FadeInUp, StaggerContainer, StaggerItem } from '@/components/MotionWrapper';
-import { articles } from '@/data/articles';
-import { guides } from '@/data/guides';
+import { feedPosts, feedConfig } from '@/data/feed';
 import { siteConfig } from '@/data/site';
 
-export const metadata: Metadata = {
-  title: 'Content Feed',
-  description: 'Latest articles, guides, and updates from Office Productivity Hacks.',
-};
-
-interface FeedItem {
-  type: 'article' | 'guide';
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  publishedAt: string;
-  readTime: string;
-}
-
 export default function FeedPage() {
-  const feedItems: FeedItem[] = [
-    ...articles.map(a => ({ type: 'article' as const, slug: a.slug, title: a.title, description: a.description, category: a.category, publishedAt: a.publishedAt, readTime: a.readTime })),
-    ...guides.map(g => ({ type: 'guide' as const, slug: g.slug, title: g.title, description: g.description, category: g.category, publishedAt: g.publishedAt, readTime: g.readTime })),
-  ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
-
-  const categoryColors: Record<string, string> = {
-    excel: 'bg-excel-100 text-excel-700',
-    sheets: 'bg-sheets-100 text-sheets-700',
-    word: 'bg-word-100 text-word-700',
-    general: 'bg-slate-100 text-slate-700',
-  };
-
   return (
     <>
       <section className="gradient-hero py-16 md:py-20">
@@ -42,15 +15,17 @@ export default function FeedPage() {
             <FadeInUp>
               <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
                 <Rss className="w-4 h-4" />
-                Content Feed
+                LinkedIn Feed
               </div>
             </FadeInUp>
             <FadeInUp delay={0.1}>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">Latest Updates</h1>
+              <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">
+                Top Posts from LinkedIn
+              </h1>
             </FadeInUp>
             <FadeInUp delay={0.2}>
               <p className="text-lg text-slate-600">
-                All our latest articles and guides in one place, sorted by date.
+                Our most popular posts from {feedConfig.followers} followers.
               </p>
             </FadeInUp>
           </div>
@@ -61,37 +36,56 @@ export default function FeedPage() {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <StaggerContainer className="space-y-6">
-              {feedItems.map((item) => (
-                <StaggerItem key={`${item.type}-${item.slug}`}>
-                  <Link
-                    href={item.type === 'article' ? `/resources/${item.slug}` : `/guides/${item.slug}`}
-                    className="card card-hover p-6 block group"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className={`tag ${categoryColors[item.category]}`}>
-                        {item.category === 'excel' ? 'Excel' : item.category === 'sheets' ? 'Google Sheets' : item.category === 'word' ? 'Word' : 'General'}
-                      </span>
-                      <span className="text-xs px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full">
-                        {item.type === 'guide' ? 'Guide' : 'Article'}
-                      </span>
-                      <span className="flex items-center gap-1 text-sm text-slate-500">
-                        <Clock className="w-3.5 h-3.5" />
-                        {item.readTime}
-                      </span>
+              {feedPosts.map((post) => (
+                <StaggerItem key={post.id}>
+                  <div className="card p-6">
+                    {/* Header */}
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white font-bold">
+                        OP
+                      </div>
+                      <div>
+                        <p className="font-semibold text-slate-900">{feedConfig.pageName}</p>
+                        <p className="text-sm text-slate-500">
+                          {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                        </p>
+                      </div>
                     </div>
-                    <h2 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">
-                      {item.title}
-                    </h2>
-                    <p className="text-slate-600 mb-4 line-clamp-2">{item.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-slate-500">
-                        {new Date(item.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                      </span>
-                      <span className="flex items-center gap-2 text-primary-600 font-medium text-sm group-hover:gap-3 transition-all">
-                        Read more <ArrowRight className="w-4 h-4" />
-                      </span>
+
+                    {/* Content */}
+                    <div className="whitespace-pre-line text-slate-700 leading-relaxed mb-6">
+                      {post.content}
                     </div>
-                  </Link>
+
+                    {/* Engagement */}
+                    <div className="flex items-center gap-6 pt-4 border-t border-slate-100">
+                      <div className="flex items-center gap-2 text-slate-500">
+                        <ThumbsUp className="w-4 h-4" />
+                        <span className="font-medium text-sm">{post.likes.toLocaleString()}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-slate-500">
+                        <MessageCircle className="w-4 h-4" />
+                        <span className="font-medium text-sm">{post.comments.toLocaleString()}</span>
+                      </div>
+                      {post.reposts && (
+                        <div className="flex items-center gap-2 text-slate-500">
+                          <Repeat2 className="w-4 h-4" />
+                          <span className="font-medium text-sm">{post.reposts.toLocaleString()}</span>
+                        </div>
+                      )}
+                      <a
+                        href={post.linkedInUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ml-auto flex items-center gap-2 text-[#0A66C2] hover:text-[#004182] transition-colors text-sm font-medium"
+                      >
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        View on LinkedIn
+                      </a>
+                    </div>
+                  </div>
                 </StaggerItem>
               ))}
             </StaggerContainer>
@@ -99,13 +93,21 @@ export default function FeedPage() {
         </div>
       </section>
 
-      <section className="section bg-slate-50">
+      <section className="section bg-[#0A66C2]">
         <div className="container-custom text-center">
           <FadeInUp>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">Stay Updated</h2>
-            <p className="text-slate-600 mb-6">Follow us on LinkedIn for daily productivity tips.</p>
-            <a href={siteConfig.linkedInUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              Follow on LinkedIn
+            <h2 className="text-2xl font-bold text-white mb-4">Get Daily Productivity Tips</h2>
+            <p className="text-white/80 mb-6">Follow us on LinkedIn for daily Excel, Sheets, and productivity hacks.</p>
+            <a
+              href={feedConfig.linkedInUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white text-[#0A66C2] px-6 py-3 rounded-lg font-semibold hover:bg-slate-100 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              Follow {feedConfig.pageName}
             </a>
           </FadeInUp>
         </div>
