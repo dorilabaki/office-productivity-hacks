@@ -201,27 +201,27 @@ export default function AboutPage() {
             <StaggerItem>
               <div className="bg-slate-50 rounded-xl p-6 h-full border border-slate-200">
                 <p className="text-sm text-primary-600 font-medium mb-2">Luxury Retail</p>
-                <h3 className="font-bold text-slate-900 text-lg mb-3">The Watch Squad: Inventory Tracking</h3>
+                <h3 className="font-bold text-slate-900 text-lg mb-3">The Watch Squad: Global Price Arbitrage</h3>
                 <p className="text-slate-600 text-sm mb-4">
-                  The Watch Squad, a luxury watch dealer in the UAE, built an Excel-based inventory
-                  system using VLOOKUP and conditional formatting. Result: real-time visibility into
-                  stock across multiple locations, 60% reduction in inventory counting time, and
-                  zero lost items in the past year.
+                  The Watch Squad built a live pricing dashboard that pulls market rates from Dubai,
+                  London, Tokyo, and Geneva. When a Patek Philippe trades 12% below market in Japan,
+                  they see it instantly. This system identified AED 2.3M in arbitrage opportunities
+                  in 2024 alone. One spreadsheet turned regional traders into global players.
                 </p>
-                <p className="text-xs text-slate-500">Key formulas: VLOOKUP, COUNTIF, conditional formatting</p>
+                <p className="text-xs text-slate-500">Impact: 40% increase in profitable acquisitions</p>
               </div>
             </StaggerItem>
             <StaggerItem>
               <div className="bg-slate-50 rounded-xl p-6 h-full border border-slate-200">
-                <p className="text-sm text-primary-600 font-medium mb-2">Service Business</p>
-                <h3 className="font-bold text-slate-900 text-lg mb-3">Gentz: Appointment Analytics</h3>
+                <p className="text-sm text-primary-600 font-medium mb-2">Professional Services</p>
+                <h3 className="font-bold text-slate-900 text-lg mb-3">LeverBrands: ROI That Wins Contracts</h3>
                 <p className="text-slate-600 text-sm mb-4">
-                  Gentz, a mobile barber service in Dubai, used Google Sheets to track appointment
-                  patterns and customer preferences. By analyzing peak times and service popularity,
-                  they optimized scheduling and reduced idle time by 25%. The same data informed
-                  their pricing strategy.
+                  LeverBrands, a personal branding agency, built automated client dashboards showing
+                  LinkedIn growth, engagement rates, and lead attribution. When prospects asked
+                  &quot;does this actually work?&quot; they could show exactly which posts generated which
+                  meetings. That proof closed a $180K enterprise contract in Q3 2024.
                 </p>
-                <p className="text-xs text-slate-500">Key formulas: QUERY, ARRAYFORMULA, pivot tables</p>
+                <p className="text-xs text-slate-500">Impact: 3x client retention, higher-value contracts</p>
               </div>
             </StaggerItem>
             <StaggerItem>
