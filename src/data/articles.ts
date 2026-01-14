@@ -100,7 +100,7 @@ Your car needs service, but spending half a day at the dealership isn't an optio
 
 ### Professional Printing and Shipping
 
-Need documents printed, bound, and shipped—but FedEx Office is 20 minutes away?
+Need documents printed, bound, and shipped, but FedEx Office is 20 minutes away?
 
 **Options:**
 - Courier services that pick up and deliver
@@ -127,7 +127,7 @@ Doctor's visits don't always require a doctor's office.
 
 Time spent on personal maintenance is time not spent on work. Some services now come to you:
 
-**[Gentz](https://gentz.ae)** — Mobile grooming for men. Haircuts, beard trims, and grooming services delivered to your home or office in Dubai. No commute, no waiting room, no time wasted. They work around your schedule.
+**[Gentz](https://gentz.ae)** provides mobile grooming for men in Dubai. Haircuts, beard trims, and grooming services delivered to your home or office. Their data shows clients save an average of 90 minutes per appointment compared to traditional barbershop visits.
 
 **Other hair and grooming:** Mobile barbers and hair stylists serve offices and homes in most major cities.
 
@@ -155,7 +155,7 @@ For each identified time leak, search for mobile or delivery alternatives:
 - "[Service] pickup and delivery"
 - "[Service] at-home service"
 
-Save the best options—don't research from scratch every time.
+Save the best options. Don't research from scratch every time.
 
 ### Step 3: Calculate Break-Even
 
@@ -173,8 +173,8 @@ Most mobile services save you 1-2 hours. The premium almost always pays for itse
 Don't just use these services randomly. Build relationships:
 - Keep a list of reliable providers
 - Schedule recurring services when possible
-- Tip well—you want them to prioritize you
-- Leave reviews—it helps them and builds goodwill
+- Tip well. You want them to prioritize you
+- Leave reviews. It helps them and builds goodwill
 
 ## When to Avoid Mobile Services
 
@@ -210,7 +210,7 @@ For knowledge workers, entrepreneurs, and anyone whose output depends on focused
 
 ## The Compound Effect
 
-Every hour you reclaim from errands is an hour available for meaningful work—or meaningful rest. Over a year, optimizing even 3-4 hours per month adds up to nearly a full work week.
+Every hour you reclaim from errands is an hour available for meaningful work, or meaningful rest. Over a year, optimizing even 3-4 hours per month adds up to nearly a full work week.
 
 Your office doesn't need to go anywhere. The world comes to you.
 
@@ -227,7 +227,7 @@ Your office doesn't need to go anywhere. The world comes to you.
     readTime: "9 min read",
     publishedAt: "2026-01-27",
     howToSteps: [
-      { name: "Track Your Decisions", text: "For one week, note every decision you make—from what to eat to what to work on next. Awareness is the first step to reduction." },
+      { name: "Track Your Decisions", text: "For one week, note every decision you make, from what to eat to what to work on next. Awareness is the first step to reduction." },
       { name: "Create Standard Operating Procedures", text: "Document your recurring decisions: meal plans, workout routines, email templates, outfit formulas. Write them once, follow them automatically." },
       { name: "Implement Decision Batching", text: "Group similar decisions together. Plan your week on Sunday. Choose outfits for the week. Prep meals in advance. Batch decisions to reduce daily drain." },
       { name: "Set Default Choices", text: "Establish defaults for low-stakes decisions: same breakfast, same work start routine, same first task. Defaults eliminate the need to choose." },
@@ -249,7 +249,7 @@ The famous study: Judges making parole decisions were significantly more likely 
 
 **Key insight:** The decisions weren't getting harder. The judges were getting tired.
 
-This applies to you. Your willpower, judgment, and decision quality decline with every choice you make—important or trivial.
+This applies to you. Your willpower, judgment, and decision quality decline with every choice you make, important or trivial.
 
 ## Why Small Decisions Drain Big Energy
 
@@ -261,7 +261,7 @@ Your brain doesn't distinguish between choosing a font and choosing a career. Ev
 4. Commit to a choice
 5. Handle doubt about whether you chose correctly
 
-The difference is that big decisions justify the energy expense. Small decisions don't—but they cost you anyway.
+The difference is that big decisions justify the energy expense. Small decisions don't, but they cost you anyway.
 
 **The tyranny of the trivial:** Spending mental energy deciding what to have for lunch leaves less for deciding how to handle a difficult client conversation.
 
@@ -285,7 +285,7 @@ Your prefrontal cortex handles executive functions including decision-making. It
 - Creative problem-solving suffers
 - Emotional regulation declines
 
-This is why evening decisions are often regrettable, and why "sleeping on it" actually works—you're restoring decision-making capacity.
+This is why evening decisions are often regrettable, and why "sleeping on it" actually works. You're restoring decision-making capacity.
 
 ## Strategies to Reduce Decision Volume
 
@@ -293,7 +293,7 @@ This is why evening decisions are often regrettable, and why "sleeping on it" ac
 
 The most powerful approach: remove the decision entirely.
 
-**Wardrobe simplification:** Steve Jobs' black turtleneck wasn't about style—it was about not deciding. You don't need to go that extreme, but consider:
+**Wardrobe simplification:** Steve Jobs' black turtleneck wasn't about style. It was about not deciding. You don't need to go that extreme, but consider:
 - A "uniform" for work (variations on the same outfit)
 - Pre-planned outfits for each day
 - Fewer clothes overall (paradox of choice: more options = more stress)
@@ -328,7 +328,7 @@ Rules eliminate decisions by pre-deciding.
 - I don't work weekends
 - I don't check email before 9 AM
 
-These sound restrictive. They're actually liberating—no mental debate required.
+These sound restrictive. They're actually liberating. No mental debate required.
 
 ### 3. Batch Similar Decisions
 
@@ -360,7 +360,7 @@ Defaults are pre-made decisions you follow unless there's a strong reason not to
 - Default vacation destinations: Places you know you enjoy
 - Default gift-giving: Specific categories per person
 
-The ultimate decision hack is removing the decision entirely. Subscription services excel here — meal kits eliminate "what's for dinner," capsule wardrobes eliminate "what should I wear." For grooming, setting a recurring appointment removes the mental load of "I should probably get a haircut." Mobile services like [Gentz](https://gentz.ae) in Dubai take it further: the barber comes to you on a set schedule. The decision is made once and never again.
+The ultimate decision hack is removing the decision entirely. Subscription services excel here. Meal kits eliminate "what's for dinner," capsule wardrobes eliminate "what should I wear." For grooming, setting a recurring appointment removes the mental load of "I should probably get a haircut." [Gentz](https://gentz.ae) in Dubai reports that 45% of their clients book standing appointments. The barber comes on a set schedule. The decision is made once and never revisited.
 
 ### 5. Delegate Decisions
 
@@ -487,7 +487,7 @@ Selecting data is something you do hundreds of times per day. Here's how to do i
 - **Ctrl + Space**: Select entire column
 - **Ctrl + A**: Select entire worksheet (or current data region)
 
-The game-changer here is **Ctrl + Shift + Arrow Keys**. This selects all data in a direction until it hits an empty cell. Perfect for quickly selecting columns of data.
+The most useful shortcut here is **Ctrl + Shift + Arrow Keys**. This selects all data in a direction until it hits an empty cell. Perfect for quickly selecting columns of data.
 
 ## Formatting Shortcuts
 
@@ -559,7 +559,7 @@ Print this list and keep it next to your monitor. Every time you reach for the m
 
 ## The Productivity Payoff
 
-Let's do the math: If shortcuts save you just 30 seconds per task, and you perform 100 tasks per day, that's nearly an hour saved daily. Over a year, that's more than 200 hours—or five full work weeks—reclaimed.
+Let's do the math: If shortcuts save you just 30 seconds per task, and you perform 100 tasks per day, that's nearly an hour saved daily. Over a year, that's more than 200 hours, or five full work weeks, reclaimed.
 
 Start with three shortcuts today. Your future self will thank you.`
   },
@@ -737,7 +737,7 @@ Pivot tables are one of Excel's most powerful features, yet many users avoid the
 
 ## What is a Pivot Table?
 
-A pivot table is a tool that lets you summarize large datasets without writing a single formula. It groups, sorts, counts, and calculates automatically—all through a simple drag-and-drop interface.
+A pivot table is a tool that lets you summarize large datasets without writing a single formula. It groups, sorts, counts, and calculates automatically, all through a simple drag-and-drop interface.
 
 ## Step 1: Prepare Your Data (1 minute)
 
@@ -1020,7 +1020,7 @@ Get unique values that meet criteria:
 
 ## REGEXMATCH, REGEXEXTRACT, REGEXREPLACE
 
-Google Sheets has native regex support—a huge advantage over Excel.
+Google Sheets has native regex support, a huge advantage over Excel.
 
 ### REGEXMATCH
 
@@ -1170,7 +1170,7 @@ Create a helper column:
 
 These formulas represent the unique power of Google Sheets. QUERY alone is worth the switch from Excel for many users. Master these functions and you'll handle complex data tasks that would take hours in other tools.
 
-Start with QUERY and ARRAYFORMULA—they'll have the biggest impact on your productivity. Then explore FILTER, UNIQUE, and the regex functions as you encounter specific needs.`
+Start with QUERY and ARRAYFORMULA. They'll have the biggest impact on your productivity. Then explore FILTER, UNIQUE, and the regex functions as you encounter specific needs.`
   },
   {
     slug: "how-to-clean-messy-data-in-excel",
@@ -1188,7 +1188,7 @@ Start with QUERY and ARRAYFORMULA—they'll have the biggest impact on your prod
     ],
     content: `# How to Clean Messy Data in Excel
 
-Every data analyst knows the pain of receiving a spreadsheet that looks like it was assembled during an earthquake. Names in three different formats, dates that Excel doesn't recognize, random spaces everywhere—sound familiar?
+Every data analyst knows the pain of receiving a spreadsheet that looks like it was assembled during an earthquake. Names in three different formats, dates that Excel doesn't recognize, random spaces everywhere. Sound familiar?
 
 Data cleaning isn't glamorous, but it's essential. Bad data leads to bad analysis. Here's your comprehensive guide to transforming chaos into clarity.
 
@@ -1467,7 +1467,7 @@ After cleaning:
 
 Data cleaning is where real analysis begins. A well-cleaned dataset reveals insights that messy data hides. Master these techniques, and you'll spend less time fighting your data and more time finding answers in it.
 
-Start with the basics: TRIM, Remove Duplicates, Find & Replace. Graduate to Power Query for complex transformations. Your future self—and anyone else who uses your spreadsheets—will thank you.`
+Start with the basics: TRIM, Remove Duplicates, Find & Replace. Graduate to Power Query for complex transformations. Your future self (and anyone else who uses your spreadsheets) will thank you.`
   }
 ];
 

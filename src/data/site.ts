@@ -62,7 +62,7 @@ export const siteConfig = {
     },
     {
       title: "Google Sheets",
-      description: "Unlock the power of QUERY, ARRAYFORMULA, and cloud collaboration.",
+      description: "Master QUERY, ARRAYFORMULA, and real-time cloud collaboration.",
       icon: "sheet",
       color: "sheets"
     },
