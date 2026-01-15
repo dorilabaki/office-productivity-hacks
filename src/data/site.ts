@@ -22,6 +22,7 @@ export const siteConfig = {
     { name: "Shortcuts", href: "/shortcuts" },
     { name: "Glossary", href: "/glossary" },
     { name: "FAQ", href: "/faq" },
+    { name: "Feed", href: "/feed" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" }
   ],
