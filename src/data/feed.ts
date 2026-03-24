@@ -26,7 +26,7 @@ export interface FeedPost {
 export const feedConfig = {
   pageName: "Office Productivity Hacks",
   linkedInUrl: "https://www.linkedin.com/company/office-productivity-hacks",
-  followers: "115,000+",
+  followers: "129,270",
   description: "Practical tips and shortcuts from our LinkedIn community.",
 }
 
@@ -80,6 +80,35 @@ Make the switch. Your future self will thank you.`,
     comments: 278,
     reposts: 312,
     date: "2024-01-08",
+  },
+  // --- Scraped 2026-03-24 ---
+  {
+    id: "4",
+    linkedInUrl: "https://www.linkedin.com/company/office-productivity-hacks/posts/",
+    content: `The 2025 Outlook Productivity Cheat Sheet
+
+Everything you need to work faster in Outlook — in one place.
+
+Shortcuts, rules, calendar tricks, and focus features most people never discover.
+
+Save this. Share it with your team.`,
+    likes: 62,
+    comments: 4,
+    date: "2026-03-24",
+  },
+  {
+    id: "5",
+    linkedInUrl: "https://www.linkedin.com/company/office-productivity-hacks/posts/",
+    content: `25 Intermediate Excel Shortcuts
+
+You know the basics. These are the next level.
+
+From navigating large datasets to formatting in seconds — these shortcuts separate the good from the great.
+
+Which one's your favourite?`,
+    likes: 0,
+    comments: 0,
+    date: "2026-03-24",
   },
   // Add more posts here...
 ]

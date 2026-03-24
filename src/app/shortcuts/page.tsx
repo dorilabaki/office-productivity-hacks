@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { Keyboard, Table, FileSpreadsheet, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeInUp, StaggerContainer, StaggerItem } from '@/components/MotionWrapper';
@@ -118,7 +119,7 @@ export default function ShortcutsPage() {
             <p className="text-slate-400 max-w-2xl mx-auto mb-6">
               Pick 2-3 shortcuts to focus on each week. Every time you reach for the mouse, stop and use the shortcut instead. Within a month, they&apos;ll become second nature.
             </p>
-            <a href="/resources" className="btn-primary">Explore More Tips</a>
+            <Link href="/resources" className="btn-primary">Explore More Tips</Link>
           </FadeInUp>
         </div>
       </section>

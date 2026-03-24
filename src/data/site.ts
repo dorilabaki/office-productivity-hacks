@@ -87,7 +87,7 @@ export const organizationSchema = {
   "@type": "Organization",
   "name": "Office Productivity Hacks",
   "url": "https://officeproductivityhacks.com",
-  "logo": "https://officeproductivityhacks.com/logo.png",
+  "logo": "https://officeproductivityhacks.com/logo.jpeg",
   "sameAs": [
     "https://www.linkedin.com/company/office-productivity-hacks"
   ],
@@ -113,9 +113,4 @@ export const websiteSchema = {
   "@type": "WebSite",
   "name": "Office Productivity Hacks",
   "url": "https://officeproductivityhacks.com",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://officeproductivityhacks.com/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
 };

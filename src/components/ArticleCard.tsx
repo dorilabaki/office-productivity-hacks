@@ -46,9 +46,9 @@ export default function ArticleCard({ article, featured = false }: ArticleCardPr
           {article.description}
         </p>
 
-        <div className="flex items-center gap-2 text-primary-600 font-medium text-sm group-hover:gap-3 transition-all">
+        <div className="flex items-center gap-2 text-primary-700 font-medium text-sm group-hover:gap-3 transition-all">
           Read article
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4" aria-hidden="true" />
         </div>
       </div>
     </Link>

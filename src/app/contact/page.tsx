@@ -69,7 +69,7 @@ export default function ContactPage() {
                   </div>
                   <h2 className="font-bold text-slate-900 text-lg mb-2">{method.title}</h2>
                   <p className="text-slate-600 text-sm mb-4 flex-1">{method.description}</p>
-                  <span className={`font-medium ${method.primary ? 'text-primary-600' : 'text-slate-700'} group-hover:underline`}>
+                  <span className={`font-medium ${method.primary ? 'text-primary-700' : 'text-slate-700'} group-hover:underline`}>
                     {method.action} &rarr;
                   </span>
                 </a>

@@ -5,6 +5,9 @@ import { ArrowLeft, BookOpen, Code } from 'lucide-react';
 import { FadeInUp } from '@/components/MotionWrapper';
 import { glossaryTerms, getGlossaryTermBySlug, getAllGlossaryTermSlugs } from '@/data/glossary';
 import { siteConfig } from '@/data/site';
+import { marked } from 'marked';
+
+marked.use({ async: false });
 
 interface Props {
   params: Promise<{ term: string }>;
@@ -95,7 +98,7 @@ export default async function GlossaryTermPage({ params }: Props) {
               )}
 
               <FadeInUp delay={0.1}>
-                <div className="prose prose-slate max-w-none prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-p:text-slate-600 prose-code:text-primary-700 prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-slate-900 prose-pre:text-slate-100" dangerouslySetInnerHTML={{ __html: term.content.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>').replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\n\n/g, '</p><p>').replace(/^# (.+)$/gm, '').replace(/^## (.+)$/gm, '<h2>$1</h2>').replace(/^### (.+)$/gm, '<h3>$1</h3>').replace(/^\- (.+)$/gm, '<li>$1</li>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>') }} />
+                <div className="article-content" dangerouslySetInnerHTML={{ __html: marked.parse(term.content) as string }} />
               </FadeInUp>
 
               {relatedTerms.length > 0 && (

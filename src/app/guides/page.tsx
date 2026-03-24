@@ -17,7 +17,7 @@ export default function GuidesPage() {
           <div className="max-w-3xl mx-auto text-center">
             <FadeInUp>
               <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <BookOpen className="w-4 h-4" />
+                <BookOpen className="w-4 h-4" aria-hidden="true" />
                 {guides.length} Comprehensive Guides
               </div>
             </FadeInUp>
@@ -54,8 +54,8 @@ export default function GuidesPage() {
                         {guide.title}
                       </h2>
                       <p className="text-slate-600 mb-4">{guide.description}</p>
-                      <div className="flex items-center gap-2 text-primary-600 font-medium group-hover:gap-3 transition-all">
-                        Read full guide <ArrowRight className="w-4 h-4" />
+                      <div className="flex items-center gap-2 text-primary-700 font-medium group-hover:gap-3 transition-all">
+                        Read full guide <ArrowRight className="w-4 h-4" aria-hidden="true" />
                       </div>
                     </div>
                     <div className="md:w-64 flex-shrink-0">
@@ -64,7 +64,7 @@ export default function GuidesPage() {
                         <ul className="space-y-1">
                           {guide.tableOfContents.slice(0, 4).map((item) => (
                             <li key={item.id} className="text-sm text-slate-600 flex items-start gap-2">
-                              <span className="text-primary-500 mt-1">•</span>
+                              <span className="text-primary-500 mt-1" aria-hidden="true">•</span>
                               {item.title}
                             </li>
                           ))}

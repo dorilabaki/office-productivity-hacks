@@ -32,7 +32,9 @@ const milestones = [
   { year: "2021", event: "Reached 10,000 followers" },
   { year: "2022", event: "Expanded to Google Sheets content" },
   { year: "2023", event: "Crossed 50,000 followers milestone" },
-  { year: "2024", event: "115,000+ professionals in our community" }
+  { year: "2024", event: "115,000+ professionals in our community" },
+  { year: "2025", event: "Launched this website with guides, glossary, and toolkit" },
+  { year: "2026", event: "Expanding content library and free resources" },
 ];
 
 export default function AboutPage() {
@@ -74,7 +76,7 @@ export default function AboutPage() {
                 <div className="space-y-4">
                   {milestones.map((milestone, index) => (
                     <div key={index} className="flex gap-4">
-                      <div className="flex-shrink-0 w-16 font-bold text-primary-600">{milestone.year}</div>
+                      <div className="flex-shrink-0 w-16 font-bold text-primary-700">{milestone.year}</div>
                       <div className="flex-1 text-slate-600 pb-4 border-b border-slate-200 last:border-0">{milestone.event}</div>
                     </div>
                   ))}
@@ -109,7 +111,7 @@ export default function AboutPage() {
       <section className="section">
         <div className="container-custom">
           <FadeInUp className="text-center mb-12">
-            <p className="text-primary-600 font-medium text-sm uppercase tracking-wide mb-2">Community Voices</p>
+            <p className="text-primary-700 font-medium text-sm uppercase tracking-wide mb-2">Community Voices</p>
             <h2 className="text-3xl font-bold text-slate-900 mb-4">What Professionals Are Saying</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">Real feedback from our LinkedIn community of 115,000+ productivity enthusiasts.</p>
           </FadeInUp>
@@ -118,7 +120,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 h-full border border-slate-200">
                 <p className="text-slate-600 text-sm mb-4 italic">&quot;Great visualization of how holistic habits drive professional performance. I especially agree with the &apos;Focus Systems&apos; section—digital minimalism is becoming a superpower in today&apos;s distraction-heavy world.&quot;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold text-sm">BK</div>
+                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-800 font-bold text-sm">BK</div>
                   <div>
                     <p className="font-medium text-slate-900 text-sm">Bipin Kumar</p>
                     <p className="text-xs text-slate-500">Digital Marketing | Google & Meta</p>
@@ -130,7 +132,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 h-full border border-slate-200">
                 <p className="text-slate-600 text-sm mb-4 italic">&quot;It&apos;s a powerful reminder that our brains are our most valuable asset and maintaining mental health is crucial for sustained productivity. I particularly appreciate the emphasis on building systems that prioritize recovery and focus.&quot;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold text-sm">MN</div>
+                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-800 font-bold text-sm">MN</div>
                   <div>
                     <p className="font-medium text-slate-900 text-sm">Mukul Nagpal</p>
                     <p className="text-xs text-slate-500">AVP at Bank of America</p>
@@ -142,7 +144,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 h-full border border-slate-200">
                 <p className="text-slate-600 text-sm mb-4 italic">&quot;True productivity and sustained energy come from managing the conditions that enable focus and resilience, not just from positive thinking. Rest, clear priorities, and single-task focus play a bigger role in real performance.&quot;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold text-sm">FG</div>
+                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-800 font-bold text-sm">FG</div>
                   <div>
                     <p className="font-medium text-slate-900 text-sm">Félix García</p>
                     <p className="text-xs text-slate-500">Lean Six Sigma Black Belt</p>
@@ -154,7 +156,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 h-full border border-slate-200">
                 <p className="text-slate-600 text-sm mb-4 italic">&quot;Even small changes and awareness around nutrition have helped me feel more consistent through the day. It&apos;s made me realise how closely food and focus are connected.&quot;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold text-sm">VS</div>
+                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-800 font-bold text-sm">VS</div>
                   <div>
                     <p className="font-medium text-slate-900 text-sm">Vishal Shukla</p>
                     <p className="text-xs text-slate-500">Financial Protection Advisor</p>
@@ -166,7 +168,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 h-full border border-slate-200">
                 <p className="text-slate-600 text-sm mb-4 italic">&quot;Not everything needs another meeting or more talking. A bit of fresh air and quiet can do more for your head than hours at a desk. Nature has a way of calming things down and helping you think clearly again.&quot;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold text-sm">CC</div>
+                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-800 font-bold text-sm">CC</div>
                   <div>
                     <p className="font-medium text-slate-900 text-sm">Corliss Charles-Sutton, MBA</p>
                     <p className="text-xs text-slate-500">Executive Leadershift Advisor</p>
@@ -178,7 +180,7 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-6 h-full border border-slate-200">
                 <p className="text-slate-600 text-sm mb-4 italic">&quot;Leaders who build these habits can make higher-quality decisions under pressure and better support their team&apos;s growth, because they aren&apos;t running on depleted mental resources.&quot;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold text-sm">SJ</div>
+                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-800 font-bold text-sm">SJ</div>
                   <div>
                     <p className="font-medium text-slate-900 text-sm">Salima Jadavji</p>
                     <p className="text-xs text-slate-500">Clinical Counsellor & Psychotherapist</p>
@@ -193,14 +195,14 @@ export default function AboutPage() {
       <section className="section bg-white">
         <div className="container-custom">
           <FadeInUp className="text-center mb-12">
-            <p className="text-primary-600 font-medium text-sm uppercase tracking-wide mb-2">Productivity in Action</p>
+            <p className="text-primary-700 font-medium text-sm uppercase tracking-wide mb-2">Productivity in Action</p>
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Case Studies</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">How businesses use these techniques to save time and reduce errors.</p>
           </FadeInUp>
           <StaggerContainer className="grid md:grid-cols-3 gap-8">
             <StaggerItem>
               <div className="bg-slate-50 rounded-xl p-6 h-full border border-slate-200">
-                <p className="text-sm text-primary-600 font-medium mb-2">Luxury Retail</p>
+                <p className="text-sm text-primary-700 font-medium mb-2">Luxury Retail</p>
                 <h3 className="font-bold text-slate-900 text-lg mb-3">The Watch Squad: Global Price Arbitrage</h3>
                 <p className="text-slate-600 text-sm mb-4">
                   The Watch Squad built a live pricing dashboard that pulls market rates from Dubai,
@@ -213,7 +215,7 @@ export default function AboutPage() {
             </StaggerItem>
             <StaggerItem>
               <div className="bg-slate-50 rounded-xl p-6 h-full border border-slate-200">
-                <p className="text-sm text-primary-600 font-medium mb-2">Professional Services</p>
+                <p className="text-sm text-primary-700 font-medium mb-2">Professional Services</p>
                 <h3 className="font-bold text-slate-900 text-lg mb-3">LeverBrands: ROI That Wins Contracts</h3>
                 <p className="text-slate-600 text-sm mb-4">
                   LeverBrands, a personal branding agency, built automated client dashboards showing
@@ -226,7 +228,7 @@ export default function AboutPage() {
             </StaggerItem>
             <StaggerItem>
               <div className="bg-slate-50 rounded-xl p-6 h-full border border-slate-200">
-                <p className="text-sm text-primary-600 font-medium mb-2">Famous Example</p>
+                <p className="text-sm text-primary-700 font-medium mb-2">Famous Example</p>
                 <h3 className="font-bold text-slate-900 text-lg mb-3">JPMorgan: 360,000 Hours Saved</h3>
                 <p className="text-slate-600 text-sm mb-4">
                   JPMorgan developed an internal program called COIN that used automation to
@@ -241,13 +243,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section bg-primary-600 text-white">
+      <section className="section bg-primary-700 text-white">
         <div className="container-custom text-center">
           <FadeInUp>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Join {siteConfig.followers} Professionals</h2>
-            <p className="text-primary-100 text-lg mb-8 max-w-2xl mx-auto">Get daily tips delivered to your LinkedIn feed.</p>
-            <a href={siteConfig.linkedInUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white text-primary-600 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors">
-              <Linkedin className="w-5 h-5" />
+            <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">Get daily tips delivered to your LinkedIn feed.</p>
+            <a href={siteConfig.linkedInUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white text-primary-700 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors">
+              <Linkedin className="w-5 h-5" aria-hidden="true" />
               Follow on LinkedIn
             </a>
           </FadeInUp>

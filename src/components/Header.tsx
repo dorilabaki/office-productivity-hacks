@@ -33,7 +33,7 @@ export default function Header() {
             />
             <div className="flex flex-col">
               <span className="font-bold text-slate-900 text-sm sm:text-lg leading-tight">Office Productivity</span>
-              <span className="text-[10px] sm:text-xs text-primary-600 font-medium">Hacks</span>
+              <span className="text-[10px] sm:text-xs text-primary-700 font-medium">Hacks</span>
             </div>
           </Link>
 
@@ -45,9 +45,13 @@ export default function Header() {
 
             {/* Resources Dropdown */}
             <div className="relative" onMouseEnter={() => setResourcesOpen(true)} onMouseLeave={() => setResourcesOpen(false)}>
-              <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors rounded-lg hover:bg-slate-50">
+              <button
+                className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors rounded-lg hover:bg-slate-50"
+                aria-expanded={resourcesOpen}
+                aria-haspopup="true"
+              >
                 Resources
-                <ChevronDown className={`w-4 h-4 transition-transform ${resourcesOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform ${resourcesOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
               </button>
 
               <AnimatePresence>
@@ -113,7 +117,7 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
           </button>
         </div>
 

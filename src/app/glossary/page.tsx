@@ -48,8 +48,8 @@ export default function GlossaryPage() {
                     {term.term}
                   </h2>
                   <p className="text-slate-600 text-sm flex-1 line-clamp-3">{term.definition}</p>
-                  <div className="flex items-center gap-2 text-primary-600 font-medium text-sm mt-4 group-hover:gap-3 transition-all">
-                    Learn more <ArrowRight className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-primary-700 font-medium text-sm mt-4 group-hover:gap-3 transition-all">
+                    Learn more <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </div>
                 </Link>
               </StaggerItem>

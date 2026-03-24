@@ -30,14 +30,14 @@ export default function Footer() {
                 className="w-10 h-10 bg-amber-700 hover:bg-amber-600 rounded-lg flex items-center justify-center transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
                 href="mailto:hello@officeproductivityhacks.com"
                 className="w-10 h-10 bg-amber-700 hover:bg-amber-600 rounded-lg flex items-center justify-center transition-colors"
                 aria-label="Email"
               >
-                <Mail className="w-5 h-5" />
+                <Mail className="w-5 h-5" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -86,10 +86,10 @@ export default function Footer() {
               href={siteConfig.linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-slate-900 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
             >
               Follow on LinkedIn
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -99,14 +99,14 @@ export default function Footer() {
       <div className="border-t border-amber-700">
         <div className="container-custom py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-amber-300 text-sm">
-              {new Date().getFullYear()} Office Productivity Hacks. All rights reserved.
+            <p className="text-amber-200 text-sm">
+              &copy; {new Date().getFullYear()} Office Productivity Hacks. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <Link href="/feed" className="text-amber-300 hover:text-white text-sm transition-colors">
+              <Link href="/feed" className="text-amber-200 hover:text-white text-sm transition-colors">
                 RSS Feed
               </Link>
-              <Link href="/sitemap.xml" className="text-amber-300 hover:text-white text-sm transition-colors">
+              <Link href="/sitemap.xml" className="text-amber-200 hover:text-white text-sm transition-colors">
                 Sitemap
               </Link>
             </div>

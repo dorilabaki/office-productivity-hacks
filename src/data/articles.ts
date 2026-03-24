@@ -1468,6 +1468,224 @@ After cleaning:
 Data cleaning is where real analysis begins. A well-cleaned dataset reveals insights that messy data hides. Master these techniques, and you'll spend less time fighting your data and more time finding answers in it.
 
 Start with the basics: TRIM, Remove Duplicates, Find & Replace. Graduate to Power Query for complex transformations. Your future self (and anyone else who uses your spreadsheets) will thank you.`
+  },
+  {
+    slug: "fill-with-gemini-google-sheets",
+    title: "Fill with Gemini: Automate Data Entry in Google Sheets 9x Faster",
+    description: "Use Google Sheets' Fill with Gemini feature to populate spreadsheets automatically. Reduce data entry time from hours to minutes with AI-powered cell generation.",
+    category: "sheets",
+    readTime: "6 min read",
+    publishedAt: "2026-03-23",
+    howToSteps: [
+      { name: "Enable Gemini in Google Sheets", text: "Upgrade to Google AI Ultra or Pro subscription. Open any Google Sheet and look for the Gemini features in the toolbar. Beta access is available to these tiers first." },
+      { name: "Create Your Column Headers", text: "Set up column headers for the data you want to populate. For example, if building a prospect list, create columns: Company Name, Location, Industry, Contact Email." },
+      { name: "Enter Sample Data", text: "Type 2-3 example entries in your first rows. Gemini learns the pattern from your examples and fills remaining cells consistently." },
+      { name: "Select Empty Cells to Fill", text: "Highlight the range of empty cells you want populated. Select from your first data row down to where you want the fill to stop." },
+      { name: "Click Fill with Gemini", text: "Right-click the selected cells or use the Sheets menu. Choose 'Fill with Gemini' and specify your instructions or leave blank to follow the pattern from your examples." },
+      { name: "Review and Validate", text: "Check the first 5-10 rows for accuracy before accepting the full fill. Look for consistency in formatting and data quality. Edit any errors before accepting all changes." }
+    ],
+    content: `# Fill with Gemini: Automate Data Entry in Google Sheets 9x Faster
+
+The average knowledge worker spends 7 hours per week on repetitive data entry. In a 40-hour work week, that's nearly 20% of your time typing information that follows predictable patterns.
+
+Google Sheets' new Fill with Gemini feature changes this equation. The AI can populate 100 cells of data in the time it takes you to manually enter 10.
+
+## What Is Fill with Gemini?
+
+Fill with Gemini is Google's native AI feature that populates spreadsheet cells automatically based on patterns you establish. You provide a few examples, and Gemini generates hundreds of entries following that same pattern.
+
+Available since March 2026 to Google Workspace subscribers (AI Ultra and Pro tiers), this feature delivers a 9x speed improvement for data population tasks compared to manual entry.
+
+The AI works by:
+1. Learning from your example entries
+2. Understanding the relationship between columns
+3. Generating new entries that match the established pattern
+4. Pulling real-time data from the web when needed
+
+## Real-World Scenarios Where This Saves Hours
+
+### Lead List Building
+
+Manual approach: Find 100 prospects on LinkedIn, type name, company, industry, location, and email for each one. Minimum 3 minutes per prospect = 5 hours.
+
+With Fill with Gemini: Enter 5 example prospects. Gemini fills the other 95 with:
+- Company names from web search
+- Job titles and departments
+- Industry classifications
+- Office locations
+- Email format patterns
+
+Time required: 20 minutes setup and review. You save 4 hours 40 minutes per prospect list.
+
+### Product Comparison Spreadsheets
+
+Building a tool comparison? Instead of manually researching 20 features across 5 tools:
+
+Enter 3-4 rows as examples (Tool A: Feature 1 = Yes, Feature 2 = Yes, Feature 3 = Premium). Gemini fills the entire matrix by searching product documentation and feature lists.
+
+Manual time: 2-3 hours. With Gemini: 15 minutes.
+
+### Customer Research Data
+
+Collect survey responses, then use Gemini to:
+- Categorize sentiment (positive, neutral, negative)
+- Extract key themes from comments
+- Classify customer segments
+- Score satisfaction levels
+
+A 500-response survey that takes 10 hours to categorize manually can be structured and analyzed in 30 minutes.
+
+### Real Estate Market Data
+
+Creating a market analysis? Provide 3 comparable properties with:
+- Address
+- Price
+- Square footage
+- Year built
+- Days on market
+
+Gemini pulls this data for 50+ additional properties in your area automatically, saving 8-12 hours of research and manual entry.
+
+## Step-by-Step: Using Fill with Gemini
+
+### Prerequisites
+
+You need:
+- Google Workspace account
+- Google AI Ultra or Pro subscription (Beta availability starting March 2026)
+- A Google Sheet with at least 2-3 example rows
+
+### The Process
+
+**Step 1: Set Up Your Headers**
+
+Create column headers that clearly describe what data goes in each column. Be specific:
+- Instead of "Info", use "Company Name"
+- Instead of "Details", use "Annual Revenue Range" or "Employee Count"
+
+Clear headers help Gemini understand what to generate.
+
+**Step 2: Enter Examples**
+
+Fill in 2-3 rows completely. These examples are your template. Gemini learns:
+- The type of data (text, numbers, yes/no)
+- The format (e.g., email format, phone number pattern)
+- The relationship between columns
+
+Example: Building a competitor analysis sheet:
+
+| Competitor | HQ Location | Funding | Employee Count | Primary Use Case |
+|---|---|---|---|---|
+| Airtable | San Francisco | $850M | 2,100 | Low-code databases |
+| Zapier | Chicago | $400M+ | 1,000+ | Workflow automation |
+
+**Step 3: Select the Range to Fill**
+
+Highlight cells from your starting row down through where you want data to end. You can fill:
+- 10 rows
+- 100 rows
+- 1,000 rows
+
+The size doesn't affect speed.
+
+**Step 4: Activate Fill with Gemini**
+
+- Right-click the selected range
+- Choose "Fill with Gemini"
+- (Optional) Add specific instructions like "Include only companies founded after 2020" or "Pull real-time pricing data"
+- Click Generate
+
+**Step 5: Review and Accept**
+
+Gemini generates results in 30-60 seconds. Review the first 10 rows for:
+- Accuracy (is the data correct?)
+- Consistency (does it match your examples?)
+- Format (are dates, numbers, and text formatted correctly?)
+
+You can:
+- Accept all changes
+- Edit individual cells before accepting
+- Regenerate if results are off-target
+
+### Pro Tips for Best Results
+
+**Be Specific in Headers**
+
+Bad header: "Info"
+Good header: "Number of Employees (2024)"
+
+Specific headers produce more accurate results.
+
+**Provide Diverse Examples**
+
+If populating a "Pricing Tier" column with values like "Free", "Pro", "Enterprise", provide at least one example of each tier. Gemini learns from variety.
+
+**Use Instructions for Complex Tasks**
+
+Don't rely on patterns alone for complex logic. Add instructions:
+- "Categorize as B2B, B2C, or B2B2C based on the business model"
+- "Mark as 'Green' if profit margin exceeds 40%, otherwise 'Red'"
+
+**Add Formulas for Calculations**
+
+Gemini fills text and categorical data, but for calculations, use formulas instead:
+- Use =A2*B2 for multiplication
+- Use =IF(C2>100,"Large","Small") for conditional logic
+
+Save Gemini's power for data that requires research or categorization.
+
+**Start with Smaller Ranges**
+
+First time using Fill with Gemini? Test on 10 rows before filling 500. Verify it understands your pattern correctly, then expand the range.
+
+## Performance Metrics: The Numbers
+
+According to Google's March 2026 announcement:
+
+- **9x faster** than manual data entry for 100-cell tasks
+- **70.48% accuracy** on the SpreadsheetBench dataset (a standard AI spreadsheet benchmark)
+- **50%+ reduction** in data entry errors compared to manual entry
+- **Workers using data entry AI** save an average of 1 hour per workday
+
+For teams using this consistently:
+- A 3-person team = 15 hours saved per week
+- Annual savings: 780 hours of work reclaimed
+- Cost per hour saved: $0 (included with Workspace subscription)
+
+## When NOT to Use Fill with Gemini
+
+Fill with Gemini is powerful but isn't the best tool for everything:
+
+**Use formulas instead for:**
+- Mathematical calculations (SUM, AVERAGE, percentages)
+- Date arithmetic (days between dates, adding weeks)
+- Logical operations based on spreadsheet data
+
+**Use manual entry for:**
+- Highly confidential or sensitive data (client lists, salaries, financial details)
+- Data requiring perfect legal precision
+- Information that needs verification from official sources before entry
+
+**Limitation:** Fill with Gemini works best for publicly available data and general categorization. It's less reliable for proprietary or highly specialized information.
+
+## Integration with Your Workflow
+
+Fill with Gemini works inside Google Sheets, so it fits naturally into your existing tools:
+
+- Link data from forms using Form Responses
+- Combine Gemini fills with existing formulas
+- Export completed sheets to Excel if needed
+- Share collaborative sheets where teammates can verify and edit Gemini's output
+
+For AI-powered productivity tools like those covered on [howdoiuse.ai](https://howdoiuse.ai), Gemini in Sheets represents the next generation of AI integration in office tools.
+
+## Conclusion
+
+Data entry isn't a skill that separates high performers from average workers. Automation is. Switching from manual entry to Fill with Gemini means reclaiming 5-10 hours per week for actual work that moves projects forward.
+
+The 9x speed improvement isn't marketing hyperbole. It's real, measured, and repeatable. If your work involves populating spreadsheets with any form of data, Gemini is worth the subscription upgrade.
+
+Start small: one prospect list, one competitor analysis, one market research sheet. Measure your time savings. Then scale it across your entire team.`
   }
 ];
 

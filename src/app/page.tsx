@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, Table, FileSpreadsheet, Keyboard, BarChart3, Users, BookOpen, Linkedin } from 'lucide-react';
 import { FadeInUp, StaggerContainer, StaggerItem } from '@/components/MotionWrapper';
 import ArticleCard from '@/components/ArticleCard';
+import LeadMagnetBanner from '@/components/LeadMagnetBanner';
 import { articles } from '@/data/articles';
 import { guides } from '@/data/guides';
 import { siteConfig } from '@/data/site';
@@ -123,8 +124,8 @@ export default function HomePage() {
                     {feature.title}
                   </h3>
                   <p className="text-slate-600 text-sm flex-1">{feature.description}</p>
-                  <div className="flex items-center gap-1 text-primary-600 font-medium text-sm mt-4 group-hover:gap-2 transition-all">
-                    Learn more <ArrowRight className="w-4 h-4" />
+                  <div className="flex items-center gap-1 text-primary-700 font-medium text-sm mt-4 group-hover:gap-2 transition-all">
+                    Learn more <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </div>
                 </Link>
               </StaggerItem>
@@ -132,6 +133,9 @@ export default function HomePage() {
           </StaggerContainer>
         </div>
       </section>
+
+      {/* Lead Magnet Banner */}
+      <LeadMagnetBanner />
 
       {/* Featured Guides Section */}
       <section className="section">
@@ -141,8 +145,8 @@ export default function HomePage() {
               <h2 className="text-3xl font-bold text-slate-900 mb-2">Comprehensive Guides</h2>
               <p className="text-slate-600">In-depth learning resources to master your tools</p>
             </div>
-            <Link href="/guides" className="hidden md:flex items-center gap-2 text-primary-600 font-medium hover:gap-3 transition-all">
-              View all guides <ArrowRight className="w-4 h-4" />
+            <Link href="/guides" className="hidden md:flex items-center gap-2 text-primary-700 font-medium hover:gap-3 transition-all">
+              View all guides <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </FadeInUp>
 
@@ -160,16 +164,16 @@ export default function HomePage() {
                     {guide.title}
                   </h3>
                   <p className="text-slate-600 mb-4 flex-1">{guide.description}</p>
-                  <div className="flex items-center gap-2 text-primary-600 font-medium group-hover:gap-3 transition-all">
-                    Read guide <ArrowRight className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-primary-700 font-medium group-hover:gap-3 transition-all">
+                    Read guide <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </div>
                 </Link>
               </StaggerItem>
             ))}
           </StaggerContainer>
 
-          <Link href="/guides" className="md:hidden flex items-center justify-center gap-2 text-primary-600 font-medium mt-6">
-            View all guides <ArrowRight className="w-4 h-4" />
+          <Link href="/guides" className="md:hidden flex items-center justify-center gap-2 text-primary-700 font-medium mt-6">
+            View all guides <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </Link>
         </div>
       </section>
@@ -183,7 +187,7 @@ export default function HomePage() {
                 Shortcuts That Save{' '}
                 <span className="text-amber-200">Hours Every Week</span>
               </h2>
-              <p className="text-amber-100 mb-6 text-lg">
+              <p className="text-white/90 mb-6 text-lg">
                 Stop reaching for the mouse. Master these essential keyboard shortcuts and watch your productivity soar.
               </p>
               <div className="flex flex-wrap gap-3 mb-6">
@@ -191,7 +195,7 @@ export default function HomePage() {
                 <span className="px-3 py-1 bg-white/20 text-white rounded-full text-sm">Google Sheets</span>
                 <span className="px-3 py-1 bg-white/20 text-white rounded-full text-sm">Word</span>
               </div>
-              <Link href="/shortcuts" className="btn bg-white text-amber-600 hover:bg-amber-50">
+              <Link href="/shortcuts" className="btn bg-white text-amber-700 hover:bg-amber-50">
                 View All Shortcuts <ArrowRight className="w-5 h-5" />
               </Link>
             </FadeInUp>
@@ -199,7 +203,7 @@ export default function HomePage() {
             <FadeInUp delay={0.2}>
               <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20">
                 <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
-                  <Keyboard className="w-5 h-5 text-amber-200" />
+                  <Keyboard className="w-5 h-5 text-white/70" aria-hidden="true" />
                   Essential Excel Shortcuts
                 </h3>
                 <div className="divide-y divide-white/20">
@@ -212,12 +216,12 @@ export default function HomePage() {
                               {key}
                             </kbd>
                             {keyIndex < shortcut.keys.length - 1 && (
-                              <span className="text-amber-200 text-xs mx-0.5">+</span>
+                              <span className="text-white/60 text-xs mx-0.5">+</span>
                             )}
                           </span>
                         ))}
                       </div>
-                      <span className="text-amber-100 text-sm">{shortcut.action}</span>
+                      <span className="text-white/90 text-sm">{shortcut.action}</span>
                     </div>
                   ))}
                 </div>
@@ -235,8 +239,8 @@ export default function HomePage() {
               <h2 className="text-3xl font-bold text-slate-900 mb-2">Latest Articles</h2>
               <p className="text-slate-600">Quick tips and tutorials to boost your productivity</p>
             </div>
-            <Link href="/resources" className="hidden md:flex items-center gap-2 text-primary-600 font-medium hover:gap-3 transition-all">
-              View all articles <ArrowRight className="w-4 h-4" />
+            <Link href="/resources" className="hidden md:flex items-center gap-2 text-primary-700 font-medium hover:gap-3 transition-all">
+              View all articles <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </FadeInUp>
 
@@ -248,33 +252,33 @@ export default function HomePage() {
             ))}
           </StaggerContainer>
 
-          <Link href="/resources" className="md:hidden flex items-center justify-center gap-2 text-primary-600 font-medium mt-6">
-            View all articles <ArrowRight className="w-4 h-4" />
+          <Link href="/resources" className="md:hidden flex items-center justify-center gap-2 text-primary-700 font-medium mt-6">
+            View all articles <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </Link>
         </div>
       </section>
 
       {/* Social Proof Section */}
-      <section className="section bg-primary-600 text-white">
+      <section className="section bg-primary-700 text-white">
         <div className="container-custom text-center">
           <FadeInUp>
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Linkedin className="w-6 h-6" />
-              <span className="text-primary-200">Join our community</span>
+              <Linkedin className="w-6 h-6" aria-hidden="true" />
+              <span className="text-white/80">Join our community</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               {siteConfig.followersAggregated} {siteConfig.followersTagline}
             </h2>
-            <p className="text-primary-100 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
               Join the fastest-growing productivity community on LinkedIn. Get daily tips, shortcuts, and tutorials delivered straight to your feed.
             </p>
             <a
               href={siteConfig.linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white text-primary-600 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors"
+              className="inline-flex items-center gap-2 bg-white text-primary-700 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors"
             >
-              <Linkedin className="w-5 h-5" />
+              <Linkedin className="w-5 h-5" aria-hidden="true" />
               Follow on LinkedIn
             </a>
           </FadeInUp>
@@ -293,11 +297,11 @@ export default function HomePage() {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Ready to Work Smarter?
               </h2>
-              <p className="text-amber-100 text-lg mb-8 max-w-2xl mx-auto">
+              <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
                 Explore our collection of guides, tutorials, and shortcuts. Everything you need to master Excel, Google Sheets, and more.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/guides" className="btn bg-white text-amber-600 hover:bg-amber-50 text-base px-6 py-3">
+                <Link href="/guides" className="btn bg-white text-amber-700 hover:bg-amber-50 text-base px-6 py-3">
                   Browse Guides <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link href="/resources" className="btn bg-white/20 text-white hover:bg-white/30 border border-white/30 text-base px-6 py-3">

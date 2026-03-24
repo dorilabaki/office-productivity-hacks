@@ -2,8 +2,9 @@ import { MetadataRoute } from 'next';
 import { getPublishedArticles } from '@/data/articles';
 import { getPublishedGuides } from '@/data/guides';
 import { glossaryTerms } from '@/data/glossary';
+import { siteConfig } from '@/data/site';
 
-const baseUrl = 'https://officeproductivityhacks.com';
+const baseUrl = siteConfig.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [

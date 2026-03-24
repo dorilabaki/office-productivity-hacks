@@ -78,15 +78,6 @@ interface StaggerContainerProps {
   once?: boolean;
 }
 
-const staggerContainer: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
 export function StaggerContainer({ children, className, staggerDelay = 0.1, once = true }: StaggerContainerProps) {
   return (
     <motion.div
