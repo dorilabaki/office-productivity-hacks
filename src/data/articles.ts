@@ -1686,6 +1686,258 @@ Data entry isn't a skill that separates high performers from average workers. Au
 The 9x speed improvement isn't marketing hyperbole. It's real, measured, and repeatable. If your work involves populating spreadsheets with any form of data, Gemini is worth the subscription upgrade.
 
 Start small: one prospect list, one competitor analysis, one market research sheet. Measure your time savings. Then scale it across your entire team.`
+  },
+  {
+    slug: "excel-copilot-agent-mode-guide",
+    title: "Excel's Agent Mode: Automate Complex Spreadsheet Tasks with One Prompt",
+    description: "Microsoft's Copilot Agent Mode in Excel goes beyond answering questions. It plans multi-step workflows, writes formulas, builds charts, and iterates until the output matches your intent. Here's how to use it effectively.",
+    category: "excel",
+    readTime: "7 min read",
+    publishedAt: "2026-03-26",
+    howToSteps: [
+      { name: "Open Agent Mode in Excel", text: "Open any workbook in Excel for Windows, Mac, or Web. Click the Copilot icon in the ribbon. In the Copilot pane, look for the Agent Mode toggle (available since January 2026 on desktop, December 2025 on web)." },
+      { name: "Write a Multi-Step Prompt", text: "Describe your full workflow in one prompt. For example: 'Create a quarterly budget tracker with revenue, expenses, and profit columns for Q1-Q4, add SUM formulas, conditional formatting for negative values, and a bar chart comparing quarters.'" },
+      { name: "Review the Execution Plan", text: "Agent Mode shows you its planned steps before executing. Review each step: table creation, formula insertion, formatting, chart generation. Approve or modify the plan before it runs." },
+      { name: "Let It Iterate", text: "Agent Mode executes each step, checks for errors, and self-corrects. If a formula returns an error or a chart references wrong data, it identifies the problem and fixes it automatically." },
+      { name: "Refine with Follow-Up Prompts", text: "After the initial output, use natural language to adjust: 'Make the chart colors match our brand palette' or 'Add a percentage change column between quarters.' Agent Mode remembers context from previous steps." }
+    ],
+    content: `# Excel's Agent Mode: Automate Complex Spreadsheet Tasks with One Prompt
+
+Standard Copilot in Excel works like a search engine. You ask a question, you get an answer. Agent Mode works like a colleague. You describe what you need, and it builds the entire thing.
+
+That's a fundamental shift in how spreadsheet work gets done.
+
+## What Agent Mode Actually Does
+
+Agent Mode became generally available on Excel for web in December 2025, then expanded to Windows and Mac in January 2026. It's available to Microsoft 365 Copilot commercial license holders, plus Personal and Family subscribers.
+
+The difference from standard Copilot is execution depth. Standard Copilot handles single-turn requests: write a formula, explain a function, summarize a column. Agent Mode handles multi-step workflows. It plans a sequence of actions, executes them directly in your workbook, reviews the results, identifies errors, and iterates until the output matches your intent.
+
+A single prompt like "build a loan calculator with monthly payment schedules based on amount, rate, and term, then present results in a formatted table" triggers Agent Mode to create tables, write formulas, apply formatting, generate charts, and verify outputs across multiple sheets.
+
+## When to Use Agent Mode vs. Standard Copilot
+
+**Use Standard Copilot when you need:**
+
+- A single formula explanation or suggestion
+- A quick data summary or count
+- Help understanding what a function does
+- One-off questions about your data
+
+**Use Agent Mode when you need:**
+
+- Multi-step workflows (create table, add formulas, format, chart)
+- Complex report generation from raw data
+- Dashboard creation with multiple visualizations
+- Data transformation pipelines (clean, restructure, analyze, present)
+- Any task that would normally take you 15+ minutes of manual work
+
+## Practical Examples That Save Real Time
+
+### Example 1: Monthly Sales Report
+
+**Without Agent Mode (manual process):** Import CSV data. Clean formatting. Create a pivot table. Add calculated columns for growth percentages. Apply conditional formatting. Build three charts. Format for printing. Total time: 45-90 minutes depending on data complexity.
+
+**With Agent Mode:** Paste your data and prompt: "Analyze this sales data. Create a summary table by region and product category. Add month-over-month growth percentages. Apply conditional formatting where growth is negative. Create a bar chart for revenue by region and a line chart for monthly trends. Format everything for a clean presentation."
+
+Agent Mode handles all of it. Typical time: 2-4 minutes including review.
+
+### Example 2: Budget vs. Actual Variance Analysis
+
+Prompt: "Compare the Budget column against Actual for each department. Add a Variance column and a Variance % column. Highlight any department that's more than 10% over budget in red. Create a summary at the bottom with totals. Add a horizontal bar chart showing variance by department."
+
+Agent Mode creates the formulas, conditional formatting rules, summary row, and chart in one pass.
+
+### Example 3: Employee Data Cleanup
+
+Prompt: "This data has inconsistent date formats, duplicate rows, and blank cells in the Email column. Standardize all dates to YYYY-MM-DD format, remove exact duplicate rows, and highlight rows with missing emails in yellow."
+
+Data cleaning that might take 30 minutes manually gets done in under 2 minutes.
+
+## Tips for Writing Effective Agent Mode Prompts
+
+**Be specific about the output you want.** "Analyze this data" is vague. "Create a pivot table showing total revenue by quarter for each product line, sorted highest to lowest" tells Agent Mode exactly what to build.
+
+**Include formatting preferences upfront.** "Use blue headers, alternate row shading, and currency format for dollar columns" prevents a follow-up round of adjustments.
+
+**Describe the end state, not the steps.** You don't need to say "first create a column, then write a VLOOKUP." Just describe what data you want and where. Agent Mode figures out the method.
+
+**Reference specific cells and ranges when needed.** "Using the data in columns A through F, rows 2 through 150" removes ambiguity about which data to work with.
+
+## What Agent Mode Can't Do (Yet)
+
+Agent Mode is powerful but has boundaries. It doesn't run Python analysis. Microsoft removed the separate "App Skills" feature (which handled Python-in-Excel) in March 2026 due to user confusion, and hasn't yet integrated those advanced capabilities into Agent Mode. That means complex statistical modeling, machine learning, and advanced visualizations like heatmaps and violin plots still require manual Python-in-Excel work or external tools.
+
+It also can't access external data sources. If your analysis requires pulling data from a database or API, you'll need to get that data into Excel first.
+
+For AI-powered approaches to data analysis beyond spreadsheets, [How Do I Use AI](https://howdoiuse.ai) covers tools and techniques for integrating AI into your broader workflow.
+
+## The Productivity Math
+
+Consider a financial analyst who builds 4-5 complex reports per week. Each report takes 45-90 minutes manually. With Agent Mode handling 70-80% of the build, that's 2-4 hours saved weekly, or roughly 100-200 hours per year.
+
+At an average analyst salary, that's thousands of dollars in recovered productive time per person. Multiply across a team and the ROI on a Microsoft 365 Copilot subscription becomes obvious.
+
+## Getting Started
+
+If you have a Microsoft 365 Copilot license, Agent Mode is already available. Open Excel, click the Copilot icon, and toggle to Agent Mode. Start with a simple multi-step task: create a formatted table with formulas and a chart. Once you see how it handles the workflow, scale up to more complex prompts.
+
+The key mindset shift: stop thinking of Copilot as a helper that answers questions. Start thinking of it as a builder that creates outputs. That's what Agent Mode delivers.`
+  },
+  {
+    slug: "excel-translate-function-guide",
+    title: "Excel's TRANSLATE Function: How to Convert Text Across 100+ Languages in Your Spreadsheet",
+    description: "Excel 365 now includes a built-in TRANSLATE function that converts text between languages directly in cells. Here's how to use it for multilingual reports, international client data, and global team collaboration.",
+    category: "excel",
+    readTime: "8 min read",
+    publishedAt: "2026-04-06",
+    howToSteps: [
+      { name: "Open a Workbook in Excel 365", text: "The TRANSLATE function requires Excel 365 (Microsoft 365 subscription) and an active internet connection. It won't work in Excel 2021 or earlier standalone versions." },
+      { name: "Enter the TRANSLATE Formula", text: "In any cell, type =TRANSLATE(A2, \"en\", \"es\") to translate the text in cell A2 from English to Spanish. Replace the language codes with your source and target languages." },
+      { name: "Use Auto-Detection for Unknown Languages", text: "Skip the source language parameter to let Excel detect it automatically: =TRANSLATE(A2, , \"fr\") translates whatever language is in A2 into French." },
+      { name: "Pair with DETECTLANGUAGE for Smarter Workflows", text: "Use =DETECTLANGUAGE(A2) to identify the language in a cell first. Combine this with TRANSLATE for conditional translation logic across mixed-language datasets." },
+      { name: "Drag Down to Translate Entire Columns", text: "Once your formula works for one cell, use AutoFill to drag it down the column. Excel translates each row individually, handling different source languages if you use auto-detection." }
+    ],
+    content: `# Excel's TRANSLATE Function: How to Convert Text Across 100+ Languages in Your Spreadsheet
+
+Before 2025, translating text in Excel meant copying cells into Google Translate, pasting results back, and repeating that process for every row. For a 200-row product catalog, that's roughly 90 minutes of copy-paste work.
+
+Excel's TRANSLATE function handles that same catalog in about 3 seconds.
+
+## How the TRANSLATE Function Works
+
+Microsoft added TRANSLATE and its companion function DETECTLANGUAGE to Excel 365 in late 2024, with general availability in early 2025. Both functions use Microsoft Translation Services (the same engine behind Bing Translate and Microsoft Translator) and require an internet connection to work.
+
+The syntax is straightforward:
+
+\`=TRANSLATE(text, [source_language], [target_language])\`
+
+**Parameters:**
+
+- **text** (required): The cell reference or text string you want to translate
+- **source_language** (optional): Two-letter language code like "en" for English or "ja" for Japanese. If you leave this blank, Excel auto-detects the language
+- **target_language** (optional): Two-letter language code for the output language. If omitted, Excel translates to your system's display language
+
+**Basic examples:**
+
+- \`=TRANSLATE(A2, "en", "es")\` translates English text to Spanish
+- \`=TRANSLATE(A2, "de", "en")\` translates German text to English
+- \`=TRANSLATE(A2, , "fr")\` auto-detects the source language, translates to French
+- \`=TRANSLATE("Hello world", "en", "pt")\` translates a literal string to Portuguese
+
+## Common Language Codes
+
+Here are the codes you'll use most often:
+
+| Language | Code | Language | Code |
+|----------|------|----------|------|
+| English | en | Spanish | es |
+| French | fr | German | de |
+| Portuguese | pt | Italian | it |
+| Japanese | ja | Chinese (Simplified) | zh-Hans |
+| Korean | ko | Arabic | ar |
+| Hindi | hi | Dutch | nl |
+| Russian | ru | Turkish | tr |
+
+Excel supports over 100 languages through Microsoft Translation Services. For the complete list, check Microsoft's Translator language support documentation.
+
+## The DETECTLANGUAGE Companion Function
+
+DETECTLANGUAGE identifies what language a cell contains:
+
+\`=DETECTLANGUAGE(text)\`
+
+It returns a language code like "en", "es", or "ja". This is useful when you're working with datasets where text comes in multiple languages and you need to sort, filter, or route translations accordingly.
+
+**Practical combo:** Use DETECTLANGUAGE in column B to identify languages, then use TRANSLATE in column C to convert everything to one standard language.
+
+## 5 Practical Use Cases
+
+### 1. Translating Product Descriptions for International Listings
+
+E-commerce teams managing listings across multiple marketplaces can translate product titles and descriptions directly in their master spreadsheet.
+
+**Setup:**
+- Column A: Original product description (English)
+- Column B: \`=TRANSLATE(A2, "en", "es")\` for Spanish marketplace
+- Column C: \`=TRANSLATE(A2, "en", "de")\` for German marketplace
+- Column D: \`=TRANSLATE(A2, "en", "fr")\` for French marketplace
+
+One formula per column, dragged down. A 500-product catalog gets translated into three languages in under a minute.
+
+**Important caveat:** Machine translation works well for straightforward product descriptions. For marketing copy, brand taglines, or anything requiring cultural nuance, treat the TRANSLATE output as a first draft and have a native speaker review it.
+
+### 2. Processing Multilingual Customer Feedback
+
+Support teams receiving feedback in multiple languages can standardize everything into one language for analysis.
+
+**Setup:**
+- Column A: Raw customer feedback (mixed languages)
+- Column B: \`=DETECTLANGUAGE(A2)\` to identify the source language
+- Column C: \`=TRANSLATE(A2, , "en")\` to translate everything to English
+
+This lets you run text analysis, keyword extraction, and sentiment review on the entire dataset without manual translation.
+
+### 3. Building Multilingual Reports for Global Teams
+
+Finance or operations teams distributing reports to offices in different countries can add translated summary rows or create parallel columns.
+
+**Example:** A quarterly performance summary with key metrics in English alongside translations for the Tokyo office (\`=TRANSLATE(A2, "en", "ja")\`) and the Sao Paulo office (\`=TRANSLATE(A2, "en", "pt")\`).
+
+### 4. Cleaning Imported Datasets with Mixed Languages
+
+When you merge data from multiple regional sources, you often end up with a mix of English, Spanish, German, and other languages in the same column. DETECTLANGUAGE helps you identify which rows need translation, and TRANSLATE standardizes them.
+
+**Workflow:**
+1. Add a helper column: \`=DETECTLANGUAGE(A2)\`
+2. Filter for rows that aren't in your target language
+3. Translate only those rows: \`=IF(DETECTLANGUAGE(A2)<>"en", TRANSLATE(A2, , "en"), A2)\`
+
+This formula checks if the text is already English. If it is, it keeps the original. If not, it translates.
+
+### 5. Quick Reference Glossaries for International Projects
+
+Project managers working across borders can build term glossaries directly in Excel. List your key terms in column A, then add columns for each language your team uses. One formula per column handles the entire glossary.
+
+## Performance and Limitations
+
+**What works well:**
+- Short to medium text (product names, descriptions, feedback comments)
+- Common language pairs (English to/from Spanish, French, German, etc.)
+- Straightforward factual content
+
+**What to watch for:**
+- **Internet required**: TRANSLATE calls Microsoft's cloud service. No connection means #VALUE! errors
+- **Rate limits**: Translating thousands of cells simultaneously may cause temporary slowdowns. Process in batches of 200-500 rows
+- **Accuracy varies by language pair**: Translations between major languages (English, Spanish, French, German) are strong. Less common language pairs may produce rougher results
+- **No formatting preservation**: TRANSLATE returns plain text. Bold, italic, or other formatting from the source cell isn't carried over
+- **Excel 365 only**: This function doesn't exist in Excel 2021, 2019, or earlier
+
+## Combining TRANSLATE with Other Excel Features
+
+**With CONCATENATE or TEXTJOIN:** Build bilingual labels:
+\`=A2 & " / " & TRANSLATE(A2, "en", "es")\`
+
+**With conditional formatting:** Highlight cells where the detected language doesn't match your expected language to catch data entry errors.
+
+**With Power Query:** Use TRANSLATE on imported data before loading it into your data model. This is especially useful for datasets pulled from international APIs or web sources.
+
+For AI-powered approaches to data automation in spreadsheets, including how Copilot Agent Mode can handle translation workflows as part of larger tasks, check out our [guide to Excel's Agent Mode](/resources/excel-copilot-agent-mode-guide).
+
+If you're interested in how AI tools beyond Excel handle language and translation tasks, [How Do I Use AI](https://howdoiuse.ai) covers the broader landscape of AI-powered productivity tools.
+
+## Getting Started Today
+
+The fastest way to test TRANSLATE:
+
+1. Open Excel 365 (web or desktop)
+2. Type a sentence in cell A1
+3. In cell B1, enter \`=TRANSLATE(A1, , "es")\`
+4. Press Enter
+
+If you see the Spanish translation appear, you're set. If you get a #NAME? error, your Excel version doesn't support TRANSLATE yet. Check for updates or switch to Excel for the web, which gets new functions first.
+
+Start with a small dataset. Translate 10-20 rows, verify the quality, then scale. For business-critical translations, always have a native speaker review the output before publishing or sending to clients.`
   }
 ];
 
