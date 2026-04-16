@@ -1938,6 +1938,168 @@ The fastest way to test TRANSLATE:
 If you see the Spanish translation appear, you're set. If you get a #NAME? error, your Excel version doesn't support TRANSLATE yet. Check for updates or switch to Excel for the web, which gets new functions first.
 
 Start with a small dataset. Translate 10-20 rows, verify the quality, then scale. For business-critical translations, always have a native speaker review the output before publishing or sending to clients.`
+  },
+  {
+    slug: "groupby-pivotby-excel-formula-alternative-pivot-tables",
+    title: "GROUPBY and PIVOTBY: Excel's Formula Alternative to Pivot Tables",
+    description: "Excel's GROUPBY and PIVOTBY functions let you summarize data with a single formula that updates automatically. Here's how to use them, when to pick them over pivot tables, and the exact syntax.",
+    category: "excel",
+    readTime: "9 min read",
+    publishedAt: "2026-04-16",
+    howToSteps: [
+      { name: "Confirm You Have Microsoft 365", text: "GROUPBY and PIVOTBY reached general availability for Current Channel users on September 25, 2024. They only work in Excel with an active Microsoft 365 subscription. If your formula returns #NAME?, your version doesn't include them yet." },
+      { name: "Start with a Clean Data Range", text: "Your source data should be structured as a table with clear headers. Each column needs consistent data types. Messy ranges with blank rows or merged cells break both functions." },
+      { name: "Write Your First GROUPBY Formula", text: "With data in A1:C100, type =GROUPBY(A2:A100, B2:B100, SUM) to group by column A and sum column B. Three arguments: what to group by, what to aggregate, how to aggregate it." },
+      { name: "Convert to PIVOTBY for Two-Dimensional Summaries", text: "To cross-tabulate, use =PIVOTBY(A2:A100, B2:B100, C2:C100, SUM). The first argument becomes row headers, the second becomes column headers, the third is the values being aggregated." },
+      { name: "Add Field Headers and Totals", text: "Use the fourth argument to control headers (3 shows headers, 0 hides them) and fifth argument to control totals (0 = no totals, 2 = grand total only, 3 = subtotals and grand total). Example: =GROUPBY(A2:A100, B2:B100, SUM, 3, 2)." }
+    ],
+    content: `# GROUPBY and PIVOTBY: Excel's Formula Alternative to Pivot Tables
+
+Pivot tables have been Excel's answer to data summarization for almost 30 years. They work, but they come with friction. You have to click Refresh when data changes. Formatting resets unexpectedly. You can't easily reference a pivot cell in another formula.
+
+Microsoft's GROUPBY and PIVOTBY functions solve all three problems. They reached general availability on September 25, 2024, for Microsoft 365 Current Channel users. If you build repeated data summaries, they're worth learning.
+
+## What the Functions Actually Do
+
+GROUPBY summarizes a list by one or more columns. Give it three things: what to group by, what to aggregate, and which aggregation function to use. You get a dynamic array that updates the moment your source data changes.
+
+PIVOTBY does the same thing but adds column grouping. Where GROUPBY gives you a list, PIVOTBY gives you a cross-tabulation. It's the same mental model as a pivot table's Rows and Columns fields, except it's a formula.
+
+Both functions live in the spilled array family alongside FILTER, SORT, UNIQUE, and XLOOKUP. That means they return an entire range from a single cell, and they recalculate instantly when dependencies change.
+
+## GROUPBY Syntax
+
+\`=GROUPBY(row_fields, values, function, [field_headers], [total_depth], [sort_order], [filter_array])\`
+
+**row_fields** (required): the column or columns to group by. Can be a single column or multiple columns stacked with HSTACK.
+
+**values** (required): the column to aggregate. Usually numeric.
+
+**function** (required): the aggregation function. Built-in options include SUM, AVERAGE, COUNT, COUNTA, MAX, MIN, PRODUCT, MEDIAN, MODE.SNGL, STDEV.S, STDEV.P, VAR.S, VAR.P, ARRAYTOTEXT, CONCAT, and PERCENTOF. You can also pass any LAMBDA function.
+
+**field_headers** (optional): controls header display. 0 = no headers, 1 = show headers from source, 2 = generate headers, 3 = show and generate.
+
+**total_depth** (optional): controls totals. 0 = none, 1 = grand total at top, 2 = grand total at bottom, -1 = subtotals and grand total at top, -2 = subtotals and grand total at bottom, 2 or 3 = various configurations.
+
+**sort_order** (optional): sorts the output. Positive numbers sort ascending, negative sort descending, and the number refers to the column position.
+
+**filter_array** (optional): a boolean array the same length as your data that includes rows where TRUE.
+
+## PIVOTBY Syntax
+
+\`=PIVOTBY(row_fields, col_fields, values, function, [field_headers], [row_total_depth], [row_sort_order], [col_total_depth], [col_sort_order], [filter_array], [relative_to])\`
+
+The first four arguments are the only required ones. PIVOTBY adds col_fields as the second argument. Everything else maps to the equivalent GROUPBY parameter, with extra controls for column totals and sorting.
+
+## Three Practical Examples
+
+**Example 1: Sales by region with a running total.**
+
+You have a table of orders with Region in column A and Revenue in column B across 500 rows.
+
+\`=GROUPBY(A2:A501, B2:B501, SUM, 3, 2)\`
+
+This returns a list of regions with their total revenue, with field headers and a grand total at the bottom. Change any value in column B and the result updates instantly.
+
+**Example 2: Monthly sales by product category.**
+
+With Date in column A, Category in column B, and Revenue in column C, get a month-by-month breakdown.
+
+\`=PIVOTBY(TEXT(A2:A501, "mmm yyyy"), B2:B501, C2:C501, SUM, 3, 2, 1, 2)\`
+
+Rows become months, columns become categories, values are summed revenue, and both row and column totals are included. The TEXT function converts dates into readable month labels for the row grouping.
+
+**Example 3: Average deal size by sales rep, filtered to closed deals.**
+
+With Rep in column A, Status in column B, and Deal Size in column D:
+
+\`=GROUPBY(A2:A501, D2:D501, AVERAGE, 3, 2, -2, B2:B501="Closed")\`
+
+The filter_array limits the calculation to rows where Status equals "Closed," the function averages deal sizes, and the negative sort_order of -2 sorts results by the second column descending.
+
+## When GROUPBY Beats Pivot Tables
+
+**When your data updates frequently.** Pivot tables require manual refresh. GROUPBY results update instantly. For dashboards connected to live data sources or models with frequent inputs, this is the difference between a tool that gets used and one that gets abandoned.
+
+**When you need to reference results in other formulas.** You can wrap GROUPBY output in other functions, feed it into charts, or use it as a lookup source. Pivot table cells are hard to reference reliably because they move when the pivot updates.
+
+**When formatting needs to survive data changes.** Pivot table formatting often breaks when you refresh. Formulas keep their formatting intact because the output range remains stable.
+
+**When you need custom aggregations.** GROUPBY accepts any LAMBDA function, which means you can aggregate with logic that pivot tables can't express. Weighted averages, conditional counts, and custom text joins are all possible.
+
+**When you want reproducible workbooks.** A GROUPBY formula is visible and auditable. A pivot table configuration is buried in dialog boxes and takes longer to document.
+
+## When Pivot Tables Still Win
+
+GROUPBY and PIVOTBY aren't replacements for every pivot table use case.
+
+**Interactive exploration.** If you need to drag fields around, drill into detail, or slice data with slicers, pivot tables remain more flexible. GROUPBY requires editing the formula each time.
+
+**Very large datasets.** Pivot tables with pivot cache are optimized for millions of rows. GROUPBY works on ranges, which can slow down with extremely large data.
+
+**Stakeholders who don't use Excel 365.** If your workbook is opened in Excel 2021 or older, GROUPBY returns #NAME? errors. Pivot tables work everywhere.
+
+**Complex layouts with multiple value fields.** Pivot tables can display SUM and AVERAGE side by side with a couple of clicks. GROUPBY needs separate formulas or nested LAMBDAs to achieve the same output.
+
+A reasonable rule: use GROUPBY and PIVOTBY for anything that needs to live in a dashboard or feed another calculation. Use pivot tables for ad-hoc exploration and reports where interactivity matters.
+
+## LAMBDA as Aggregation Function
+
+The hidden superpower is LAMBDA support. Built-in aggregations cover common cases, but custom LAMBDAs handle the rest.
+
+Weighted average by quantity:
+
+\`=GROUPBY(A2:A501, HSTACK(B2:B501, C2:C501), LAMBDA(x, SUMPRODUCT(TAKE(x,,1), TAKE(x,,-1)) / SUM(TAKE(x,,-1))))\`
+
+Count of distinct values:
+
+\`=GROUPBY(A2:A501, B2:B501, LAMBDA(x, COUNTA(UNIQUE(x))))\`
+
+Concatenated list of values with commas:
+
+\`=GROUPBY(A2:A501, B2:B501, LAMBDA(x, TEXTJOIN(", ", TRUE, x)))\`
+
+These aren't possible in standard pivot tables without power query or calculated fields that require extra setup.
+
+## Common Errors and How to Fix Them
+
+**#NAME? error.** Your Excel version doesn't support the function. Check your Microsoft 365 subscription and update channel. Excel for the web gets functions first, so test there if desktop is behind.
+
+**#CALC! error.** Usually means your function argument isn't returning a single value when GROUPBY tries to aggregate. Check that your LAMBDA ends with a scalar result, not an array.
+
+**#VALUE! error.** Argument shapes don't match. The values column must be the same length as the row_fields column. Filter arrays must also match the source length.
+
+**Empty output.** Often caused by filter_array returning all FALSE. Check your filter condition.
+
+**Totals appearing in wrong places.** Total_depth uses positive numbers for bottom placement and negative for top. Swap the sign to move totals.
+
+## Performance Considerations
+
+For most business datasets, GROUPBY performance is excellent. On ranges under 100,000 rows with simple aggregations, recalculation is near-instant.
+
+Performance degrades with two patterns. First, complex LAMBDA aggregations called on large datasets. A LAMBDA that internally sorts, filters, or does multiple passes will slow down proportionally. Second, multiple GROUPBY formulas referencing the same large range. Excel recalculates each one independently.
+
+Optimizations that help: convert your source range to a proper Excel Table so the formula can reference the table structure, use helper columns for expensive intermediate calculations, and consider breaking complex PIVOTBY formulas into multiple simpler ones when clarity matters more than density.
+
+## Getting Started
+
+The fastest way to learn is to replace one existing pivot table with GROUPBY.
+
+1. Identify a simple pivot table in an existing workbook. One that groups by one field and sums one value.
+2. Set up a GROUPBY formula in an empty area: \`=GROUPBY(grouping_range, values_range, SUM, 3, 2)\`
+3. Compare the output. Numbers should match exactly.
+4. Add field headers and totals to match the pivot table's appearance.
+5. Change a value in the source data. Watch both update. The pivot needs a refresh. The formula updates instantly.
+
+Once the first replacement works, PIVOTBY for two-dimensional summaries is a small extension. Most users can be productive with both within a few hours of practice.
+
+For deeper AI-driven data analysis workflows that combine these functions with Copilot, see our [guide to Excel's Copilot Agent Mode](/resources/excel-copilot-agent-mode-guide). And if you're looking to apply this level of data automation beyond spreadsheets, [How Do I Use AI](https://howdoiuse.ai) covers broader AI productivity tools and workflows.
+
+## The Bottom Line
+
+GROUPBY and PIVOTBY aren't pivot table replacements. They're a parallel approach that wins in any case where your output needs to be dynamic, referenceable, or formula-driven. For analysts building dashboards, financial models, or recurring reports, they're among the most useful functions Microsoft has added to Excel in the past decade.
+
+The three-argument minimum makes them approachable. The LAMBDA support makes them powerful. The instant updates make them reliable. Worth the afternoon it takes to become fluent.`
   }
 ];
 
