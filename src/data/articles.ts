@@ -2100,6 +2100,134 @@ For deeper AI-driven data analysis workflows that combine these functions with C
 GROUPBY and PIVOTBY aren't pivot table replacements. They're a parallel approach that wins in any case where your output needs to be dynamic, referenceable, or formula-driven. For analysts building dashboards, financial models, or recurring reports, they're among the most useful functions Microsoft has added to Excel in the past decade.
 
 The three-argument minimum makes them approachable. The LAMBDA support makes them powerful. The instant updates make them reliable. Worth the afternoon it takes to become fluent.`
+  },
+  {
+    slug: "excel-financial-model-auditable",
+    title: "How to Build an Excel Financial Model That Anyone Can Audit",
+    description: "The best financial models aren't the cleverest — they're the clearest. Learn the structure, naming conventions, and formatting rules that make your spreadsheets genuinely trustworthy.",
+    category: "excel",
+    readTime: "11 min read",
+    publishedAt: "2026-04-20",
+    howToSteps: [
+      { name: "Separate inputs, calculations, and outputs", text: "Split your workbook into three distinct sheets or clearly demarcated zones so a reviewer can find every assumption without hunting." },
+      { name: "Use colour coding for cell types", text: "Blue for hard-coded inputs, black for calculations, green for links to other sheets. This is an industry convention and takes one minute to apply." },
+      { name: "Write one formula per row, then copy across", text: "Consistency is auditability. A reviewer should be able to test one cell in a row and trust the rest." },
+      { name: "Replace magic numbers with named ranges", text: "Instead of =B4*0.21, write =Revenue*TaxRate. Your future self and anyone reviewing the file will thank you." },
+      { name: "Add a check row that sums to zero", text: "Every model should have a balance-check row that must equal zero. If it stops equalling zero, something broke." }
+    ],
+    content: `# How to Build an Excel Financial Model That Anyone Can Audit
+
+The test of a good financial model isn't whether it produces the right answer. It's whether another human can sit down, trace every number back to an assumption, and convince themselves the answer is right.
+
+Most models fail that test. They grow organically, someone adds a quick fix, someone else hardcodes a number they meant to unhard-code later, and six months in the spreadsheet is a house of cards. The fix is not more cleverness. It is a handful of conventions that the best modellers have used for decades.
+
+## What "Auditable" Really Means
+
+An auditable model has four properties. A reviewer can find every input. A reviewer can follow every calculation one step at a time. A reviewer can identify when something has changed. And a reviewer can run the model with different assumptions without breaking it.
+
+If your model fails any one of those, it is not a model — it is a calculator with memory problems. The good news is that the fixes are mechanical. You do not need to be a better analyst. You need to be a more disciplined one.
+
+## The Three-Zone Structure
+
+Professional modellers separate a workbook into three zones: inputs, calculations, and outputs. How you implement this depends on the model's size, but the separation is non-negotiable.
+
+For a small model, three coloured sections on a single sheet are enough. For a medium model, use three separate sheets. For a large model, the calculations zone may itself be split by module — revenue, costs, working capital, debt, equity — each on its own sheet with its own checks.
+
+The point of the separation is that a reviewer should never have to ask "is this an assumption or a result?" An input is something you can change and see effects flow through. A calculation is a deterministic function of inputs. An output is a presentation of calculations. Mixing them makes models impossible to stress-test, because you never know what happens if you change a given cell.
+
+## Colour Coding: The One-Minute Habit
+
+The most widely used convention, dating back at least to the investment banking analyst manuals of the 1990s, is this: blue font for hard-coded inputs, black font for formulas and calculations, and green font for links between sheets or workbooks. Some shops add red for links to external files, which are usually a sign of trouble.
+
+This takes about one minute to apply to a finished model using Home > Find & Select > Go To Special > Constants vs Formulas. Do it at the end of every session. Any reviewer who opens your file can instantly see which cells drive the model and which cells compute from them.
+
+## Name Your Assumptions
+
+A formula like =B4*C5*(1-D6) is unreadable. A formula like =Revenue*GrossMargin*(1-TaxRate) is self-documenting.
+
+Excel's Name Manager (Formulas > Name Manager) lets you give any cell or range a named reference. Use it for every single assumption in your model. The upfront cost is ten seconds per name. The downstream benefit is that your formulas read like English and your reviewer can trace logic without referring to a glossary.
+
+A good practice is to prefix input names by module: rev_Price, rev_Volume, cost_Staff, cost_COGS, fin_InterestRate. This gives you logical grouping and makes IntelliSense helpful.
+
+## One Formula Per Row
+
+The single most common source of errors in real-world models is a row where the formula changes halfway across. You copied cell E5 across to N5, but at J5 someone needed to adjust for a tax exemption and typed in a modified formula. Six months later, nobody remembers, and the projection for Q3 is wrong.
+
+The rule is simple: write a formula once, make it work for every column, then copy it across. If a particular period needs special handling, handle it through an input switch, not a modified formula. A row of identical formulas with one outlier is an error waiting to be discovered.
+
+Use Excel's Trace Precedents (Ctrl+[) and Trace Dependents (Ctrl+]) liberally while building. If a formula points somewhere unexpected, you want to know before the model goes to the CFO.
+
+## Check Totals and Balance Rows
+
+Every real model has at least one identity that must always hold. For a three-statement model, assets must equal liabilities plus equity. For a project finance model, sources must equal uses. For a budget model, the sum of departmental spends must equal total spend.
+
+Build a dedicated "checks" row that subtracts one side from the other and must equal zero. Conditional formatting that flashes red if the check is non-zero is almost free to add. The moment your check row breaks, you know something has gone wrong, even if the headline numbers still look plausible.
+
+Add more than one check. Cash flow should reconcile. Opening balances plus movements should equal closing balances. A retained earnings walk should reconcile to net income less dividends. Checks are the model's self-test.
+
+## Inputs, Not Hardcodes
+
+The most insidious class of model error is a hardcoded number buried inside a calculation. A tax rate typed directly into a margin formula. An inflation assumption baked into a growth rate. These become invisible after you close the workbook.
+
+The discipline is this: if a number appears in a formula, it should be a reference to an input cell. The only exception is a true mathematical constant — 12 for months, 365 for days, 100 for percentage conversion. Even these are often better expressed as named constants for readability.
+
+A useful workflow at the end of each modelling session is to use Find & Replace with "Look in: Formulas" and search for digit patterns to catch any stray hardcodes. A handful of minutes, and you have a model with no hidden assumptions.
+
+## Consistent Signs and Units
+
+Decide at the start whether costs are positive or negative and stick to it. Decide whether your revenue numbers are in thousands, millions, or units and label every cell accordingly. Switching conventions halfway through a model is a guaranteed source of confusion.
+
+A useful convention: display units in the column header row, and use Excel's custom number formatting to show units alongside values. A cell showing "1,234 k" with the format "#,##0 \\k" is clearer than a cell showing 1234 with a mental note that the units are thousands.
+
+## Document Your Logic
+
+Every non-trivial calculation should have a plain-English description, either in an adjacent column or in a dedicated notes section. You are not writing for yourself; you are writing for the reviewer who opens this file in six months.
+
+The simplest version is a "Notes" column to the right of your calculations. One sentence per row: "Revenue = volume times price, adjusted for 5% annual price increase." The discipline forces you to articulate your logic, which often catches errors.
+
+For modular models, a dedicated assumptions log sheet that lists every input, its value, its source, and the date it was last updated is worth its weight in gold. Auditors will ask for it. Investors will ask for it. You will one day forget where the 3.2% discount rate came from, and you will be glad past-you documented it.
+
+## Version Control Without Git
+
+Spreadsheets don't play well with version control systems. The practical substitute is disciplined file naming and a change log.
+
+Use the convention ProjectName_vYY.MM.DD_initials.xlsx. Never overwrite a prior version during an important modelling exercise; always save-as and increment. On the first sheet, keep a change log: date, version, person, summary of changes. Three lines per version. The whole log fits in ten rows.
+
+This saves you the nightmare of "which version was the one the board saw" and gives you a paper trail if anyone questions a number.
+
+## Stress Tests and Sensitivity Tables
+
+A model that produces one number is useful. A model that shows how the number changes under different assumptions is useful and trustworthy. Excel's Data Table feature (Data > What-If Analysis > Data Table) will compute a two-variable grid of output values for any pair of inputs, often in a few clicks.
+
+Every significant model should include at least one sensitivity table showing how the key output responds to the two most important inputs. If the CFO asks "what happens if revenue grows at 8% instead of 10%?", you should be able to point at a cell, not reopen the model.
+
+## The Shortcut Toolkit for Modellers
+
+A handful of shortcuts will earn their weight back within a day of modelling:
+
+- Ctrl+\\ — select cells in the current selection that don't match the active cell (catches inconsistent formulas in a row)
+- Ctrl+[ — trace precedents (shows where a formula gets its inputs from)
+- Ctrl+] — trace dependents (shows where a cell is used)
+- F5 + Alt+S + F — go to all formula cells
+- F5 + Alt+S + O — go to all constant cells
+- Ctrl+Shift+{ — select all precedents, direct and indirect
+- Alt+M+M+D — Name Manager
+
+These are discoverable through Alt-key navigation and worth practising. A modeller who uses them well works roughly twice as fast as one who doesn't.
+
+## A Final Word on Discipline
+
+Every convention described here is the result of someone, somewhere, losing hours or days to a problem these conventions would have prevented. They are boring. They feel slow when you are excited about the substance of the analysis. They are worth the discomfort.
+
+The best models are not the cleverest. They are the ones a stranger can open, understand, and trust. That stranger is sometimes you, six months from now, looking at a file you don't quite remember writing. The conventions are your gift to that future self.
+
+For a complement to this approach, our [Google Sheets QUERY Function guide](/resources/google-sheets-query-function-guide) covers how to build similarly auditable reporting on the Sheets side. And if you're combining these modelling disciplines with AI-assisted analysis, [How Do I Use AI](https://howdoiuse.ai) has practical workflows for using Copilot and Claude on financial datasets.
+
+## The Bottom Line
+
+Auditable models are built, not discovered. Separate inputs from calculations. Colour-code your cell types. Name your assumptions. Write one formula per row. Check your identities. Document your logic. Version your files.
+
+Every item on that list takes minutes to implement. Skipping them costs hours to recover from. The difference between an analyst whose models are trusted and one whose models are rebuilt is nothing more than the consistent practice of these small disciplines.`
   }
 ];
 

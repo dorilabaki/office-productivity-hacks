@@ -1119,6 +1119,498 @@ You've now covered everything from basic navigation to advanced automation. Here
 5. **Build projects**: Create a budget tracker, CRM, or inventory system
 
 The best way to learn is by doing. Pick a real problem and solve it with Sheets.`
+  },
+  {
+    slug: "google-sheets-query-function-guide",
+    title: "The Complete Guide to the Google Sheets QUERY Function",
+    description: "QUERY is the single most powerful function in Google Sheets. This guide walks through SELECT, WHERE, GROUP BY, ORDER BY, PIVOT, and the edge cases that trip up beginners, with copy-paste examples throughout.",
+    category: "sheets",
+    readTime: "28 min read",
+    publishedAt: "2026-04-20",
+    tableOfContents: [
+      { id: "introduction", title: "Why QUERY Matters", level: 1 },
+      { id: "basic-syntax", title: "Basic Syntax", level: 1 },
+      { id: "select-clause", title: "The SELECT Clause", level: 1 },
+      { id: "where-clause", title: "The WHERE Clause", level: 1 },
+      { id: "group-by", title: "GROUP BY and Aggregation", level: 1 },
+      { id: "order-by-limit", title: "ORDER BY and LIMIT", level: 1 },
+      { id: "pivot-clause", title: "PIVOT: Two-Dimensional Summaries", level: 1 },
+      { id: "labels-formats", title: "LABEL and FORMAT", level: 1 },
+      { id: "dynamic-queries", title: "Building Dynamic Queries", level: 1 },
+      { id: "common-errors", title: "Common Errors and Fixes", level: 1 },
+      { id: "real-world-patterns", title: "Real-World Patterns", level: 1 }
+    ],
+    content: `# The Complete Guide to the Google Sheets QUERY Function
+
+Google Sheets has around five hundred functions. You can get by knowing twenty of them. Of those twenty, one function does more work than any other: QUERY.
+
+QUERY lets you run a SQL-like query against a range of cells. Once you understand it, most of the elaborate combinations of FILTER, SORT, SUMIFS, and array formulas you were reaching for collapse into a single readable expression. This guide walks through the function from basic syntax to the patterns experienced users rely on every day.
+
+<section id="introduction">
+
+## Why QUERY Matters
+
+Here is the promise. Any reporting problem that involves filtering, grouping, sorting, or reshaping tabular data — and most of them do — can be solved with one QUERY formula. The alternatives are almost always longer, harder to read, and more fragile.
+
+Three examples of what you can do with a single QUERY:
+
+- Filter a table by multiple conditions and sort the output
+- Summarise a transaction log by month and category with totals
+- Pivot a long-format table into a wide-format report
+
+QUERY is not the fastest function on very large datasets, and it has a handful of quirks that trip up beginners. But for the problems it is designed for, it is closer to a dedicated analytics language than any other spreadsheet function.
+
+</section>
+
+<section id="basic-syntax">
+
+## Basic Syntax
+
+The function takes three arguments:
+
+\`\`\`
+=QUERY(data, query, headers)
+\`\`\`
+
+- **data** — the range to query, which must be rectangular and contain consistent data types per column
+- **query** — a string written in Google Visualization API Query Language (a SQL subset)
+- **headers** — the number of header rows in the data, usually 1
+
+A minimal example:
+
+\`\`\`
+=QUERY(A1:D100, "SELECT A, B, D WHERE C > 100", 1)
+\`\`\`
+
+That returns columns A, B, and D from the first hundred rows where column C is greater than 100.
+
+**Column references in the query string are letters, not names.** Even if your header says "Revenue," you refer to it as column C (or whatever its position is). This is the most common source of confusion for new users.
+
+</section>
+
+<section id="select-clause">
+
+## The SELECT Clause
+
+The SELECT clause picks which columns come out. It supports several patterns.
+
+**Select specific columns:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT A, C, E", 1)
+\`\`\`
+
+**Select all columns:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT *", 1)
+\`\`\`
+
+**Aggregates:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT COUNT(A), SUM(C), AVG(D)", 1)
+\`\`\`
+
+**Arithmetic in the SELECT:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT A, B, C, D, B*C", 1)
+\`\`\`
+
+This returns columns A-D and a fifth column computed as the product of B and C. The computed column has no header by default. We'll cover LABEL for renaming it further down.
+
+**String manipulation** is limited in QUERY. There is no CONCAT or SUBSTRING inside QUERY. If you need derived text columns, usually it's better to compute them in a helper column and reference that column in your QUERY.
+
+</section>
+
+<section id="where-clause">
+
+## The WHERE Clause
+
+WHERE filters rows. It supports standard comparison operators, logical operators, and a handful of useful string functions.
+
+**Comparison operators:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE C > 1000", 1)
+=QUERY(A1:E, "SELECT * WHERE C >= 500 AND C <= 2000", 1)
+=QUERY(A1:E, "SELECT * WHERE C != 0", 1)
+\`\`\`
+
+**Text matching:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE B = 'North'", 1)
+=QUERY(A1:E, "SELECT * WHERE B CONTAINS 'north'", 1)
+=QUERY(A1:E, "SELECT * WHERE B STARTS WITH 'N'", 1)
+=QUERY(A1:E, "SELECT * WHERE B ENDS WITH 'region'", 1)
+=QUERY(A1:E, "SELECT * WHERE B MATCHES '^[A-C].*'", 1)
+\`\`\`
+
+Text values use single quotes inside the query string. If you need to include a literal apostrophe in a value, escape it or use a cell reference (covered below).
+
+**CONTAINS is case-sensitive.** Use LOWER() in the WHERE clause to normalise: \`WHERE LOWER(B) CONTAINS 'north'\`.
+
+**Date comparisons** require the literal \`date\` keyword and ISO format:
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE A > date '2025-01-01'", 1)
+=QUERY(A1:E, "SELECT * WHERE A >= date '2025-01-01' AND A < date '2026-01-01'", 1)
+\`\`\`
+
+**NULL handling:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE B IS NOT NULL", 1)
+=QUERY(A1:E, "SELECT * WHERE B IS NULL", 1)
+\`\`\`
+
+Empty cells in Sheets are treated as NULL for QUERY purposes.
+
+**Combining conditions** uses AND, OR, and parentheses:
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE (B = 'North' OR B = 'South') AND C > 1000", 1)
+\`\`\`
+
+</section>
+
+<section id="group-by">
+
+## GROUP BY and Aggregation
+
+GROUP BY collapses rows by a column value and applies aggregates from the SELECT.
+
+**Simple grouping with a sum:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT B, SUM(C) GROUP BY B", 1)
+\`\`\`
+
+Returns one row per unique value in B, with the total of C.
+
+**Multiple group fields:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT B, D, SUM(C), COUNT(A) GROUP BY B, D", 1)
+\`\`\`
+
+**Every non-aggregate column in the SELECT must appear in the GROUP BY.** This is a SQL rule and QUERY enforces it strictly.
+
+**Aggregate functions supported:**
+
+- SUM
+- AVG
+- MIN
+- MAX
+- COUNT
+
+**Filter before grouping** with WHERE:
+
+\`\`\`
+=QUERY(A1:E, "SELECT B, SUM(C) WHERE A > date '2025-01-01' GROUP BY B", 1)
+\`\`\`
+
+**Filter after grouping** with HAVING (less commonly needed but useful):
+
+Note: HAVING is not supported in Google Sheets QUERY. To filter after grouping, wrap the query in another QUERY, or filter in the WHERE clause where possible.
+
+</section>
+
+<section id="order-by-limit">
+
+## ORDER BY and LIMIT
+
+**Sort ascending (default):**
+
+\`\`\`
+=QUERY(A1:E, "SELECT B, C ORDER BY C", 1)
+\`\`\`
+
+**Sort descending:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT B, C ORDER BY C DESC", 1)
+\`\`\`
+
+**Multiple sort keys:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT B, C, D ORDER BY B ASC, C DESC", 1)
+\`\`\`
+
+**Sort by aggregate:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT B, SUM(C) GROUP BY B ORDER BY SUM(C) DESC", 1)
+\`\`\`
+
+**LIMIT for top N:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT B, SUM(C) GROUP BY B ORDER BY SUM(C) DESC LIMIT 10", 1)
+\`\`\`
+
+Returns the top ten groups by total. Classic "top 10 customers" pattern.
+
+**OFFSET for pagination:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT * ORDER BY A LIMIT 20 OFFSET 40", 1)
+\`\`\`
+
+Skips the first 40 rows and returns the next 20.
+
+</section>
+
+<section id="pivot-clause">
+
+## PIVOT: Two-Dimensional Summaries
+
+PIVOT is where QUERY pulls ahead of most alternatives. It turns a long-format table into a wide-format pivot without a single extra formula.
+
+Given a transactions table with columns Date, Region, Product, Amount, pivoting Region across columns and summing Amount by Product:
+
+\`\`\`
+=QUERY(A1:D, "SELECT C, SUM(D) GROUP BY C PIVOT B", 1)
+\`\`\`
+
+This produces a table with Product rows, Region columns, and total Amount in each cell.
+
+**Pivot with filter:**
+
+\`\`\`
+=QUERY(A1:D, "SELECT C, SUM(D) WHERE A > date '2025-01-01' GROUP BY C PIVOT B", 1)
+\`\`\`
+
+**Pivot with sort:**
+
+\`\`\`
+=QUERY(A1:D, "SELECT C, SUM(D) GROUP BY C PIVOT B ORDER BY SUM(D) DESC", 1)
+\`\`\`
+
+The columns in a PIVOT output are the unique values of the pivoted column. This is dynamic: if a new region appears in your data, a new column appears in the output without changing the formula.
+
+**The catch:** rows and columns in a pivot are always sorted alphabetically in the output, regardless of ORDER BY. This is a known limitation. For sort control, wrap the pivot in another QUERY.
+
+</section>
+
+<section id="labels-formats">
+
+## LABEL and FORMAT
+
+By default, computed columns in a QUERY have unhelpful headers like "sum amount" or "B*C". LABEL renames them.
+
+\`\`\`
+=QUERY(A1:D, "SELECT B, SUM(C) GROUP BY B LABEL SUM(C) 'Total Revenue'", 1)
+\`\`\`
+
+**Label multiple columns in one query:**
+
+\`\`\`
+=QUERY(A1:D, "SELECT B, SUM(C), COUNT(A) GROUP BY B LABEL SUM(C) 'Revenue', COUNT(A) 'Orders'", 1)
+\`\`\`
+
+**Hide a header** with an empty label:
+
+\`\`\`
+=QUERY(A1:D, "SELECT B, SUM(C) GROUP BY B LABEL SUM(C) ''", 1)
+\`\`\`
+
+**FORMAT controls how values are displayed.** This does not change the underlying value, only the display. Standard number and date format strings work.
+
+\`\`\`
+=QUERY(A1:D, "SELECT A, B, C FORMAT A 'dd-MMM-yyyy', C '$#,##0.00'", 1)
+\`\`\`
+
+</section>
+
+<section id="dynamic-queries">
+
+## Building Dynamic Queries
+
+The power of QUERY multiplies when the query string itself is built from cell references. This lets you build interactive dashboards where users change a filter cell and the query responds.
+
+**Using a cell as a filter value:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE B = '" & G1 & "'", 1)
+\`\`\`
+
+If G1 contains "North", the query filters for region North.
+
+**Caution with quotes:** single quotes go inside the query string to wrap text values. The & operator concatenates the cell reference in between. This is fiddly; test carefully.
+
+**Using a cell for a date:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE A > date '" & TEXT(G1,"yyyy-MM-dd") & "'", 1)
+\`\`\`
+
+**Using a cell for a numeric threshold:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE C > " & G1, 1)
+\`\`\`
+
+Numeric values do not need quotes.
+
+**Multiple dynamic filters:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE B = '" & G1 & "' AND C > " & G2, 1)
+\`\`\`
+
+**Conditional filter logic.** If a filter cell is empty, you may want to show all rows. IFERROR or IF patterns can toggle between queries.
+
+\`\`\`
+=IF(G1="", QUERY(A1:E, "SELECT *", 1), QUERY(A1:E, "SELECT * WHERE B = '" & G1 & "'", 1))
+\`\`\`
+
+For complex dashboards, drop-downs from Data Validation feeding into these cells give you a filterable report in under five minutes of setup.
+
+</section>
+
+<section id="common-errors">
+
+## Common Errors and Fixes
+
+**#VALUE! - "Unable to parse query string"**
+
+The query string has a syntax error. Most common causes: missing or unmatched quotes, wrong column letter (referring to a column that doesn't exist in the data range), misspelled keyword (e.g. "GROUPBY" instead of "GROUP BY").
+
+Read the error message fully. Sheets tells you which column name was unrecognised or where the parser gave up.
+
+**#N/A - "No column"**
+
+You referred to a column by a letter that is outside the data range. If your range is A1:E, the only valid references are Col1 through Col5 (or A-E). Referring to F will fail.
+
+**Column letter vs Col1 vs header name.**
+
+- When the range starts at A1, you use column letters: A, B, C.
+- When the range starts elsewhere, use Col1, Col2, Col3 referring to position within the range.
+- Header names in quotes also work: \`SELECT A WHERE "Region" = 'North'\` — but this is fragile if the header text changes.
+
+For portable formulas, the letter convention is usually safest.
+
+**Mixed data types break aggregation.**
+
+If column C contains both numbers and text (e.g., "N/A"), SUM(C) will fail or produce zero. QUERY treats each column as a single data type; mixed columns fall back to the majority type.
+
+Fix by cleaning the source data, or wrap the column with IFERROR in a helper column before querying.
+
+**Empty output from a PIVOT.**
+
+Often caused by having null values in the pivoted column. Filter them out with \`WHERE X IS NOT NULL\` before pivoting.
+
+**Dates not filtering.**
+
+Usually a format mismatch. The WHERE clause requires \`date 'YYYY-MM-DD'\` format. If your date cells are text, they won't compare properly. Convert text dates to real dates with DATEVALUE before querying.
+
+**QUERY is slow on very large ranges.**
+
+Above about 50,000 rows, QUERY performance degrades. For large datasets, consider importing to BigQuery or using a dedicated pivot table (Data > Pivot Table). QUERY is optimised for reporting-scale data, not analytics-scale.
+
+</section>
+
+<section id="real-world-patterns">
+
+## Real-World Patterns
+
+A handful of QUERY patterns cover most reporting needs. These are the ones experienced users reach for without thinking.
+
+**Top N by group:**
+
+\`\`\`
+=QUERY(A1:E, "SELECT B, SUM(C) GROUP BY B ORDER BY SUM(C) DESC LIMIT 10 LABEL SUM(C) 'Total'", 1)
+\`\`\`
+
+**Month-over-month summary:**
+
+Add a helper column containing \`=TEXT(A2,"yyyy-MM")\`, then query grouped by that helper column. QUERY doesn't have a DATE_TRUNC function, so this helper-column approach is standard.
+
+**Running total:**
+
+QUERY doesn't support window functions. For running totals, use a SUMIF approach outside the QUERY, or transform the data in a helper column.
+
+**Filter by list of values:**
+
+Put your list in a range (say G1:G10). Use a MATCH-based helper column in the source, or iterate with OR conditions:
+
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE B = '" & G1 & "' OR B = '" & G2 & "'", 1)
+\`\`\`
+
+For long lists, QUERY's string length becomes unwieldy. Consider FILTER with MATCH instead.
+
+**Deduplicating with latest record:**
+
+To get one row per category with the most recent date, sort descending by date and wrap in UNIQUE on the grouping column. Or use a helper approach with MAX(date) GROUP BY category, then look up the full row.
+
+**Combining tables:**
+
+To query across two ranges, stack them with \`{A1:E100; G1:K100}\` and query the union. Both ranges must have the same column structure.
+
+\`\`\`
+=QUERY({Sheet1!A2:D; Sheet2!A2:D}, "SELECT Col1, SUM(Col4) GROUP BY Col1", 0)
+\`\`\`
+
+Note: stacked ranges use Col1, Col2 syntax (not letters) and headers: 0 because the stacked range has no single header row.
+
+**Cross-sheet references:**
+
+QUERY works with cross-sheet ranges natively:
+
+\`\`\`
+=QUERY(Transactions!A:E, "SELECT B, SUM(C) GROUP BY B", 1)
+\`\`\`
+
+Combined with IMPORTRANGE for cross-workbook queries, QUERY becomes the engine behind multi-source dashboards.
+
+## Putting It Together: A Dashboard in Twelve Lines
+
+Imagine a transactions sheet with columns Date, Region, Product, Rep, Amount. A full filterable dashboard can be built with six QUERY formulas:
+
+**Monthly totals (chart-ready):**
+\`\`\`
+=QUERY(A1:E, "SELECT TEXT(A,'yyyy-MM'), SUM(E) GROUP BY TEXT(A,'yyyy-MM') LABEL SUM(E) 'Revenue'", 1)
+\`\`\`
+(Note: TEXT inside QUERY works in Google Sheets but not in SQL. Alternative: use a helper column.)
+
+**Top 10 customers:**
+\`\`\`
+=QUERY(A1:E, "SELECT B, SUM(E) GROUP BY B ORDER BY SUM(E) DESC LIMIT 10", 1)
+\`\`\`
+
+**Region x Product pivot:**
+\`\`\`
+=QUERY(A1:E, "SELECT B, SUM(E) GROUP BY B PIVOT C", 1)
+\`\`\`
+
+**Filtered detail view (uses cells G1 and G2 as filter controls):**
+\`\`\`
+=QUERY(A1:E, "SELECT * WHERE B = '" & G1 & "' AND A > date '" & TEXT(G2,"yyyy-MM-dd") & "' ORDER BY A DESC", 1)
+\`\`\`
+
+**Rep leaderboard:**
+\`\`\`
+=QUERY(A1:E, "SELECT D, COUNT(A), SUM(E) GROUP BY D ORDER BY SUM(E) DESC LIMIT 20 LABEL COUNT(A) 'Deals', SUM(E) 'Revenue'", 1)
+\`\`\`
+
+Each formula reads like a sentence. Each updates instantly when the source data changes. No pivot table refresh. No manual drag-down. This is what QUERY is for.
+
+## Where to Go from Here
+
+The fastest way to become fluent in QUERY is to replace existing formulas with QUERY versions. Take a report you build regularly with SUMIFS, FILTER, or pivot tables, and rewrite it as one or two QUERY calls. The first few rewrites are slow. By the fifth, the function has become second nature.
+
+For pairing this with advanced Excel data techniques, see our [guide to Excel GROUPBY and PIVOTBY functions](/resources/excel-groupby-pivotby-functions). And if you're building AI-assisted workflows on top of Sheets, [How Do I Use AI](https://howdoiuse.ai) has patterns for combining QUERY outputs with language models for automated reporting.
+
+## Closing
+
+QUERY is not a new function. It has been in Google Sheets for over a decade. What it lacks in novelty it makes up for in reach. Half of the advanced formula combinations in a typical reporting workbook can be replaced by a single QUERY that is shorter, clearer, and more maintainable.
+
+The learning curve is real — the SQL-flavoured syntax, the column-letter conventions, the quote escaping. A few hours of practice puts you past the initial friction. Past that, it is the most productive hour you will spend in Sheets.`
   }
 ];
 
