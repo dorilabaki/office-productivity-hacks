@@ -2228,6 +2228,160 @@ For a complement to this approach, our [Google Sheets QUERY Function guide](/res
 Auditable models are built, not discovered. Separate inputs from calculations. Colour-code your cell types. Name your assumptions. Write one formula per row. Check your identities. Document your logic. Version your files.
 
 Every item on that list takes minutes to implement. Skipping them costs hours to recover from. The difference between an analyst whose models are trusted and one whose models are rebuilt is nothing more than the consistent practice of these small disciplines.`
+  },
+  {
+    slug: "excel-copilot-function-formula-guide",
+    title: "The Excel COPILOT() Function: How to Use AI Inside a Formula",
+    description: "Excel's COPILOT() function puts a language model inside a cell. Here's the actual syntax, five practical examples, the rate limits, and where the function earns its keep versus where it doesn't.",
+    category: "excel",
+    readTime: "10 min read",
+    publishedAt: "2026-04-21",
+    howToSteps: [
+      { name: "Check Your Licence and Channel", text: "The COPILOT() function reached general availability in February 2026 and requires a Microsoft 365 Copilot licence. Before that date you needed the Beta or Current Preview channel through the Microsoft 365 Insider or Frontier programme. If your formula returns #BUSY! or #CONNECT!, the licence or channel is the usual culprit." },
+      { name: "Write a Plain-English Prompt as the First Argument", text: "Start every formula with a natural-language instruction wrapped in quotes. For example, =COPILOT(\"Classify each review as positive, negative, or neutral\", B2:B50). The clearer the instruction, the more consistent the result." },
+      { name: "Pass Cell Ranges as Context Arguments", text: "Everything after the prompt is either more instruction text or a cell range. The function accepts multiple prompt/context pairs, so you can say =COPILOT(\"Categorise these products\", A2:A50, \"using these allowed categories\", D2:D10)." },
+      { name: "Let the Result Spill Like Other Dynamic Arrays", text: "COPILOT() returns a spilled array. Place the formula in a single cell and leave the cells below and to the right empty — the result fills in automatically, the same behaviour as SORT, UNIQUE, and FILTER." },
+      { name: "Stay Within the Rate Limits", text: "Initial limits are 100 COPILOT calls per 10 minutes and 300 per hour. Batch inputs by passing ranges rather than one call per row, and use IF() or IFERROR() wrappers to avoid calling it on empty rows." }
+    ],
+    content: `# The Excel COPILOT() Function: How to Use AI Inside a Formula
+
+Microsoft has spent two years bolting AI onto Excel's user interface. The COPILOT() function, which reached general availability for Microsoft 365 Copilot licence holders in February 2026, does something different. It puts the model inside the formula bar.
+
+You write =COPILOT("Classify these comments as complaints or compliments", A2:A100) and the result spills down column B. The formula recalculates when the source changes. It references cells like any other function. It is not a chat pane and it is not Agent Mode. It is a single-cell function you compose with SUMIF, XLOOKUP, and everything else.
+
+That is a meaningful shift, and it is worth understanding carefully because the function has real rate limits, a real model backing it, and real places where it earns its keep versus places where it will waste your tokens.
+
+## What the Function Actually Does
+
+The COPILOT() function calls a language model with a prompt you write, attaches any cell ranges you pass it as context, and returns the model's answer as a spilled array. The entire round trip happens inside the workbook. No chat pane, no copy-paste between ChatGPT and Excel.
+
+The syntax is:
+
+\`=COPILOT(prompt_part1, [context1], [prompt_part2], [context2], ...)\`
+
+Only the first prompt argument is required. You can interleave further prompts and further ranges as many times as you need. That interleaving is how you tell the model "here is the instruction, here is the data it applies to, here is the second instruction, here is the data for that." The function stitches it together and sends one call.
+
+Under the hood, the currently documented model is gpt-4.1-mini. Microsoft has stated that the model will evolve over time, which means two things. First, the same formula can return slightly different results across versions — do not treat COPILOT() output as deterministic. Second, capabilities will quietly improve, so formulas that fail to produce good results today are worth retrying after each model update.
+
+## The Rate Limits You Need to Know
+
+At launch, Microsoft set two initial caps: 100 COPILOT() calculations per rolling 10-minute window and 300 per rolling hour. Exceed either and you will see #BUSY! errors until the window resets.
+
+These limits apply to formula calls, not to input rows. A formula that spills 500 results from a single call counts as one call, not 500. This is the single most important practical fact about the function.
+
+Therefore the strongest efficiency rule is: pass ranges, not cells. Write one COPILOT() formula that covers 100 rows rather than 100 formulas of one row each. The former is one call against your rate limit; the latter is 100.
+
+## Five Formulas That Actually Earn Their Keep
+
+### 1. Classifying Unstructured Text
+
+You have 300 customer comments in column B. You want each tagged as positive, negative, or neutral.
+
+\`=COPILOT("Classify each comment below as positive, negative, or neutral. Return only the single-word label.", B2:B301)\`
+
+The prompt uses two techniques that improve reliability. It restricts the output vocabulary ("positive, negative, or neutral") and it explicitly asks for single words rather than sentences. Both reduce the chance of the model returning a well-meaning paragraph that breaks your downstream formulas.
+
+### 2. Extracting Structured Fields From Messy Input
+
+You have a column of free-form addresses and you need them split into city, state, and postal code.
+
+\`=COPILOT("Extract the city, state, and postal code from each address. Return three columns in that order, with headers.", A2:A101)\`
+
+The model handles the formatting variations that REGEX functions struggle with — "Apt 3, New York NY 10001" and "10001 New York, Apartment 3" resolve to the same output. Pair this with the output being a spilled array and you get a three-column table from a one-column input.
+
+### 3. Normalising Category Lists Against a Controlled Vocabulary
+
+Your sales team has been typing product categories freely for a year and you need every row mapped to one of the twelve official categories in your taxonomy.
+
+\`=COPILOT("Map each product to one of the allowed categories. If none fits, return 'Other'.", A2:A1000, "Allowed categories:", D2:D13)\`
+
+The second range is how you pass the controlled list. The model matches each input against the allowed vocabulary, and the fallback instruction ("If none fits, return 'Other'") prevents it from inventing a thirteenth category under pressure.
+
+### 4. Generating Short Summaries in Bulk
+
+You have a column of article titles and meta descriptions and you need a one-sentence tag for each.
+
+\`=COPILOT("Write a single-sentence tagline for each row. Keep each tagline under 12 words.", B2:C201)\`
+
+The word-count constraint matters. Without it, the model will write twenty-word sentences and two of them will be thirty words. Constraints in the prompt are the single biggest lever for consistent output.
+
+### 5. Sentiment Plus Reason in Two Columns
+
+For a harder task — tagging both sentiment and the reason behind it — the model can return two columns from one call.
+
+\`=COPILOT("For each review below, return two columns: sentiment (positive/negative/neutral) and a three-word reason.", B2:B101)\`
+
+You place this formula in a single cell and two columns spill down. This is where COPILOT() does something no other Excel function can do economically. A regex cannot extract the reason. A pivot table cannot generate sentiment. A manual review takes hours. The function takes one call against your rate limit.
+
+## When the Formula Is Worth Using
+
+The COPILOT() function earns its place when three conditions are true: the task involves unstructured text that rule-based formulas can't handle, the output fits into cells, and the volume is large enough that doing it manually would be tedious.
+
+Good fits are classification over text columns, extraction of fields from messy inputs, translation, summarisation of short passages, sentiment tagging, and mapping to controlled vocabularies. These are problems that used to require either manual work or a detour out to a separate tool.
+
+## When the Formula Is Not Worth Using
+
+There are several places the function is a bad choice despite looking tempting.
+
+First, deterministic computation. If the task can be done with SUMIF, FILTER, REGEX, or a pivot table, use those. They are faster, free, and produce the same answer every time. COPILOT() is for tasks that standard functions can't express.
+
+Second, audit-critical numbers. A financial model's revenue projection should not pass through a language model, full stop. The model may be 99% accurate, but the 1% where it rounds a number or invents a digit will not be caught by Excel's recalculation. Keep COPILOT() away from anything that feeds a board pack.
+
+Third, high-volume single-row calls. If you find yourself writing COPILOT() inside a cell that will be copied down 5,000 rows, you are burning through your rate limit and your Microsoft 365 compute allowance. Rewrite the formula to pass the entire range at once.
+
+Fourth, real-time dashboards. Because the function recalculates when inputs change, a dashboard connected to live data can issue thousands of calls per day without anyone noticing. Consider using paste-values or a manual refresh discipline if you have volatile inputs feeding COPILOT() cells.
+
+## Prompt Patterns That Actually Work
+
+Over a few weeks of building formulas, a handful of prompt patterns consistently produce better output than casual phrasing.
+
+**Constrain the output vocabulary.** "Return one of: A, B, or C" beats "Categorise this" every time.
+
+**Specify the output shape.** "Return one column" or "Return three columns labelled X, Y, Z" stops the model from sometimes writing prose.
+
+**Cap the length.** "Under 10 words" or "One short sentence" prevents variable-length answers that break downstream formulas.
+
+**Give examples when the task is subtle.** "Examples: 'I loved it' → positive, 'It was fine' → neutral" anchors the model when the distinction is subjective.
+
+**Handle the fallback.** Tell the model what to do when the input doesn't fit your rubric. "Return 'Other' if unclear" or "Return 'N/A' if no match."
+
+These five moves cover roughly 90% of the prompt engineering that matters inside a spreadsheet formula. You do not need a chain-of-thought or a persona description; you need tight constraints on the output.
+
+## Error Messages and What They Mean
+
+The function produces several error types and each points to a specific fix.
+
+**#BUSY!** — You've hit the rate limit. Wait 10 minutes and check the 300-per-hour cap as well. If you are consistently hitting it, you need to batch your inputs into larger ranges.
+
+**#CONNECT!** — A connection problem, often a licence or tenant configuration issue. Verify your Microsoft 365 Copilot licence is active.
+
+**#BLOCKED!** — Your tenant admin has disabled COPILOT() or the underlying connection to the model. This is a policy setting, not a formula problem.
+
+**#CALC!** — The argument shapes don't match what the function expects. Usually caused by passing a range that is the wrong orientation (columns versus rows) for the instruction you wrote.
+
+**#VALUE!** — One of the arguments isn't text or a range. Check for stray numbers or booleans outside the expected positions.
+
+## A Note on Reproducibility
+
+Because COPILOT() calls a generative model, the same formula can produce slightly different results on re-calculation. For most classification and extraction tasks the answers are stable, but for open-ended summarisation they are not.
+
+If reproducibility matters for your workflow — say, you are feeding COPILOT() output into a report that will be compared year-on-year — the discipline is to run the formula once, then convert the results to values with Paste Special. The spilled array becomes static text, and the static text becomes the audit record.
+
+## How It Fits Alongside Agent Mode
+
+Microsoft's Excel Agent Mode and the COPILOT() function solve different problems. Agent Mode is multi-step, takes a workbook-level instruction, and makes autonomous edits across sheets. COPILOT() is single-step, fits inside a formula, and produces a value that other formulas can reference.
+
+The dividing line is whether the task is a cell-level operation or a workflow. Classifying a column is a cell-level operation — COPILOT() shines. Building a loan amortisation sheet from scratch is a workflow — Agent Mode is the right tool.
+
+For a practical walkthrough of when to use Agent Mode's multi-step reasoning, our [Excel Copilot Agent Mode guide](/resources/excel-copilot-agent-mode-guide) covers the setup and prompts that work well there. And if you're combining COPILOT() output with broader AI workflows across tools, [How Do I Use AI](https://howdoiuse.ai) has practical guides on prompt patterns that carry across ChatGPT, Claude, and Copilot.
+
+## The Bottom Line
+
+The COPILOT() function is the first time Microsoft has put an AI model inside an Excel cell as a callable function. That makes it easy to under- or over-estimate.
+
+The honest assessment: it is excellent for classification, extraction, normalisation, and bulk tagging of text. It is unreliable for deterministic calculations and a bad choice for audit-critical numbers. It costs one call per range, not one call per row, so batching matters more than almost anything else.
+
+Used with those boundaries in mind, COPILOT() removes a specific kind of spreadsheet friction — the moment where you'd normally copy a column out to ChatGPT, do something, and paste it back — and keeps the whole workflow inside the file.`
   }
 ];
 
