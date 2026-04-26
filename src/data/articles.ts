@@ -2104,7 +2104,7 @@ The three-argument minimum makes them approachable. The LAMBDA support makes the
   {
     slug: "excel-financial-model-auditable",
     title: "How to Build an Excel Financial Model That Anyone Can Audit",
-    description: "The best financial models aren't the cleverest — they're the clearest. Learn the structure, naming conventions, and formatting rules that make your spreadsheets genuinely trustworthy.",
+    description: "The best financial models aren't the cleverest. They're the clearest. Learn the structure, naming conventions, and formatting rules that make your spreadsheets genuinely trustworthy.",
     category: "excel",
     readTime: "11 min read",
     publishedAt: "2026-04-20",
@@ -2125,13 +2125,13 @@ Most models fail that test. They grow organically, someone adds a quick fix, som
 
 An auditable model has four properties. A reviewer can find every input. A reviewer can follow every calculation one step at a time. A reviewer can identify when something has changed. And a reviewer can run the model with different assumptions without breaking it.
 
-If your model fails any one of those, it is not a model — it is a calculator with memory problems. The good news is that the fixes are mechanical. You do not need to be a better analyst. You need to be a more disciplined one.
+If your model fails any one of those, it is not a model. It is a calculator with memory problems. The good news is that the fixes are mechanical. You do not need to be a better analyst. You need to be a more disciplined one.
 
 ## The Three-Zone Structure
 
 Professional modellers separate a workbook into three zones: inputs, calculations, and outputs. How you implement this depends on the model's size, but the separation is non-negotiable.
 
-For a small model, three coloured sections on a single sheet are enough. For a medium model, use three separate sheets. For a large model, the calculations zone may itself be split by module — revenue, costs, working capital, debt, equity — each on its own sheet with its own checks.
+For a small model, three coloured sections on a single sheet are enough. For a medium model, use three separate sheets. For a large model, the calculations zone may itself be split by module (revenue, costs, working capital, debt, equity), each on its own sheet with its own checks.
 
 The point of the separation is that a reviewer should never have to ask "is this an assumption or a result?" An input is something you can change and see effects flow through. A calculation is a deterministic function of inputs. An output is a presentation of calculations. Mixing them makes models impossible to stress-test, because you never know what happens if you change a given cell.
 
@@ -2169,7 +2169,7 @@ Add more than one check. Cash flow should reconcile. Opening balances plus movem
 
 The most insidious class of model error is a hardcoded number buried inside a calculation. A tax rate typed directly into a margin formula. An inflation assumption baked into a growth rate. These become invisible after you close the workbook.
 
-The discipline is this: if a number appears in a formula, it should be a reference to an input cell. The only exception is a true mathematical constant — 12 for months, 365 for days, 100 for percentage conversion. Even these are often better expressed as named constants for readability.
+The discipline is this: if a number appears in a formula, it should be a reference to an input cell. The only exception is a true mathematical constant, like 12 for months, 365 for days, or 100 for percentage conversion. Even these are often better expressed as named constants for readability.
 
 A useful workflow at the end of each modelling session is to use Find & Replace with "Look in: Formulas" and search for digit patterns to catch any stray hardcodes. A handful of minutes, and you have a model with no hidden assumptions.
 
@@ -2205,13 +2205,13 @@ Every significant model should include at least one sensitivity table showing ho
 
 A handful of shortcuts will earn their weight back within a day of modelling:
 
-- Ctrl+\\ — select cells in the current selection that don't match the active cell (catches inconsistent formulas in a row)
-- Ctrl+[ — trace precedents (shows where a formula gets its inputs from)
-- Ctrl+] — trace dependents (shows where a cell is used)
-- F5 + Alt+S + F — go to all formula cells
-- F5 + Alt+S + O — go to all constant cells
-- Ctrl+Shift+{ — select all precedents, direct and indirect
-- Alt+M+M+D — Name Manager
+- Ctrl+\\: select cells in the current selection that don't match the active cell (catches inconsistent formulas in a row)
+- Ctrl+[: trace precedents (shows where a formula gets its inputs from)
+- Ctrl+]: trace dependents (shows where a cell is used)
+- F5 + Alt+S + F: go to all formula cells
+- F5 + Alt+S + O: go to all constant cells
+- Ctrl+Shift+{: select all precedents, direct and indirect
+- Alt+M+M+D: Name Manager
 
 These are discoverable through Alt-key navigation and worth practising. A modeller who uses them well works roughly twice as fast as one who doesn't.
 
@@ -2237,15 +2237,15 @@ Every item on that list takes minutes to implement. Skipping them costs hours to
     readTime: "10 min read",
     publishedAt: "2026-04-21",
     howToSteps: [
-      { name: "Check Your Licence and Channel", text: "The COPILOT() function reached general availability in February 2026 and requires a Microsoft 365 Copilot licence. Before that date you needed the Beta or Current Preview channel through the Microsoft 365 Insider or Frontier programme. If your formula returns #BUSY! or #CONNECT!, the licence or channel is the usual culprit." },
+      { name: "Check Your Licence and Channel", text: "As of April 2026, the COPILOT() function is still in preview. It requires a Microsoft 365 Copilot licence and either the Beta Channel or Current Channel (Preview) via the Microsoft 365 Insider or Frontier programme. Per Microsoft's documentation, Windows needs Version 2509 or later and Mac needs Version 16.101 or later. If your formula returns #BUSY! or #CONNECT!, the licence or channel is the usual culprit." },
       { name: "Write a Plain-English Prompt as the First Argument", text: "Start every formula with a natural-language instruction wrapped in quotes. For example, =COPILOT(\"Classify each review as positive, negative, or neutral\", B2:B50). The clearer the instruction, the more consistent the result." },
       { name: "Pass Cell Ranges as Context Arguments", text: "Everything after the prompt is either more instruction text or a cell range. The function accepts multiple prompt/context pairs, so you can say =COPILOT(\"Categorise these products\", A2:A50, \"using these allowed categories\", D2:D10)." },
-      { name: "Let the Result Spill Like Other Dynamic Arrays", text: "COPILOT() returns a spilled array. Place the formula in a single cell and leave the cells below and to the right empty — the result fills in automatically, the same behaviour as SORT, UNIQUE, and FILTER." },
+      { name: "Let the Result Spill Like Other Dynamic Arrays", text: "COPILOT() returns a spilled array. Place the formula in a single cell and leave the cells below and to the right empty. The result fills in automatically, the same behaviour as SORT, UNIQUE, and FILTER." },
       { name: "Stay Within the Rate Limits", text: "Initial limits are 100 COPILOT calls per 10 minutes and 300 per hour. Batch inputs by passing ranges rather than one call per row, and use IF() or IFERROR() wrappers to avoid calling it on empty rows." }
     ],
     content: `# The Excel COPILOT() Function: How to Use AI Inside a Formula
 
-Microsoft has spent two years bolting AI onto Excel's user interface. The COPILOT() function, which reached general availability for Microsoft 365 Copilot licence holders in February 2026, does something different. It puts the model inside the formula bar.
+Microsoft has spent two years bolting AI onto Excel's user interface. The COPILOT() function, currently in preview for Microsoft 365 Copilot licence holders on the Beta or Current (Preview) channels, does something different. It puts the model inside the formula bar.
 
 You write =COPILOT("Classify these comments as complaints or compliments", A2:A100) and the result spills down column B. The formula recalculates when the source changes. It references cells like any other function. It is not a chat pane and it is not Agent Mode. It is a single-cell function you compose with SUMIF, XLOOKUP, and everything else.
 
@@ -2261,7 +2261,7 @@ The syntax is:
 
 Only the first prompt argument is required. You can interleave further prompts and further ranges as many times as you need. That interleaving is how you tell the model "here is the instruction, here is the data it applies to, here is the second instruction, here is the data for that." The function stitches it together and sends one call.
 
-Under the hood, the currently documented model is gpt-4.1-mini. Microsoft has stated that the model will evolve over time, which means two things. First, the same formula can return slightly different results across versions — do not treat COPILOT() output as deterministic. Second, capabilities will quietly improve, so formulas that fail to produce good results today are worth retrying after each model update.
+Under the hood, the currently documented model is gpt-4.1-mini. Microsoft has stated that the model will evolve over time, which means two things. First, the same formula can return slightly different results across versions, so do not treat COPILOT() output as deterministic. Second, capabilities will quietly improve, so formulas that fail to produce good results today are worth retrying after each model update.
 
 ## The Rate Limits You Need to Know
 
@@ -2287,7 +2287,7 @@ You have a column of free-form addresses and you need them split into city, stat
 
 \`=COPILOT("Extract the city, state, and postal code from each address. Return three columns in that order, with headers.", A2:A101)\`
 
-The model handles the formatting variations that REGEX functions struggle with — "Apt 3, New York NY 10001" and "10001 New York, Apartment 3" resolve to the same output. Pair this with the output being a spilled array and you get a three-column table from a one-column input.
+The model handles the formatting variations that REGEX functions struggle with. "Apt 3, New York NY 10001" and "10001 New York, Apartment 3" resolve to the same output. Pair this with the output being a spilled array and you get a three-column table from a one-column input.
 
 ### 3. Normalising Category Lists Against a Controlled Vocabulary
 
@@ -2307,7 +2307,7 @@ The word-count constraint matters. Without it, the model will write twenty-word 
 
 ### 5. Sentiment Plus Reason in Two Columns
 
-For a harder task — tagging both sentiment and the reason behind it — the model can return two columns from one call.
+For a harder task, like tagging both sentiment and the reason behind it, the model can return two columns from one call.
 
 \`=COPILOT("For each review below, return two columns: sentiment (positive/negative/neutral) and a three-word reason.", B2:B101)\`
 
@@ -2351,27 +2351,27 @@ These five moves cover roughly 90% of the prompt engineering that matters inside
 
 The function produces several error types and each points to a specific fix.
 
-**#BUSY!** — You've hit the rate limit. Wait 10 minutes and check the 300-per-hour cap as well. If you are consistently hitting it, you need to batch your inputs into larger ranges.
+**#BUSY!** You've hit the rate limit. Wait 10 minutes and check the 300-per-hour cap as well. If you are consistently hitting it, you need to batch your inputs into larger ranges.
 
-**#CONNECT!** — A connection problem, often a licence or tenant configuration issue. Verify your Microsoft 365 Copilot licence is active.
+**#CONNECT!** A connection problem, often a licence or tenant configuration issue. Verify your Microsoft 365 Copilot licence is active.
 
-**#BLOCKED!** — Your tenant admin has disabled COPILOT() or the underlying connection to the model. This is a policy setting, not a formula problem.
+**#BLOCKED!** Your tenant admin has disabled COPILOT() or the underlying connection to the model. This is a policy setting, not a formula problem.
 
-**#CALC!** — The argument shapes don't match what the function expects. Usually caused by passing a range that is the wrong orientation (columns versus rows) for the instruction you wrote.
+**#CALC!** The argument shapes don't match what the function expects. Usually caused by passing a range that is the wrong orientation (columns versus rows) for the instruction you wrote.
 
-**#VALUE!** — One of the arguments isn't text or a range. Check for stray numbers or booleans outside the expected positions.
+**#VALUE!** One of the arguments isn't text or a range. Check for stray numbers or booleans outside the expected positions.
 
 ## A Note on Reproducibility
 
 Because COPILOT() calls a generative model, the same formula can produce slightly different results on re-calculation. For most classification and extraction tasks the answers are stable, but for open-ended summarisation they are not.
 
-If reproducibility matters for your workflow — say, you are feeding COPILOT() output into a report that will be compared year-on-year — the discipline is to run the formula once, then convert the results to values with Paste Special. The spilled array becomes static text, and the static text becomes the audit record.
+If reproducibility matters for your workflow, say you are feeding COPILOT() output into a report that will be compared year-on-year, the discipline is to run the formula once, then convert the results to values with Paste Special. The spilled array becomes static text, and the static text becomes the audit record.
 
 ## How It Fits Alongside Agent Mode
 
 Microsoft's Excel Agent Mode and the COPILOT() function solve different problems. Agent Mode is multi-step, takes a workbook-level instruction, and makes autonomous edits across sheets. COPILOT() is single-step, fits inside a formula, and produces a value that other formulas can reference.
 
-The dividing line is whether the task is a cell-level operation or a workflow. Classifying a column is a cell-level operation — COPILOT() shines. Building a loan amortisation sheet from scratch is a workflow — Agent Mode is the right tool.
+The dividing line is whether the task is a cell-level operation or a workflow. Classifying a column is a cell-level operation, where COPILOT() shines. Building a loan amortisation sheet from scratch is a workflow, where Agent Mode is the right tool.
 
 For a practical walkthrough of when to use Agent Mode's multi-step reasoning, our [Excel Copilot Agent Mode guide](/resources/excel-copilot-agent-mode-guide) covers the setup and prompts that work well there. And if you're combining COPILOT() output with broader AI workflows across tools, [How Do I Use AI](https://howdoiuse.ai) has practical guides on prompt patterns that carry across ChatGPT, Claude, and Copilot.
 
@@ -2381,7 +2381,7 @@ The COPILOT() function is the first time Microsoft has put an AI model inside an
 
 The honest assessment: it is excellent for classification, extraction, normalisation, and bulk tagging of text. It is unreliable for deterministic calculations and a bad choice for audit-critical numbers. It costs one call per range, not one call per row, so batching matters more than almost anything else.
 
-Used with those boundaries in mind, COPILOT() removes a specific kind of spreadsheet friction — the moment where you'd normally copy a column out to ChatGPT, do something, and paste it back — and keeps the whole workflow inside the file.`
+Used with those boundaries in mind, COPILOT() removes a specific kind of spreadsheet friction. The moment where you'd normally copy a column out to ChatGPT, do something, and paste it back now stays inside the file.`
   }
 ];
 
