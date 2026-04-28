@@ -2382,6 +2382,283 @@ The COPILOT() function is the first time Microsoft has put an AI model inside an
 The honest assessment: it is excellent for classification, extraction, normalisation, and bulk tagging of text. It is unreliable for deterministic calculations and a bad choice for audit-critical numbers. It costs one call per range, not one call per row, so batching matters more than almost anything else.
 
 Used with those boundaries in mind, COPILOT() removes a specific kind of spreadsheet friction. The moment where you'd normally copy a column out to ChatGPT, do something, and paste it back now stays inside the file.`
+  },
+  {
+    slug: "excel-let-function-cleaner-formulas",
+    title: "The LET Function: How to Write Excel Formulas That Anyone (Including Future You) Can Read",
+    description: "Excel's LET function lets you name intermediate values inside a formula. The result is shorter, faster, and far easier to debug. Here is the syntax, four practical patterns, and the cases where LET is worth the rewrite versus where it isn't.",
+    category: "excel",
+    readTime: "9 min read",
+    publishedAt: "2026-04-27",
+    howToSteps: [
+      { name: "Understand the Three-Part Pattern", text: "Every LET formula follows the same shape: name pairs, then a final calculation. The syntax is =LET(name1, value1, name2, value2, ..., calculation). The names work like local variables. They exist only inside that single formula and disappear once the cell finishes calculating." },
+      { name: "Replace Repeated Subexpressions", text: "If the same expression appears more than once in a formula, name it. =IF(SUMIFS(...)>100, SUMIFS(...)*0.1, SUMIFS(...)*0.05) becomes =LET(s, SUMIFS(...), IF(s>100, s*0.1, s*0.05)). The formula now calls SUMIFS once instead of three times, which is faster and easier to read." },
+      { name: "Name the Concepts, Not the Cells", text: "Use names that describe meaning. revenue, tax_rate, and effective_price tell the next reader what the formula is doing. x, y, and z make them solve a puzzle. The cost of a clear name is two extra keystrokes. The cost of an unclear one is hours of confusion later." },
+      { name: "Combine LET with LAMBDA for Reusable Logic", text: "LET names values inside one formula. LAMBDA wraps an entire calculation as a reusable function with named parameters. Use LET inside LAMBDA when the function body has its own intermediate values worth naming. Together they turn ad-hoc formulas into a small library of reliable calculations." },
+      { name: "Know When LET Is Not Worth It", text: "For a one-line formula like =A1*B1, LET adds noise. The function pays off in formulas that contain repeated subexpressions, multiple steps of logic, or values whose meaning is not obvious from the formula itself. If a formula fits in your head and runs once, leave it alone. If it does not, LET is almost always the right rewrite." }
+    ],
+    content: `# The LET Function: How to Write Excel Formulas That Anyone (Including Future You) Can Read
+
+The standard objection to long Excel formulas is not that they are hard to write. It is that they are hard to read three months later when something breaks and you have to figure out what the original author was thinking.
+
+The LET function, generally available since 2021 in Excel for Microsoft 365 and Excel 2021 onward, fixes the readability problem in a way nothing else in the formula bar can. It lets you name intermediate values inside a single formula and then refer to those names. The same calculation, written without LET, ends up duplicating expressions and forcing the reader to mentally re-evaluate the same thing several times. With LET, you write each piece once, name it, and use the name.
+
+This article walks through the actual syntax, four patterns where LET earns its keep, the performance benefit that is easy to miss, and a candid view of where LET is overkill.
+
+## The Syntax in One Sentence
+
+LET takes pairs of names and values, followed by a final calculation that uses those names.
+
+\`=LET(name1, value1, name2, value2, ..., calculation)\`
+
+The pairs can be as many as you like, and a name defined earlier can be used in a later value. Names are local to the formula. They do not exist anywhere else in the workbook and they disappear when the formula finishes evaluating. There is no risk of polluting a global namespace because there is no namespace.
+
+A trivial example to anchor the syntax:
+
+\`=LET(price, A1, tax, 0.07, price * (1 + tax))\`
+
+Here, price is bound to whatever is in A1, tax is bound to 0.07, and the final calculation multiplies them. Read aloud, this is the same as: "Let price equal A1 and tax equal seven percent. The answer is price times one plus tax." Excel formulas almost never read like that. With LET, they can.
+
+## Pattern One: Eliminating Duplicated Subexpressions
+
+The single most common reason a formula is hard to read is that it contains the same expression twice or three times. IF formulas are the worst offenders.
+
+Without LET:
+
+\`=IF(SUMIFS(C:C, A:A, "North", B:B, ">0") > 10000, SUMIFS(C:C, A:A, "North", B:B, ">0") * 0.1, SUMIFS(C:C, A:A, "North", B:B, ">0") * 0.05)\`
+
+The same SUMIFS is written three times. To understand the formula you have to recognise that all three are identical, then mentally factor them out, then read what is left. Worse, if you ever need to change the SUMIFS criteria, you must change them in three places.
+
+With LET:
+
+\`=LET(s, SUMIFS(C:C, A:A, "North", B:B, ">0"), IF(s > 10000, s * 0.1, s * 0.05))\`
+
+The SUMIFS is written once, named s, and used three times by name. The formula is shorter, easier to read, and only has one place to edit.
+
+There is also a performance difference, which is usually understated. Excel evaluates a named expression in LET once. Without LET, an expression that appears three times is evaluated three times, even if the result is identical. On large workbooks with thousands of LET candidates, that compounds.
+
+## Pattern Two: Building a Calculation in Named Steps
+
+A complex formula often computes several intermediate values on the way to the final answer. Naming each step makes the structure visible.
+
+Imagine a formula that calculates the effective hourly rate of a salaried employee, accounting for benefits and paid time off.
+
+\`=LET(
+  annual_salary, B2,
+  benefits_value, B3,
+  total_compensation, annual_salary + benefits_value,
+  weeks_per_year, 52,
+  weeks_pto, B4,
+  weeks_worked, weeks_per_year - weeks_pto,
+  hours_per_week, B5,
+  total_hours, weeks_worked * hours_per_week,
+  total_compensation / total_hours
+)\`
+
+Even without context, this formula reads as a small program. Each line names a value or a step. The final line is the calculation. Anyone reading this six months from now can verify the logic without reverse-engineering it.
+
+The unrolled version, with everything inlined, would be a single line of nested arithmetic that no one wants to debug.
+
+## Pattern Three: Making Conditional Logic Auditable
+
+When IF is nested several levels deep, the formula becomes a thicket of commas. LET turns nested IF chains into something you can talk through.
+
+\`=LET(
+  amount, A2,
+  tier1, 1000,
+  tier2, 5000,
+  tier3, 10000,
+  rate1, 0.05,
+  rate2, 0.07,
+  rate3, 0.10,
+  rate4, 0.12,
+  rate, IF(amount < tier1, rate1,
+        IF(amount < tier2, rate2,
+        IF(amount < tier3, rate3, rate4))),
+  amount * rate
+)\`
+
+The thresholds and rates are explicit at the top. The logic uses those names. The final calculation is one line. If you ever need to adjust a threshold, you change one number, not a buried literal inside a long IF.
+
+## Pattern Four: Making Array Formulas Tractable
+
+Dynamic array formulas, with FILTER, SORT, UNIQUE, and friends, often build up an intermediate array that gets used in two places. Without LET, you compute it twice.
+
+For example, finding the top three rows in a filtered subset:
+
+\`=LET(
+  filtered, FILTER(A2:C100, A2:A100 = "Active"),
+  sorted, SORT(filtered, 3, -1),
+  TAKE(sorted, 3)
+)\`
+
+Each step is named and built on the previous one. If you needed to change the filter criterion or the sort order, exactly one line changes.
+
+## What LET Is Not For
+
+LET pays off when a formula is long, repeated, or hard to read. It does not pay off everywhere.
+
+A one-line arithmetic formula like =A1 + B1 does not need LET. The cognitive overhead of the name pairs would dwarf the formula itself.
+
+A pure lookup like =VLOOKUP(A2, Reference!A:C, 3, FALSE) does not need LET unless the same lookup is repeated in the formula or the result is reused.
+
+A formula whose meaning is obvious from its operators does not need LET to clarify intent. Save the function for the cases where the formula is no longer self-explanatory.
+
+A reasonable rule: if you would not annotate the formula with a comment if cell formulas could have comments, LET is probably unnecessary. If you would annotate it, LET is almost always the right way to write the comment, because the names are the comments.
+
+## LET, LAMBDA, and the Path to Reusable Excel
+
+LET is one half of a pair. LAMBDA, generally available since 2021 alongside LET, lets you wrap a calculation as a reusable function with named parameters. The two are designed to work together.
+
+A typical pattern: write the calculation once with LET, get it working, then promote it to a LAMBDA defined in the Name Manager so other cells can call it like a built-in function. The LAMBDA's body often uses LET internally to keep itself readable.
+
+This is how Microsoft has been quietly turning Excel into a programmable spreadsheet without changing the formula bar. The combination of LET, LAMBDA, dynamic arrays, and the newer functions in the lambda helper family means that a competent analyst can now build, in pure formulas, what previously required VBA or Power Query.
+
+## A Brief Note on Performance
+
+LET's performance benefit comes from the fact that named expressions are evaluated once per LET call, regardless of how many times the name is referenced. For most small formulas this is invisible. For large workbooks where the same expensive subexpression appears five or ten times across many cells, switching to LET can produce a measurable recalculation speedup.
+
+This is not a reason to wrap everything in LET. It is a reason to pay attention when you find yourself writing the same SUMIFS, INDEX/MATCH, or large array calculation more than once in a single formula.
+
+## Where LET Earns Its Keep, Summarised
+
+The function is worth it whenever a formula has any of these characteristics. Repeated subexpressions are the strongest case. Multiple steps of logic that build on each other is the second strongest. Long IF chains where the thresholds and outcomes deserve names is the third. Array formulas where an intermediate result is reused is the fourth.
+
+For everything else, leaving the formula alone is usually fine. LET is a tool for the formulas that have grown beyond what a single line can communicate clearly. Used in those cases, it changes Excel from a stack of opaque expressions into something a future reader can actually understand.
+
+For a deeper look at writing reliable spreadsheet logic, our [ultimate Excel formulas reference guide](/guides/ultimate-excel-formulas-reference) covers the function families that LET most often improves. And for the LAMBDA side of the story, the same concepts extend into building your own reusable functions on top of the patterns shown above.`
+  },
+  {
+    slug: "excel-regex-functions-regextest-regexextract-regexreplace",
+    title: "Excel's REGEX Functions: A Practical Guide to REGEXTEST, REGEXEXTRACT, and REGEXREPLACE",
+    description: "Microsoft added three regex functions to Excel in 2024. They use the PCRE2 flavor, work natively in the formula bar, and replace the awkward chains of LEFT, RIGHT, MID, and FIND that used to be the only way to parse irregular text. Here is how each function works, the patterns that come up most in real spreadsheets, and the limits worth knowing.",
+    category: "excel",
+    readTime: "10 min read",
+    publishedAt: "2026-04-28",
+    howToSteps: [
+      { name: "Confirm Your Excel Version Has REGEX", text: "REGEXTEST, REGEXEXTRACT, and REGEXREPLACE rolled out to Microsoft 365 Insiders in May 2024 and reached general availability through the rest of 2024 and into 2025. They are not in Excel 2021 or earlier perpetual licences. If your formula bar shows #NAME? when you type =REGEXTEST(, you are on a version that does not support them." },
+      { name: "Test Patterns Outside Excel First", text: "All three functions use the PCRE2 flavor, the same syntax as regex101.com (with PCRE2 selected). Build and verify a pattern there before pasting it into a workbook. The Excel formula bar gives no preview of matches, so working blind inside the cell is slower and more error-prone than testing externally." },
+      { name: "Use REGEXTEST as a Cleaner Validator", text: "REGEXTEST replaces nested IF/SEARCH chains for validating that a string matches a pattern. Email format, postcode format, internal employee ID format, anything where you previously stitched together SEARCH and ISNUMBER becomes one call: =REGEXTEST(A2, \"^[A-Z]{2}-\\d{4}$\"). The result is TRUE or FALSE, which feeds cleanly into IF, SUMIFS, and conditional formatting." },
+      { name: "Use REGEXEXTRACT to Pull Out the Part You Want", text: "REGEXEXTRACT(text, pattern, [return_mode]) returns matched substrings. Return mode 0 gives the first match, 1 gives all matches as a spilled array, 2 gives the capture groups from the first match. Most real extraction work needs mode 0 or 2. Mode 2 is what you reach for when a single string contains several distinct fields you want as separate cells." },
+      { name: "Use REGEXREPLACE for Rule-Based Cleanup", text: "REGEXREPLACE(text, pattern, replacement) is the function that finally lets you strip irregular formatting from a column without iterating SUBSTITUTE. Strip non-digits, normalise whitespace, mask sensitive substrings, or rewrite a date format in one cell. Capture groups in the replacement string use $1, $2, etc., not the backslash form some other tools use." }
+    ],
+    content: `# Excel's REGEX Functions: A Practical Guide to REGEXTEST, REGEXEXTRACT, and REGEXREPLACE
+
+For most of Excel's history, parsing irregular text meant chaining LEFT, RIGHT, MID, FIND, SEARCH, SUBSTITUTE, and a stack of IF statements. The formulas were long, fragile, and always one edge case away from breaking. Anyone who has ever cleaned a column of mixed-format phone numbers or extracted invoice references from a free-text field knows the feeling.
+
+That changed when Microsoft added three regular expression functions to Excel: REGEXTEST, REGEXEXTRACT, and REGEXREPLACE. They went into the Insiders channel in May 2024 and reached general availability across Microsoft 365 over the following year. They use PCRE2, the same regex flavor as regex101.com and most modern programming languages, which means patterns built and tested elsewhere drop into Excel directly.
+
+This article covers what each function does, the patterns that come up most in actual spreadsheets, the things they are and are not good at, and a few non-obvious behaviours worth knowing before you build a workbook around them.
+
+## Which Excel Versions Have REGEX
+
+The three functions are available in Microsoft 365 (Excel for the web, Windows, Mac) and Excel for iPad. They are not in perpetual-licence Excel 2021 or earlier. If you type =REGEXTEST( and the formula bar shows #NAME? after you confirm, your version does not have them.
+
+For shared workbooks where some collaborators are on perpetual licences, the formulas will simply return #NAME? on the older version. There is no graceful fallback inside the file itself. The pragmatic options are to either standardise the team on Microsoft 365 or to keep the regex work in a separate sheet that older clients are not expected to interact with.
+
+## REGEXTEST: A Boolean Match Check
+
+Signature: \`=REGEXTEST(text, pattern, [case_sensitivity])\`
+
+REGEXTEST returns TRUE if the pattern matches anywhere in the text and FALSE if it does not. The third argument is optional and controls case sensitivity. The default is case-insensitive on the Mac and Windows builds at the time of writing, which is the opposite of most regex engines, so check before relying on default behaviour.
+
+This is the function that replaces the largest amount of legacy spreadsheet code. Anywhere you previously wrote =ISNUMBER(SEARCH("xyz", A2)) or stacked IFs to check whether a value matched several patterns, REGEXTEST collapses the logic to a single call.
+
+A few patterns that come up constantly:
+
+\`=REGEXTEST(A2, "^\\d{5}(-\\d{4})?$")\` validates a US zip code in either the five-digit or nine-digit format.
+
+\`=REGEXTEST(A2, "^[\\w.-]+@[\\w.-]+\\.\\w{2,}$")\` does a serviceable email format check. Note the deliberate choice of "serviceable" rather than "complete." Real email validation requires far more than a regex, and the practical recommendation is to do basic format checking in the spreadsheet and rely on the actual mail system for anything that has to be deliverable.
+
+\`=REGEXTEST(A2, "^(?=.*[A-Z])(?=.*\\d).{8,}$")\` checks that a password meets a basic policy: at least eight characters, with at least one uppercase letter and one digit. Useful for vetting an export of user records before passing them to a system that enforces the policy.
+
+The function is also the cleanest way to power conditional formatting. Set the rule to "Use a formula to determine which cells to format" and write =REGEXTEST(A2, pattern). The cells that match get the formatting. This is materially better than the equivalent ISNUMBER(SEARCH(...)) approach because the regex can describe the pattern instead of approximating it.
+
+## REGEXEXTRACT: Pulling Substrings Out of Text
+
+Signature: \`=REGEXEXTRACT(text, pattern, [return_mode], [case_sensitivity])\`
+
+REGEXEXTRACT is the function for the case where a string contains a piece of information you want, surrounded by content you do not. The return_mode argument controls how it gives back results.
+
+Return mode 0 (the default) returns the first match as a single value. Use this when there is exactly one thing you are extracting from each cell.
+
+Return mode 1 returns all matches as a spilled vertical array. Use this when one cell contains multiple instances of the same pattern and you want them as separate rows.
+
+Return mode 2 returns the capture groups from the first match as a spilled horizontal array. Use this when a single string contains several distinct fields, each captured by its own group, that you want as separate columns.
+
+A few examples that map to real spreadsheet work:
+
+Extracting the numeric portion of an SKU: \`=REGEXEXTRACT(A2, "\\d+")\` returns the first run of digits. If your SKUs look like "SKU-12345-RED", this returns "12345" as text. Wrap with VALUE() if you need a number.
+
+Extracting all dollar amounts from a free-text note: \`=REGEXEXTRACT(A2, "\\$[\\d,]+(\\.\\d{2})?", 1)\` with return mode 1 spills every match into rows below the formula. Useful for summarising expenses written into a notes column.
+
+Splitting a fully formatted name into its parts: \`=REGEXEXTRACT(A2, "^(\\S+)\\s+(.*?)\\s+(\\S+)$", 2)\` with return mode 2 captures first name, middle, and last name into three adjacent cells in one formula. The pattern is naive, in the way name patterns always are, but the technique generalises.
+
+The most common mistake with REGEXEXTRACT is forgetting that it returns text. If you extract digits and need to do arithmetic on them, wrap the call in VALUE or use the unary minus prefix to coerce. Without coercion, downstream SUMs silently treat the extracted strings as zero.
+
+## REGEXREPLACE: Rule-Based Find and Replace
+
+Signature: \`=REGEXREPLACE(text, pattern, replacement, [occurrence], [case_sensitivity])\`
+
+REGEXREPLACE is the function that turns a column of inconsistent text into a column of consistent text. The first three arguments are the obvious ones. The fourth argument is the occurrence to replace: leave it blank to replace all matches, set it to 1 to replace only the first, 2 for only the second, and so on.
+
+Capture groups in the replacement string are referenced as $1, $2, $3, and so on. The literal string $0 refers to the entire match. This is the same convention as JavaScript and most other modern regex engines.
+
+Patterns that come up often:
+
+Stripping non-digits from phone numbers: \`=REGEXREPLACE(A2, "\\D", "")\` removes every character that is not a digit. The result is the bare phone number suitable for a database key, regardless of whether the original was "(555) 123-4567" or "555.123.4567" or "+1 555-123-4567".
+
+Normalising whitespace: \`=REGEXREPLACE(TRIM(A2), "\\s+", " ")\` collapses runs of multiple spaces, tabs, and other whitespace characters into a single space. The TRIM handles leading and trailing whitespace; the regex handles internal runs. The two together give you clean text in one expression.
+
+Reformatting dates: \`=REGEXREPLACE(A2, "(\\d{4})-(\\d{2})-(\\d{2})", "$3/$2/$1")\` rewrites an ISO-format date as DD/MM/YYYY by capturing the three components and reassembling them in a different order. This is useful for one-off reformatting jobs where converting to and from a real date type would be more work than the rewrite.
+
+Masking sensitive data: \`=REGEXREPLACE(A2, "\\d(?=\\d{4})", "*")\` masks all but the last four digits of a numeric string. Each digit followed by at least four more digits is replaced with an asterisk. The lookahead is what makes this work without consuming the trailing digits.
+
+## What Makes the Excel Implementation Specific
+
+Three details of the Excel implementation are worth knowing because they catch people coming from other regex environments.
+
+First, the functions use PCRE2 specifically. PCRE2 supports almost everything you would expect from Perl-compatible regex, including lookaheads, lookbehinds, named groups, and Unicode properties. If a pattern works on regex101.com with the PCRE2 flavor selected, it should work in Excel.
+
+Second, all three functions accept arrays. If you pass a range to the text argument, the function evaluates against each cell and spills the results. \`=REGEXTEST(A2:A100, pattern)\` returns a 99-row array of TRUE and FALSE values, which can feed FILTER or SUMPRODUCT. This is useful and not always advertised. It also means you do not need to wrap the call in any spill helper to get array behaviour.
+
+Third, the case sensitivity argument is the third positional argument and uses 0 for case-sensitive, 1 for case-insensitive. The default behaviour differs across Microsoft documentation and platform, so the safe practice is to set it explicitly when case matters. If your pattern itself uses (?i) or (?-i) flag groups, those override the function argument for the parts of the pattern they apply to.
+
+## Where REGEX Functions Are Not the Answer
+
+Like any tool, the regex functions have limits. Three honest cases where they are the wrong choice:
+
+Highly structured data with reliable delimiters does not need regex. If your column is comma-separated and you want the third field, TEXTSPLIT or TEXTBEFORE/TEXTAFTER are simpler and more readable than the equivalent regex pattern. Regex earns its keep on irregular text. On regular text, simpler functions win.
+
+Recursive or context-sensitive parsing is beyond regex regardless of flavor. Matching balanced parentheses in arbitrarily nested expressions, validating actual XML or JSON structure, or anything where the meaning of a token depends on tokens far away in the string is a job for a parser, not a pattern. Excel does not have a built-in parser, but Power Query handles many of these cases with M, and Python in Excel handles the rest.
+
+Patterns that have to be edited frequently by non-technical colleagues are a poor fit for regex. The syntax is dense, the failure modes are silent, and a misplaced character can flip an entire column from correct to wrong without warning. If a workbook will be maintained by people who do not write regex regularly, prefer named columns of cleanup rules and a Power Query step over a single regex formula that nobody else can debug.
+
+## Combining REGEX with Other Functions
+
+The regex functions are most powerful in combination with the rest of Excel's modern formula language.
+
+REGEXTEST inside FILTER lets you pull rows by pattern: \`=FILTER(A2:C100, REGEXTEST(A2:A100, "^INV-2026"))\` returns only the invoice rows for 2026. The same pattern with SUMIFS or COUNTIFS would require an awkward wildcard, which does not support the full regex syntax.
+
+REGEXEXTRACT inside LET lets you parse a string once and refer to the parts by name. We covered LET in detail in our [LET function guide](/resources/excel-let-function-cleaner-formulas), and the combination with regex is one of the cases where LET pays off most clearly.
+
+REGEXREPLACE chained through multiple steps lets you build a small cleanup pipeline without leaving the formula bar. The first call strips one kind of noise, the second normalises whitespace, the third applies a final format. Each step is auditable on its own.
+
+## A Note on AI and Regex
+
+The single most common practical use of AI for spreadsheet work in 2026 is asking a model to write a regex pattern from a natural-language description. Tools like ChatGPT and Claude are reliably good at this. Describe the pattern you want, paste a few representative inputs, ask for a PCRE2-compatible regex, and verify the output on regex101.com before dropping it into Excel.
+
+This is one of the rare cases where AI removes a bottleneck that was almost entirely about syntax recall. Regex syntax is dense and easy to forget between uses. Asking a model to translate "match a UK postcode" or "extract the first quoted phrase" produces a pattern in seconds. Just verify with real test data, because models occasionally produce patterns that match the examples you gave but fail on edge cases you did not.
+
+For more on the discipline of evaluating AI output before relying on it, our sister site has a guide on [evaluating AI answers when you are not the expert](https://howdoiuse.ai/resources/evaluating-ai-outputs-without-being-an-expert) that applies almost directly here.
+
+## Where REGEX Earns Its Keep
+
+REGEXTEST replaces validation logic. REGEXEXTRACT replaces extraction logic. REGEXREPLACE replaces cleanup logic. In each category, the regex versions are usually shorter, more flexible, and easier to maintain than the LEFT/RIGHT/MID/FIND chains they replace.
+
+The functions are not a magic wand. They reward thinking about the actual structure of your data and writing a pattern that captures that structure precisely. They punish guessing, in the sense that a pattern that works on the first ten rows but fails on row 117 is just as visible as one that fails everywhere.
+
+For most teams, the right time to learn the three functions is the next time you find yourself writing a chain of three or more legacy text functions to do something that feels like pattern matching. That is the moment regex turns a forty-character formula into a ten-character one and a fragile workbook into a stable one.`
   }
 ];
 
