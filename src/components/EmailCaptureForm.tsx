@@ -19,7 +19,7 @@ export default function EmailCaptureForm() {
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, magnet_slug: 'cheat-sheet-bundle' }),
       });
 
       if (res.ok) {

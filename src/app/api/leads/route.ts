@@ -1,30 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { neon } from '@neondatabase/serverless';
+import { createHash } from 'crypto';
 
-interface Lead {
-  email: string;
-  timestamp: string;
-  source: string;
-}
-
-const LEADS_FILE = path.join(process.cwd(), 'src/data/leads.json');
-
-function readLeads(): Lead[] {
-  try {
-    const content = fs.readFileSync(LEADS_FILE, 'utf-8');
-    return JSON.parse(content) as Lead[];
-  } catch {
-    return [];
-  }
-}
-
-function writeLeads(leads: Lead[]): void {
-  fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2), 'utf-8');
-}
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: NextRequest) {
-  let body: { email?: string };
+  let body: { email?: string; magnet_slug?: string };
   try {
     body = await request.json();
   } catch {
@@ -33,18 +14,27 @@ export async function POST(request: NextRequest) {
 
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!email || !EMAIL_REGEX.test(email)) {
     return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
   }
 
-  const leads = readLeads();
+  const magnetSlug = body.magnet_slug ?? 'cheat-sheet-bundle';
+  const pageUrl = request.headers.get('referer') ?? null;
+  const userAgent = request.headers.get('user-agent') ?? null;
+  const forwarded = request.headers.get('x-forwarded-for');
+  const ip = forwarded ? forwarded.split(',')[0].trim() : 'unknown';
+  const ipHash = createHash('sha256').update(ip).digest('hex');
 
-  if (leads.some((lead) => lead.email === email)) {
-    return NextResponse.json({ error: 'duplicate' }, { status: 409 });
+  try {
+    const sql = neon(process.env.DATABASE_URL!);
+    await sql`
+      INSERT INTO leads (email, site, magnet_slug, page_url, user_agent, ip_hash)
+      VALUES (${email}, ${'office-productivity-hacks'}, ${magnetSlug}, ${pageUrl}, ${userAgent}, ${ipHash})
+      ON CONFLICT (email, site) DO NOTHING
+    `;
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error('DB error:', err);
+    return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
   }
-
-  leads.push({ email, timestamp: new Date().toISOString(), source: 'toolkit' });
-  writeLeads(leads);
-
-  return NextResponse.json({ success: true });
 }
