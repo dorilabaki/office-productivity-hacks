@@ -2659,6 +2659,126 @@ REGEXTEST replaces validation logic. REGEXEXTRACT replaces extraction logic. REG
 The functions are not a magic wand. They reward thinking about the actual structure of your data and writing a pattern that captures that structure precisely. They punish guessing, in the sense that a pattern that works on the first ten rows but fails on row 117 is just as visible as one that fails everywhere.
 
 For most teams, the right time to learn the three functions is the next time you find yourself writing a chain of three or more legacy text functions to do something that feels like pattern matching. That is the moment regex turns a forty-character formula into a ten-character one and a fragile workbook into a stable one.`
+  },
+  {
+    slug: "excel-edit-with-copilot-april-2026-plan-mode-python-local-files",
+    title: "Excel's April 2026 Edit with Copilot Update: Plan Mode, Python, and Local Files Explained",
+    description: "Microsoft's April 2026 Excel update turned Copilot from a chat companion into an editor. There is now a Chat/Edit switcher, a new Plan mode that walks through multi-step changes before executing, Python invocation inside Edit mode, and full support for local files on Windows and Mac. Here is what each capability actually does, the limits worth knowing, and where the new features replace older workflows versus where they sit alongside them.",
+    category: "excel",
+    readTime: "12 min read",
+    publishedAt: "2026-04-30",
+    howToSteps: [
+      { name: "Switch Between Chat and Allow Editing", text: "The new Copilot pane has an explicit switcher between Chat only and Allow editing. Chat answers questions and suggests formulas without modifying cells. Allow editing makes direct changes. Default to Chat for new files and switch to Allow editing only after validating what the model intends to change." },
+      { name: "Try Plan Mode on a Known Task", text: "Pick a multi-step task you have done manually before. Ask Copilot to make a plan, read the plan critically, then execute it. The judgment you build comparing your manual approach to the model's plan is the foundation for using the feature well in production work." },
+      { name: "Invoke Python Directly Inside Edit Mode", text: "For analytical work that exceeds native formulas, ask Copilot to use Python explicitly. Confirm Python in Excel is enabled for your tenant first. If you need reproducible runs, save the generated Python into a named cell and execute it deterministically rather than re-prompting each time." },
+      { name: "Use Edit with Copilot on Local Files", text: "The April 2026 update lifts the OneDrive requirement on Windows and Mac. Open a local .xlsx and Edit with Copilot works directly. Prompts and relevant context still travel to the Copilot service, so confirm your data-handling policy before using the feature on sensitive files." },
+      { name: "Save Before Any Non-Trivial Edit Run", text: "Edit mode can change data you did not intend to change. Apply the same discipline you use with macros: keep a saved copy before letting Copilot make structural edits, and review the diff once it completes. This is the cheapest insurance against an accidental cascade." }
+    ],
+    content: `# Excel's April 2026 Edit with Copilot Update: Plan Mode, Python, and Local Files Explained
+
+Microsoft's April 2026 Excel update is the largest change to Copilot in Excel since the original release. The single-sentence summary is that Copilot has moved from being a chat companion to being an editor. The longer answer matters to anyone whose workflow has been waiting for Copilot to actually do the spreadsheet work, not just describe it.
+
+The full set of features rolled out across Excel for Windows, Mac, and the web. This article walks through each of them, what they actually do, the limits worth knowing before you build them into a workflow, and the cases where the new capabilities replace older patterns versus where they are best treated as an addition rather than a replacement.
+
+## The Headline Change: Chat Versus Allow Editing
+
+The most visible change in the April 2026 release is a new switcher in the Copilot pane. The two modes are Chat only and Allow editing.
+
+In Chat only mode, Copilot answers questions about your data, suggests formulas, and explains what is happening in your workbook, but it does not modify cells. This is the mode that maps to the original Copilot in Excel experience from earlier releases.
+
+In Allow editing mode (formerly called Agent mode in some preview builds), Copilot makes changes directly to your workbook based on the prompt you give it. You ask it to add a summary column. It adds the column. You ask it to highlight outliers. It applies the formatting. The work happens in the workbook, not in the chat pane.
+
+The reason the switcher is new and not just an "edit" toggle is that the two modes are different relationships with the file. Chat mode is reversible because the model never touched anything. Edit mode is, in the worst case, capable of changing data you did not intend to change. The switcher is the explicit user gesture that distinguishes the two.
+
+The practical recommendation for the first month using this feature is to default to Chat mode, switch to Allow editing only after you have validated what the model intends to do, and keep a copy of the file saved before any non-trivial edit run. This is the same discipline experienced spreadsheet users already apply to macros and Power Query refreshes. Edit mode just adds one more category of operation to the same pattern.
+
+## Plan Mode: Why It Matters More Than the Headline Suggests
+
+Of the new capabilities, Plan mode is the one that changes the model's behaviour in the deepest way. Microsoft's own framing is that Copilot can now generate a multi-step plan to make changes to your content. The example in their release notes is asking Copilot to "Make a dashboard based on this data," at which point it explains its insights about how the data could be structured and visualised, along with the formula adjustments it would make, before executing.
+
+The reason this matters more than the headline suggests is that it introduces a deliberate review step between intent and execution. The previous behaviour was either describe (Chat) or do (a single edit). Plan mode is closer to: here is the multi-step sequence I would run, do you want me to run it.
+
+For dashboard creation, financial model construction, or any task where the plan involves five or six dependent steps, this is the difference between getting a result you can audit and getting a result you have to reverse-engineer. The plan is human-readable. You can correct a step before it runs. You can ask why a particular formula was chosen. The audit happens before the change, not after.
+
+The most useful pattern for Plan mode at this stage is to use it for any operation that touches more than one cell. For single-cell formula assistance, Chat mode is faster. For anything structural, the plan-then-execute pattern is materially safer.
+
+## Python in Edit with Copilot
+
+Microsoft has now connected Python in Excel to Edit with Copilot directly. The practical effect is that Copilot can apply Python-powered techniques as part of an editing sequence, helping with data transformation, visualisation, and multi-step analysis tasks that exceed what native Excel formulas can handle cleanly.
+
+You can invoke Python explicitly by asking Copilot to use Python for the analysis. You can also let Copilot decide. According to Microsoft's documentation, Copilot will reach for Python when the analytical complexity exceeds what formulas handle well, primarily in cases involving statistical analysis, advanced grouping, or multi-step pipeline transformations.
+
+This is a meaningful capability bump and it has limits worth being explicit about.
+
+The first limit is licensing. Python in Excel availability varies by Microsoft 365 plan, region, and tenant trust settings. If your tenant's Python in Excel is not enabled, Copilot cannot invoke it regardless of what you ask. Confirm the feature is on for your account before designing workflows around it.
+
+The second limit is reproducibility. Copilot-generated Python is, by default, regenerated each time it runs. If the model picks a slightly different approach on a later run, the output may not match exactly. For one-off analysis this is fine. For workbooks that need to produce identical results across runs, ask Copilot for the Python code, save it explicitly into a Python cell, and run it deterministically rather than re-prompting each time.
+
+The third limit is auditability. A Python step inside Edit with Copilot is, by default, less visible than a chain of formulas. The cells the Python operates on may not be obvious from the surface of the workbook. For models you intend to share or audit, the recommendation is to keep the Python explicit and named, not buried in a Copilot edit history.
+
+For the broader pattern of asking AI to write code you then verify before running, our sister site has a guide on [evaluating AI outputs when you are not the expert](https://howdoiuse.ai/resources/evaluating-ai-outputs-without-being-an-expert) that applies almost directly here.
+
+## Local Files: What Changed and Why It Matters
+
+Until April 2026, Edit with Copilot in Excel required the file to be in OneDrive or SharePoint. The April release removed that requirement on Windows and Mac. You can now invoke Edit with Copilot on a local .xlsx file without forcing it to the cloud first.
+
+This is a smaller-sounding change with a larger practical impact. A meaningful share of finance, operations, and analytics teams keep working files local for reasons that range from policy to habit to the specific isolation required by sensitive data. Forcing those files into OneDrive to use Copilot was, for many teams, a non-starter. Removing the requirement makes Edit with Copilot accessible to those workflows for the first time.
+
+Two notes on the limits. Local Edit with Copilot still sends prompts and relevant context to the Copilot service to generate the response. The "local" in "local files" refers to where the file lives, not where the inference happens. Teams with strict data residency or external-processing constraints should confirm that the Copilot service's data handling aligns with their policy before turning the feature on for sensitive files.
+
+The second is that Edit with Copilot on local files does not currently support the full set of features available on cloud-stored files in every build. Specifically, some collaborative features and version history capabilities are tied to OneDrive's infrastructure. If you use these features alongside Edit with Copilot, the cloud-stored path is still the more complete experience.
+
+## Mobile Comments Pane Improvements
+
+The April release also includes an updated Comments pane experience on iPhone, designed to make comment threads easier to find, read, and act on. This is the smaller of the announced changes, but it matters for teams whose review workflow depends on commenting from mobile.
+
+The headline improvements are clearer thread visualisation, faster navigation between comments, and reduced friction for resolving threads from the phone. For users who already commented heavily on mobile, the change is incremental. For teams who avoided mobile commenting because the previous experience was awkward, the new pane removes one of the actual friction points.
+
+## Model Selection: GPT-5.5 and Claude Opus 4.7
+
+Microsoft's release notes also reference the addition of OpenAI GPT-5.5 and Anthropic Claude Opus 4.7 as model options for Copilot in Excel. The practical effect for end users is that, depending on plan and admin configuration, you can choose which model handles your prompt.
+
+The honest answer on whether this matters in day-to-day use is: usually less than it sounds. For routine spreadsheet tasks, the differences between recent frontier models are small and hard to detect inside the constraint of a single Excel cell. For complex multi-step Plan mode runs, the differences become more visible, particularly in how the models reason about ambiguous prompts and how they explain their plans.
+
+If your organisation already has a model-selection policy in place for other Copilot surfaces, the same policy reasonably applies in Excel. If not, the pragmatic default is to use whichever model is set as the tenant default and to switch only when you have a specific reason to believe a different model handles your task better.
+
+## What This Update Actually Replaces in Older Workflows
+
+Three categories of older workflow are now meaningfully better served by the April 2026 release.
+
+Manual dashboard construction, where you previously stitched together several pivot tables, conditional formats, and chart objects, can now be requested as a single Plan mode operation. The plan is explicit, the execution is fast, and the result is auditable. We have covered the older approach in [groupby and pivotby: the formula alternative to pivot tables](/resources/groupby-pivotby-excel-formula-alternative-pivot-tables), and the comparison between the formula approach and the Plan mode approach is now the live decision worth making for new dashboards.
+
+Multi-step data cleanup, particularly the kind that previously involved Power Query or a sequence of REGEX formulas, has a new option. Edit with Copilot can chain the cleanup steps in plain language. For deterministic, reproducible cleanup, Power Query is still the more robust option. For one-off cleanup, Copilot is now competitive and faster to set up. For the deterministic regex side of the same job, our [REGEX functions guide](/resources/excel-regex-functions-regextest-regexextract-regexreplace) covers the formula path.
+
+Light statistical analysis that previously required exporting to Python or R, then importing the result, can now be done in place using Copilot's Python invocation. The reproducibility caveat applies, but the convenience is real for analysts who previously avoided Python in Excel because the round-trip was awkward.
+
+## What It Does Not Replace
+
+Three categories of work where the April 2026 update is not a substitute for the existing tools.
+
+Long-lived production financial models. The audit, version, and lineage discipline these models require is incompatible with a workflow where Copilot rewrites portions of the file. If a model has to reproduce identical output across years, the Copilot edits should be treated as drafts, manually reviewed, and committed only as deliberate human decisions. We have written separately about [building a financial model that holds up to audit](/resources/excel-financial-model-auditable), and the principles there apply unchanged.
+
+Compliance-bound data work. Where regulation requires explicit records of who changed what and why, an automated edit history from a model is not a sufficient audit trail. The compliance discipline of named change owners and documented rationale still applies.
+
+Tasks where the right answer is a formula, not a result. Copilot, in Edit mode, defaults to producing a result. For tasks where the right outcome is a formula you can read, modify, and reason about, Chat mode and a deliberate paste is the more useful pattern than Allow editing.
+
+## Where to Start
+
+For practical adoption, the most useful first move is to spend an afternoon trying Plan mode on a real workbook you understand. Pick a task you have done manually before, ask Copilot to make a plan, read the plan critically, then execute it. The judgment you build by comparing your manual approach to the model's plan is the foundation for using the feature well in production.
+
+After that, add Python in Edit mode the next time you would have exported to Python anyway. The convenience compound starts to show after about a week of regular use.
+
+Local file editing requires no learning curve. It just removes a previous friction point.
+
+The April 2026 update is the version of Copilot in Excel that earns the place in a power user's workflow. The Chat-only version was useful. The Edit version, with Plan mode and Python, is materially different. The discipline to use it well is the same discipline experienced spreadsheet users already bring to macros, Power Query, and any other automation. The tool is more capable. The judgment about when to trust it is still yours.
+
+---
+
+*Sources: Microsoft Tech Community blog, "What's New in Excel (April 2026)" (techcommunity.microsoft.com/blog/excelblog/whats-new-in-excel-april-2026/4502696); Microsoft Support documentation on Copilot in Excel with Python (support.microsoft.com/en-us/office/copilot-in-excel-with-python-364e4ae9-9343-4d56-952a-5f62b0f70db6); Neowin coverage of the April 2026 Excel feature additions; Chris Menard Training analysis of Edit with Copilot on local files.*
+
+---
+
+*Join 115,000+ professionals at Office Productivity Hacks for practical, vendor-agnostic guides on getting more from the tools you already pay for.*`
   }
 ];
 
