@@ -2871,6 +2871,123 @@ The feature is doing the hard work of intent verification for you. Most of its v
 
 *Join 137,500+ professionals at Office Productivity Hacks for practical, evidence-based productivity guides.*`,
   },
+  {
+    slug: "google-sheets-canvas-build-live-dashboard-without-add-ons",
+    title: "Sheets Canvas: Build a Live Dashboard or Kanban Board in Google Sheets Without a Single Add-On",
+    description: "Google's Sheets canvas, announced at Cloud Next '26, turns your spreadsheet data into interactive dashboards, kanban boards, and heat maps. A practical walkthrough of what it does, how to set one up, and the use cases where it actually saves you time.",
+    category: "sheets",
+    readTime: "9 min read",
+    publishedAt: "2026-05-07",
+    howToSteps: [
+      { name: "Confirm Your Account Has Access", text: "Sheets canvas is rolling out to Gemini Alpha for work and school accounts in English in the US first. Open Google Sheets and look for the Canvas menu in the bottom bar. If you do not see it, your account is in a later wave." },
+      { name: "Open the Sheet With Your Source Data", text: "Canvas builds on top of live data. Use a sheet that already has the records you want to visualize (a project tracker, a sales pipeline, a content calendar). Make sure the first row has clear column headers." },
+      { name: "Create the Canvas", text: "Open the canvas in one of three ways: side panel via Tools > Create canvas, the menu bar via Insert > Create a canvas, or the bottom bar via Canvas menu > Create a canvas." },
+      { name: "Prompt Gemini for the View You Want", text: "In the prompt box, describe the visualization in plain language. For a kanban: 'Group these tasks by Status, with drag-and-drop between columns.' For a dashboard: 'Show total revenue, deals closed this month, and top three reps.'" },
+      { name: "Iterate Until the Layout Is Useful", text: "Canvas does not always get the layout right on the first try. Refine with follow-up prompts ('move the chart to the top-right,' 'add a filter for region'). Treat the first output as a draft, not a finished product." },
+      { name: "Share Like Any Other Sheet", text: "The canvas inherits the spreadsheet's permissions. Anyone with edit access on the sheet can interact with the canvas. Anyone with view-only access can use it but not change the underlying data." }
+    ],
+    content: `# Sheets Canvas: Build a Live Dashboard or Kanban Board in Google Sheets Without a Single Add-On
+
+For roughly a decade, the answer to "I want a dashboard or a kanban board on top of my spreadsheet data" was: install an add-on, copy the data into Trello, or rebuild the same view in a separate tool. Sheets canvas, announced at Google Cloud Next '26 in April and rolling out through May, collapses that workflow into a Gemini prompt.
+
+This article is a practical look at what Sheets canvas actually does, how to build a live project board with it in about ten minutes, and the use cases where it meaningfully replaces a third-party tool versus the ones where it does not.
+
+## What Sheets Canvas Is
+
+Sheets canvas is a feature inside Google Sheets that lets you turn the rows and columns of a spreadsheet into an interactive visual layer. Google's framing in the Cloud Next '26 announcement is that canvas builds "a fully interactive mini-app right on top of your data." The visualizations Google has shipped first are dashboards, heat maps, kanban boards, gallery (card) views, and calendar layouts.
+
+Two details that matter and are easy to miss in the marketing pages.
+
+The first is that the canvas is not a static export. It reads from and writes back to the underlying spreadsheet in real time. If you drag a card in a kanban canvas from "In Progress" to "Done," the Status cell in the source row updates. If a teammate edits the source row in the spreadsheet, the canvas reflects it. There is no "refresh" step.
+
+The second is that canvas inherits the sheet's permissions. There is no separate share dialog, no separate access list. Anyone you have already shared the spreadsheet with sees the canvas at the same level of access. For most teams, that is the right default. For teams used to Trello or Asana's separate permission models, it is worth understanding before you put sensitive data into the source sheet.
+
+## What Was Released in April 2026, in One Place
+
+The April 2026 Cloud Next announcements bundled several Sheets updates that work together. It is worth knowing what is on by default and what is gated.
+
+Sheets canvas itself, announced at Cloud Next '26, is rolling out to Gemini Alpha customers on work and school accounts, in English, in the US, in the weeks following the announcement. Personal Gmail accounts and other regions are expected to follow in subsequent waves but are not in the first rollout.
+
+Google also doubled calculation speed in Sheets on Chrome and Microsoft Edge browsers as part of the same wave of updates. Formula recalcs, pivot table refreshes, and conditional formatting all run faster. There is no setting to flip. If you are on Chrome or Edge, you have it.
+
+Two new functions, =SHEET and =SHEETS, shipped earlier in February 2026 and are available to all users. =SHEET(reference) returns the sheet number of a referenced sheet. =SHEETS() returns the count of all sheets in the workbook. They are small but useful for cross-sheet formulas where you previously had to hard-code an index.
+
+Connected Sheets for Looker pivot tables now supports up to 100,000 rows, up from the previous limit. This is the change that quietly removes the most common reason teams give up on Connected Sheets and pull data into BigQuery or a BI tool. If you tried Connected Sheets in 2024 and bounced off the row cap, it is worth retrying.
+
+## Building a Live Project Kanban in Ten Minutes
+
+The fastest way to understand canvas is to build something with it. Here is the workflow that takes a project tracker spreadsheet and produces a working kanban board.
+
+Start with a sheet that has at least three columns: Task, Owner, Status. Add Due Date if you want the kanban cards to surface deadlines. Make sure Status uses a small, consistent set of values (Backlog, In Progress, In Review, Done). Open the spreadsheet and click Canvas menu > Create a canvas in the bottom bar.
+
+In the prompt box, type something like: "Build a kanban board grouped by Status. Show Task as the card title and Owner and Due Date below. Allow drag and drop between columns."
+
+Canvas takes 10 to 30 seconds to render. The first version will probably need adjustments. Common refinements that work well as follow-up prompts: "Color cards red if Due Date is in the past." "Add a filter at the top to show only one Owner at a time." "Sort cards within each column by Due Date ascending."
+
+Once the layout is useful, the canvas behaves like any interactive board. Drag a card from Backlog to In Progress, and the Status cell in the source spreadsheet updates. Edit the source spreadsheet in another tab, and the canvas updates. Share the spreadsheet, and your collaborators see the same canvas.
+
+The whole flow, from a flat tracker spreadsheet to a working kanban, runs in about ten minutes. That is meaningfully shorter than the equivalent setup in Trello or Asana, where the value is in the broader feature set, not in the time-to-first-board.
+
+## The Use Cases Where Canvas Actually Wins
+
+Canvas is not a Trello replacement for every team. It is a real productivity win for specific scenarios.
+
+The first is internal team trackers that already live in Sheets. Most teams have a "shared sheet" — for content calendars, hiring pipelines, vendor lists, sales activity — that started as a tracker and slowly accumulated rows. Canvas turns that sheet into a visual tool without migrating the data anywhere. The data stays in the system the team already trusts.
+
+The second is dashboard reporting against live spreadsheet data. If your sales tracker, support log, or project plan is in Sheets, canvas builds a dashboard that auto-refreshes against the source. There is no copy-paste, no scheduled export, no Power BI license. For teams that previously rebuilt the same dashboard every Monday, this is the change worth paying attention to.
+
+The third is one-off interactive mini-apps. A common pattern in operations work is "I need a thing that looks like a card view of these 80 records, with a filter for assignee, that I can share with three people for a week." Building that in Trello means three days of board-and-card-and-permission setup. Building it in Sheets canvas is a single prompt.
+
+The fourth is small teams that cannot justify another tool. The most expensive cost of Trello, Asana, Monday, or Notion is not the seat license. It is the cognitive overhead of one more tool. Canvas keeps the team in the spreadsheet they already use.
+
+## The Use Cases Where Canvas Does Not Win
+
+Canvas is not a project management platform. Three patterns are worth flagging.
+
+It does not replace tools where the value is the workflow engine, not the visualization. If you rely on Asana for dependencies, automation rules, custom fields with conditional logic, recurring task templates, or rich integrations with Slack, GitHub, and your CRM, canvas does not match that depth. It builds a view, not a workflow.
+
+It does not replace BI for analyst-grade dashboards. For dashboards with multiple sliced segments, drill-downs, joined data sources, and calculated measures across millions of rows, Looker, Tableau, or Power BI are still the right tools. Canvas is for the team-level views, not for executive scorecards over the data warehouse.
+
+It does not replace separate-permission tools. Because canvas inherits the sheet's permissions, you cannot easily expose a kanban to a contractor without exposing the underlying data. If your security model requires read-only access to a board while keeping the source data restricted, that is a Trello or Asana use case, not a Sheets canvas use case.
+
+## How Canvas Pairs With Gemini's Other Sheets Features
+
+Canvas is the most visible piece of the broader push to make Gemini do real work inside Sheets, not just answer questions about it. The previously released "Fill with Gemini" feature populates table cells from natural language prompts, and Edit with Copilot's equivalent in Excel does similar work on the Microsoft side.
+
+The pattern is consistent across both ecosystems. The model is no longer a chat panel that suggests what you might do. It is an editor that does it, with the spreadsheet as the canvas. Canvas extends that pattern from cell-level fills to layout-level visualizations.
+
+If you have not used Fill with Gemini yet, it pairs naturally with canvas. Use Fill with Gemini to populate or clean up the source table, then build a canvas on top of the cleaned data. The two features compound. For a deeper look at how to prompt these AI features inside Sheets specifically, see [our companion piece on Fill with Gemini in Google Sheets](/articles/fill-with-gemini-google-sheets/). For the broader pattern of AI features that operate as editors rather than chat tools, our partner site has a piece on [adaptive thinking in modern AI tools](https://howdoiuse.ai/) that translates well to spreadsheet work.
+
+## What to Do This Week
+
+Three concrete moves if you want to put canvas to work.
+
+Pick one shared spreadsheet your team already uses as a tracker. The best candidates are content calendars, hiring pipelines, project task lists, and weekly KPI dashboards. The data should already be there and reasonably clean.
+
+Spend ten minutes building a canvas view of that data. Do not overthink it. The first prompt will produce a draft. Iterate with two or three follow-up prompts.
+
+Share the canvas with the team in the existing channel where the spreadsheet is referenced. Watch for two signals over the next week: are people interacting with the canvas, or only with the underlying spreadsheet, and are any new edits coming through the canvas drag-and-drop versus directly in the rows? The first signal tells you whether the visualization is genuinely useful. The second tells you whether the canvas is becoming the team's primary entry point for that data.
+
+If both signals are positive, you have a candidate to retire whichever third-party tracker the team was using before. If only the first signal is positive, the canvas is a useful adjunct to the spreadsheet, not a replacement for the existing tool.
+
+## A Note on Where Spreadsheets Are Heading
+
+The release pattern is the larger story. In the past six months, both Microsoft and Google have shipped features that make their spreadsheets significantly more capable as workflow tools, not just calculation tools. Excel has Plan Mode, Agent Mode, and Python in Edit with Copilot. Sheets has canvas, =SHEET/=SHEETS, doubled calc speed, and bigger Connected Sheets row limits.
+
+The implication for productivity work is that the gap between "the spreadsheet I use to track this" and "the application I would build to manage this" is narrowing fast. Ten years ago, the upgrade path from a tracker spreadsheet was a SaaS tool. Today, increasingly, the upgrade path is a better feature on the spreadsheet you already have.
+
+That does not mean every team should retire its Trello, Asana, or Notion subscription. It does mean that for the long tail of "we need a quick view of this data," the right answer is no longer to evaluate a new tool. It is to spend ten minutes prompting a canvas and seeing if that is enough.
+
+For most cases this year, it will be.
+
+---
+
+*Sources: Google Workspace Blog, "10 more announcements for Workspace at Google Cloud Next 2026" (April 2026); Google Workspace Blog, "Double calculation speed in Google Sheets plus new AI features"; Google Workspace Blog, "Delivering new innovations in Google Workspace with smart canvas"; Google Workspace Updates, "Two new functions in Google Sheets" (February 2026); Google Docs Editors Help, "Create a Sheets canvas" (support.google.com).*
+
+---
+
+*Join 137,500+ professionals at Office Productivity Hacks for practical, evidence-based productivity guides.*`,
+  },
 ];
 
 // Helper function to check if content is published
