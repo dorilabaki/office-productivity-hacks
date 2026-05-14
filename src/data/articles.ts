@@ -2988,6 +2988,173 @@ For most cases this year, it will be.
 
 *Join 137,500+ professionals at Office Productivity Hacks for practical, evidence-based productivity guides.*`,
   },
+  {
+    slug: "arrayformula-stop-repeating-formulas-in-google-sheets",
+    title: "ARRAYFORMULA: Stop Repeating the Same Formula Over and Over in Google Sheets",
+    description: "Learn how to use ARRAYFORMULA to apply formulas automatically to entire columns. Eliminate the time spent copying formulas down hundreds of rows.",
+    category: "sheets",
+    readTime: "8 min read",
+    publishedAt: "2026-05-14",
+    howToSteps: [
+      { name: "Identify Your Formula Task", text: "Find the formula you copy down repeatedly across rows. Examples: converting text to uppercase, multiplying prices by a tax rate, checking if a value meets a condition." },
+      { name: "Determine Your Data Range", text: "Identify the column of source data. Note where it starts and whether it grows dynamically. For sales data in B2:B100, or for a growing form response, identify the first row and last row pattern." },
+      { name: "Write Your Base Formula", text: "Write the formula that works for a single row. Test it once with sample data to confirm it works. Example: =B2*1.08 for adding 8% tax." },
+      { name: "Wrap in ARRAYFORMULA", text: "Replace the single cell reference with a range reference. Change =B2*1.08 to =ARRAYFORMULA(B2:B*1.08). Google Sheets will apply the calculation across every row." },
+      { name: "Add IF to Handle Empty Cells", text: "If your data is sparse, nest the formula in an IF: =ARRAYFORMULA(IF(B2:B<>\"\", B2:B*1.08, \"\")). This prevents blank rows from showing 0 or errors." },
+      { name: "Test and Watch It Grow", text: "Add new rows of data to your sheet. The ARRAYFORMULA automatically includes them without copying the formula down manually." }
+    ],
+    content: `# ARRAYFORMULA: Stop Repeating the Same Formula Over and Over in Google Sheets
+
+Here's a universal frustration in Google Sheets: you write a formula that works. Then you copy it down 500 rows. Then new data arrives and you copy it 500 more rows. Then a coworker asks if you can handle 10,000 rows and suddenly you're spending an hour on something that should be instant.
+
+There's a better way. It's called ARRAYFORMULA, and it's the single most underused productivity tool in Google Sheets.
+
+## What Is ARRAYFORMULA?
+
+ARRAYFORMULA tells Google Sheets to apply a formula to an entire range of cells instead of just one cell. Write the formula once. It applies to every row automatically.
+
+This is not copy-paste. This is "apply this formula rule to this entire column, forever, including rows that don't exist yet."
+
+## The Problem It Solves
+
+You have 500 rows of sales data in column B. You need to add 8% tax to each value in column C.
+
+**The old way:**
+1. Click C2
+2. Type =B2*1.08
+3. Press Enter
+4. Select C2 again
+5. Copy
+6. Select C3:C501
+7. Paste
+8. Pray nobody adds more data tomorrow
+
+**The ARRAYFORMULA way:**
+1. Click C2
+2. Type =ARRAYFORMULA(B2:B*1.08)
+3. Press Enter
+4. Done. Even if someone adds 1000 more rows tomorrow, the formula applies automatically.
+
+## Basic ARRAYFORMULA Syntax
+
+The simplest structure:
+
+\`\`\`
+=ARRAYFORMULA(formula_range_operator)
+\`\`\`
+
+**Example:** Apply a 10% discount to every price in column B
+
+\`\`\`
+=ARRAYFORMULA(B2:B*0.9)
+\`\`\`
+
+Google Sheets reads this as: "Take the range B2:B, multiply every cell by 0.9, and show me all the results."
+
+The difference from regular spreadsheets is that B2:B means "the entire B column starting from B2," not "just B2."
+
+## Real Examples
+
+### Example 1: Clean Text by Converting to Uppercase
+
+You have customer names in column A that are inconsistently capitalized. You want column B to show them in uppercase.
+
+\`\`\`
+=ARRAYFORMULA(UPPER(A2:A))
+\`\`\`
+
+Every name in column A, starting from A2, gets converted to uppercase automatically. When you add new customer names, they're automatically converted without any extra work.
+
+### Example 2: Check if Values Meet a Condition
+
+You have survey scores in column B. You want column C to mark whether each is above a threshold (75).
+
+\`\`\`
+=ARRAYFORMULA(IF(B2:B>75, "Pass", "Fail"))
+\`\`\`
+
+This reads: "For every value in B2 through B, if it's greater than 75, show 'Pass', otherwise show 'Fail'."
+
+### Example 3: Combine Data from Multiple Columns
+
+You have first names in column A and last names in column B. You want the full name in column C.
+
+\`\`\`
+=ARRAYFORMULA(A2:A&" "&B2:B)
+\`\`\`
+
+The & operator concatenates. So every first name in A gets combined with a space and every last name in B.
+
+### Example 4: Handle Empty Cells Properly
+
+Here's the problem: if you do =ARRAYFORMULA(B2:B*1.08) and column B has gaps, Google Sheets shows 0 for empty cells. That's usually not what you want.
+
+Solution: wrap it in IF to check if cells are empty.
+
+\`\`\`
+=ARRAYFORMULA(IF(B2:B<>"", B2:B*1.08, ""))
+\`\`\`
+
+This reads: "For every cell in B2:B, if it's not empty, multiply by 1.08, otherwise show nothing."
+
+## When ARRAYFORMULA Saves the Most Time
+
+The time savings are biggest when:
+
+1. **You have dynamic data.** Your spreadsheet grows regularly. ARRAYFORMULA handles new rows automatically.
+
+2. **You have large datasets.** 100 rows isn't a problem to copy formulas. 10,000 rows is. ARRAYFORMULA makes it instant.
+
+3. **You update the formula later.** If you realize the 8% tax should be 9%, you edit one formula instead of 10,000. One edit propagates everywhere.
+
+4. **You're collaborating.** A coworker adds 500 new rows. They don't have to know to copy your formula. It works automatically.
+
+## Common Mistakes (and How to Fix Them)
+
+**Mistake 1: Using A2:A instead of A2:A100.**
+
+If you know your data stops at row 100, using A2:A (the entire column) works fine and is actually clearer. But if you're nervous about "too much range," don't be. Google Sheets only calculates on rows with data.
+
+**Mistake 2: Forgetting the IF when handling sparse data.**
+
+\`=ARRAYFORMULA(B2:B*1.08)\` on sparse data will show 0 for every empty row. Your sheet fills with meaningless 0s. Wrap it: \`=ARRAYFORMULA(IF(B2:B<>"", B2:B*1.08, ""))\`
+
+**Mistake 3: Using ARRAYFORMULA with functions that don't support arrays.**
+
+Some functions (like VLOOKUP in older versions) don't work inside ARRAYFORMULA. If you get an error, try a different function. VLOOKUP's modern equivalent, XLOOKUP (when available), works better here.
+
+**Mistake 4: Nesting multiple ARRAYFORMULAs.**
+
+Don't put ARRAYFORMULA inside ARRAYFORMULA. One per column is the rule.
+
+## Why This Matters for Productivity
+
+According to recent research, knowledge workers spend over 10 hours per week on manual data entry in Google Sheets. Most of that time is repetition: typing the same formula, copying it, pasting it, fixing formatting.
+
+ARRAYFORMULA eliminates a huge chunk of that. You write a formula once. It applies everywhere. Forever.
+
+For a team managing a sheet with 50,000 rows, ARRAYFORMULA isn't a nice-to-have. It's the difference between "someone spends 2 hours copying formulas" and "it happens instantly."
+
+## The Next Step: Dynamic Data with FILTER and ARRAYFORMULA
+
+Once you're comfortable with ARRAYFORMULA, the next upgrade is combining it with FILTER to show only rows that meet criteria.
+
+Example: Show only sales above $1000, automatically updated.
+
+\`\`\`
+=ARRAYFORMULA(FILTER(B2:B, B2:B>1000))
+\`\`\`
+
+But that's a separate deep dive. For now, master ARRAYFORMULA with basic formulas. The principle is the same: write once, apply everywhere.
+
+---
+
+*Sources: [Coupler.io Blog: Google Sheets ARRAYFORMULA with Examples](https://blog.coupler.io/arrayformula-google-sheets/); [OWOX: Complete Guide to Master Array Formulas in Google Sheets for 2025](https://www.owox.com/blog/articles/array-formulas-google-sheets); [Ben Collins: Array Formula Introduction](https://www.benlcollins.com/spreadsheets/array-formula-intro/); [Sheetgo: Mastering ARRAYFORMULA with Examples](https://www.sheetgo.com/blog/google-sheets-formulas/master-arrayformula-4-use-cases/); research on knowledge worker productivity and data entry time allocation (2025-2026).*
+
+---
+
+*Join 137,500+ professionals at Office Productivity Hacks for practical, evidence-based productivity guides.*`,
+  },
 ];
 
 // Helper function to check if content is published
