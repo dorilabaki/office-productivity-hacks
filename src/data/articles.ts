@@ -15,6 +15,76 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "edit-with-copilot-work-iq-excel-local-files-2026",
+    title: "Edit with Copilot: How Excel's Work IQ Now Makes Multi-Step Edits on Local Files",
+    description: "Excel's 'Edit with Copilot' now runs multi-step edits on workbooks saved locally on Windows and Mac, and Work IQ pulls in context from your emails, chats, and files automatically. Here's what changed and how to use it without breaking your workbook.",
+    category: "excel",
+    readTime: "7 min read",
+    publishedAt: "2026-06-18",
+    content: `# Edit with Copilot: How Excel's Work IQ Now Makes Multi-Step Edits on Local Files
+
+For most of Copilot's life in Excel, two limits kept it on the bench for real work. It needed your file in the cloud, and it had no idea what you were actually working on beyond the cells in front of it. Microsoft's March 2026 update removed both. If you've avoided Copilot in Excel because it felt like a cloud-only toy, it's worth a second look.
+
+Here's exactly what changed, and how to use it without letting an AI quietly scramble a workbook you depend on.
+
+## What Actually Changed
+
+Two updates landed together, and they matter more in combination than apart.
+
+**Edit with Copilot now works on local files.** Copilot can make multi-step edits to modern Excel workbooks stored locally on your device, across both Windows and Mac. You no longer have to move a file to OneDrive or SharePoint before Copilot will touch it. That single change pulls Copilot into the everyday reality of most people's work, where plenty of files live on the desktop, a network drive, or a synced folder.
+
+**Work IQ adds context automatically.** When you edit with Copilot, Work IQ brings in the most relevant context from your emails, meetings, chats, and files without you manually pointing at any of it. In practice that means if you ask Copilot to "update the Q2 forecast tab with the latest numbers from the finance team," it can reach for the relevant figures and context rather than asking you to paste them in. The grounding rolled out later in March 2026.
+
+Both capabilities require a Microsoft 365 Copilot license. They are not part of the free or standard Microsoft 365 subscription.
+
+## What "Multi-Step Edit" Means in Practice
+
+The phrase sounds like marketing, so here's the concrete version. A single-step edit is "make row 1 bold." A multi-step edit is a request that requires Copilot to plan and execute several changes in sequence:
+
+- "Clean the imported data in column C, split the full names into first and last name columns, then sort by last name."
+- "Add a 12% tax column, total each region, and add a grand total row at the bottom formatted as currency."
+- "Find the duplicate order IDs, highlight them, and add a note column flagging which rows to review."
+
+Copilot now handles these as connected operations rather than forcing you to issue each one separately. That's the real time saver. The work that used to mean stringing together five manual actions becomes one instruction.
+
+## How to Use It Step by Step
+
+1. Open a modern .xlsx workbook (the older .xls format isn't supported).
+2. On the Home tab, select the Copilot button to open the Copilot pane.
+3. Describe the change you want in plain language. Be specific about the range and the outcome.
+4. Copilot proposes the edit. Review what it intends to do before you accept.
+5. Accept the change, or refine your prompt and try again.
+
+The review step in line 4 is not optional housekeeping. It's the whole game, which is the next section.
+
+## The Rule That Keeps You Safe: Review Before You Accept
+
+AI editing your spreadsheet is genuinely useful and genuinely capable of confidently doing the wrong thing. A few habits keep you out of trouble:
+
+**Work on a copy for anything important.** Before you turn Copilot loose on a workbook that feeds a report or a payroll run, duplicate the file. Five seconds of insurance.
+
+**Read the proposed change, not just the result.** Copilot can produce a number that looks plausible and is wrong, especially if it misreads which column holds what. Check that it operated on the range you meant.
+
+**Spot-check the math.** If Copilot adds a total or applies a formula, click into a couple of cells and confirm the formula is what you'd have written. Treat its output the way you'd treat work from a fast but new team member: useful, and worth a glance.
+
+**Keep ambiguous decisions human.** If a task involves judgment, like deciding which duplicate to keep or how to categorize a messy entry, let Copilot surface the candidates and make the call yourself.
+
+This isn't a knock on the feature. It's the same discipline that separates people who save hours with automation from people who spend their afternoon untangling a mess. We've written before about [why automating the wrong task makes you slower](/resources/workflow-automation-paradox-productivity/), and AI editing raises the stakes on that same principle.
+
+## Who Should Bother, and Who Shouldn't
+
+If you have a Microsoft 365 Copilot license and you regularly do repetitive multi-step cleanup and formatting, this update moves Copilot from novelty to genuinely useful. The local-file support alone removes the most common reason people gave up on it.
+
+If you don't have the Copilot license, none of this applies yet, and the good news is you can do most of these tasks with built-in tools that cost nothing. Flash Fill, Power Query, and a handful of functions cover a large share of what people reach Copilot for. For the AI-curious who want to understand prompting better before relying on it for real work, our sister site How Do I Use AI has practical guidance on writing prompts that get accurate results, which translates directly to getting better edits out of Copilot.
+
+The headline is simple. Excel's AI editing grew up this year. It works where your files actually live, it understands more of your context, and it can chain steps together. Use it, review it, and keep a copy of anything you can't afford to lose.
+
+---
+
+*Sources: Microsoft Support, "Edit with Copilot in Excel" (support.microsoft.com); "What's New in Microsoft 365 Copilot, March 2026" and "What's New in Excel, March 2026" (techcommunity.microsoft.com).*
+`,
+  },
+  {
     slug: "python-in-excel-2026-automate-hours",
     title: "Python in Excel 2026: Automate 10 Hours of Work Weekly",
     description: "Write Python code directly in Excel cells. Microsoft's data shows 10-hour weekly time savings. Learn how to eliminate data consolidation, cleaning, and routine analysis tasks.",
