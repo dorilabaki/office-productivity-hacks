@@ -2804,7 +2804,7 @@ The single most common practical use of AI for spreadsheet work in 2026 is askin
 
 This is one of the rare cases where AI removes a bottleneck that was almost entirely about syntax recall. Regex syntax is dense and easy to forget between uses. Asking a model to translate "match a UK postcode" or "extract the first quoted phrase" produces a pattern in seconds. Just verify with real test data, because models occasionally produce patterns that match the examples you gave but fail on edge cases you did not.
 
-For more on the discipline of evaluating AI output before relying on it, our sister site has a guide on [evaluating AI answers when you are not the expert](https://howdoiuse.ai/resources/evaluating-ai-outputs-without-being-an-expert) that applies almost directly here.
+For more on the discipline of evaluating AI output before relying on it, our sister site has a guide on [evaluating AI answers when you are not the expert](https://howdoiuse.ai/resources/ai-research-without-wrong-answers) that applies almost directly here.
 
 ## Where REGEX Earns Its Keep
 
