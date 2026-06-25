@@ -15,6 +15,72 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "textsplit-textbefore-textafter-excel-functions",
+    title: "Stop Wrestling With Text to Columns: TEXTSPLIT, TEXTBEFORE, and TEXTAFTER",
+    description: "TEXTSPLIT, TEXTBEFORE, and TEXTAFTER replace the Text to Columns wizard and long LEFT/MID/FIND formula chains with dynamic, self-updating splits. Syntax confirmed against Microsoft's docs, plus where a formula stops and AI begins.",
+    category: "excel",
+    readTime: "6 min read",
+    publishedAt: "2026-06-25",
+    content: `# Stop Wrestling With Text to Columns: TEXTSPLIT, TEXTBEFORE, and TEXTAFTER
+
+Splitting messy text used to mean one of two bad options. Either you ran the Text to Columns wizard, which is fast but static and overwrites your data, or you stacked LEFT, RIGHT, MID, FIND, and SEARCH into a formula long enough to need its own documentation. Three functions retire most of that pain: TEXTSPLIT, TEXTBEFORE, and TEXTAFTER.
+
+If you have full names that should be first and last, email addresses you need split at the @ sign, or a single cell jammed with comma-separated values, these are the tools to reach for. Here is exactly how each one works, with the syntax confirmed against Microsoft's own documentation.
+
+## First, Check You Have Them
+
+These functions are dynamic array functions, which means availability matters. Per Microsoft, TEXTSPLIT works in Excel for Microsoft 365, Excel for Microsoft 365 for Mac, Excel for the web, Excel 2024, and Excel 2024 for Mac. If you are on Excel 2019, 2021, or an older perpetual licence, they will not appear. The functions rolled out to Microsoft 365 subscribers in 2022, so a subscription that is kept updated will have them.
+
+A quick way to test: type =TEXTSPLIT( in a cell. If Excel offers it in the autocomplete, you are set. If it returns a #NAME? error, your version does not support it.
+
+## TEXTSPLIT: One Cell Into Many
+
+TEXTSPLIT does what Text to Columns does, but as a live formula that updates when the source changes. Microsoft describes it as the inverse of TEXTJOIN, and that is the cleanest way to picture it: TEXTJOIN glues pieces together, TEXTSPLIT pulls them apart.
+
+The syntax, straight from Microsoft Support:
+
+=TEXTSPLIT(text, col_delimiter, [row_delimiter], [ignore_empty], [match_mode], [pad_with])
+
+Only the first two arguments matter for most jobs. The text is the cell you are splitting, and the col_delimiter is the character that marks where to break across columns.
+
+The classic example. If cell A2 holds "Dakota Lennon Sanchez" and you write =TEXTSPLIT(A2, " "), Excel spills the result across three cells: Dakota, Lennon, Sanchez. Change the name in A2 and the split updates on its own. That is the advantage over Text to Columns, which would have frozen the result the moment you ran it.
+
+Three arguments are worth knowing once your data gets messier:
+
+The optional row_delimiter lets you split down rows as well as across columns, so you can turn one packed cell into a small grid. Microsoft's documentation shows "1,2,3;4,5,6" split with a comma as the column delimiter and a semicolon as the row delimiter to produce a 2 by 3 array.
+
+The ignore_empty argument, set to TRUE, collapses consecutive delimiters so two commas in a row do not create a blank cell. The default is FALSE.
+
+The pad_with argument fills the gaps when rows split into uneven lengths. Without it, short rows return a #N/A error, which you can also clean up with IFNA.
+
+One detail that trips people up: to split on more than one delimiter at once, you pass them as an array constant in curly braces. Microsoft's own example is =TEXTSPLIT(A1,{",","."}) to break on both commas and periods.
+
+## TEXTBEFORE and TEXTAFTER: Grab One Side
+
+Often you do not want every piece, just the part before or after a marker. That is where the companion functions earn their place, and they read almost like plain English.
+
+TEXTBEFORE returns everything to the left of a delimiter. TEXTAFTER returns everything to the right. To pull the username from an email in A2, =TEXTBEFORE(A2, "@") gives you the part before the @ sign, and =TEXTAFTER(A2, "@") gives you the domain. No nested FIND inside a LEFT. No counting characters.
+
+Both functions take an optional instance number, so you can target, say, the second space or the third slash rather than the first one. And both offer a case sensitivity switch, which removes one of the oldest Excel annoyances: having to remember that FIND is case sensitive while SEARCH is not. With these functions you just set the argument and move on.
+
+## When to Use Which
+
+Reach for TEXTSPLIT when you want the whole string broken into all its parts at once, like separating a full address into street, city, and postal code. Reach for TEXTBEFORE or TEXTAFTER when you only need one chunk relative to a known marker, like the file extension after the last dot or the area code before the first dash. Many real cleanup jobs use them together: TEXTBEFORE to isolate a section, then TEXTSPLIT to break that section apart.
+
+The shared payoff is that all three are dynamic. Update the source cell and every result recalculates. That is the difference between a one-time cleanup and a reusable system, and it is why these functions are worth building into your default toolkit rather than falling back on Text to Columns out of habit.
+
+## Where a Formula Stops and AI Begins
+
+These functions are unbeatable when your data has a reliable pattern: a consistent delimiter, a predictable structure, a marker that always appears. They are deterministic, which means the same input always gives the same output, and you can audit exactly what happened.
+
+They struggle when the pattern breaks down. If your text is genuinely messy, free-form notes that need to be interpreted rather than split, customer comments that need to be categorized by meaning, entries where the useful information is implied rather than delimited, no text function will save you, because there is no consistent rule to encode. That is the boundary where AI tools take over, reasoning about intent instead of matching characters. If you are deciding which side of that line your task falls on, our partners at [How Do I Use AI](https://howdoiuse.ai/resources/ai-tools-save-time) cover when an AI assistant genuinely saves time versus when a plain formula is faster and more reliable. The rule of thumb: if you can describe the split as a rule, use a function. If you can only describe it as a judgment, that is the job for AI.
+
+## Sources
+
+Function syntax, availability, and examples in this article are drawn from Microsoft Support's official documentation: "TEXTSPLIT function," Microsoft Support (https://support.microsoft.com/en-us/office/textsplit-function-b1ca414e-4c21-4ca0-b1b7-bdecace8a6e7), including the supported versions, the full argument list, and the worked examples for splitting names, multi-delimiter splits, and row-and-column arrays.
+`,
+  },
+  {
     slug: "edit-with-copilot-work-iq-excel-local-files-2026",
     title: "Edit with Copilot: How Excel's Work IQ Now Makes Multi-Step Edits on Local Files",
     description: "Excel's 'Edit with Copilot' now runs multi-step edits on workbooks saved locally on Windows and Mac, and Work IQ pulls in context from your emails, chats, and files automatically. Here's what changed and how to use it without breaking your workbook.",
