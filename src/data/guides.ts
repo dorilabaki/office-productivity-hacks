@@ -506,7 +506,7 @@ This reference covers the essential Excel formulas for professional use. Bookmar
 
 The key to mastery is practice. Pick one new function per week, find a real use case, and implement it. Soon, you'll be combining these functions in creative ways to solve complex problems.
 
-Remember: the best formula is the one that's correct, readable, and maintainable. Don't optimize for cleverness—optimize for clarity.`
+Remember: the best formula is the one that's correct, readable, and maintainable. Don't optimize for cleverness. Optimize for clarity.`
   },
   {
     slug: "google-sheets-mastery-beginner-to-advanced",
@@ -736,7 +736,7 @@ Use any formula that returns TRUE/FALSE:
 
 ## Mastering the QUERY Function
 
-QUERY is Google Sheets' superpower—SQL-like queries on spreadsheet data.
+QUERY is Google Sheets' superpower: SQL-like queries on spreadsheet data.
 
 ### Basic Syntax
 
@@ -1150,7 +1150,7 @@ QUERY lets you run a SQL-like query against a range of cells. Once you understan
 
 ## Why QUERY Matters
 
-Here is the promise. Any reporting problem that involves filtering, grouping, sorting, or reshaping tabular data — and most of them do — can be solved with one QUERY formula. The alternatives are almost always longer, harder to read, and more fragile.
+Here is the promise. Any reporting problem that involves filtering, grouping, sorting, or reshaping tabular data (and most of them do) can be solved with one QUERY formula. The alternatives are almost always longer, harder to read, and more fragile.
 
 Three examples of what you can do with a single QUERY:
 
@@ -1172,9 +1172,9 @@ The function takes three arguments:
 =QUERY(data, query, headers)
 \`\`\`
 
-- **data** — the range to query, which must be rectangular and contain consistent data types per column
-- **query** — a string written in Google Visualization API Query Language (a SQL subset)
-- **headers** — the number of header rows in the data, usually 1
+- **data**: the range to query, which must be rectangular and contain consistent data types per column
+- **query**: a string written in Google Visualization API Query Language (a SQL subset)
+- **headers**: the number of header rows in the data, usually 1
 
 A minimal example:
 
@@ -1490,7 +1490,7 @@ You referred to a column by a letter that is outside the data range. If your ran
 
 - When the range starts at A1, you use column letters: A, B, C.
 - When the range starts elsewhere, use Col1, Col2, Col3 referring to position within the range.
-- Header names in quotes also work: \`SELECT A WHERE "Region" = 'North'\` — but this is fragile if the header text changes.
+- Header names in quotes also work: \`SELECT A WHERE "Region" = 'North'\`, but this is fragile if the header text changes.
 
 For portable formulas, the letter convention is usually safest.
 
@@ -1610,7 +1610,7 @@ For pairing this with advanced Excel data techniques, see our [guide to Excel GR
 
 QUERY is not a new function. It has been in Google Sheets for over a decade. What it lacks in novelty it makes up for in reach. Half of the advanced formula combinations in a typical reporting workbook can be replaced by a single QUERY that is shorter, clearer, and more maintainable.
 
-The learning curve is real — the SQL-flavoured syntax, the column-letter conventions, the quote escaping. A few hours of practice puts you past the initial friction. Past that, it is the most productive hour you will spend in Sheets.`
+The learning curve is real: the SQL-flavoured syntax, the column-letter conventions, the quote escaping. A few hours of practice puts you past the initial friction. Past that, it is the most productive hour you will spend in Sheets.`
   },
   {
     slug: "mastering-conditional-formatting",

@@ -87,7 +87,7 @@ Make the switch. Your future self will thank you.`,
     linkedInUrl: "https://www.linkedin.com/company/office-productivity-hacks/posts/",
     content: `The 2025 Outlook Productivity Cheat Sheet
 
-Everything you need to work faster in Outlook — in one place.
+Everything you need to work faster in Outlook, in one place.
 
 Shortcuts, rules, calendar tricks, and focus features most people never discover.
 
@@ -103,7 +103,7 @@ Save this. Share it with your team.`,
 
 You know the basics. These are the next level.
 
-From navigating large datasets to formatting in seconds — these shortcuts separate the good from the great.
+From navigating large datasets to formatting in seconds, these shortcuts separate the good from the great.
 
 Which one's your favourite?`,
     likes: 0,

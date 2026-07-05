@@ -179,7 +179,7 @@ Display as % of total, difference from, running total, etc.
 
 ## Best Practices
 
-1. Use Tables (Ctrl+T) as your source—they auto-expand
+1. Use Tables (Ctrl+T) as your source. They auto-expand
 2. Name your pivot tables descriptively
 3. Create on a new sheet for cleaner layouts
 4. Use slicers instead of filters for dashboards
@@ -233,7 +233,7 @@ Show values as horizontal bars within cells, like inline bar charts.
 
 ### 4. Color Scales
 
-Apply gradient colors based on value—great for heat maps.
+Apply gradient colors based on value, great for heat maps.
 - 2-color scale (low to high)
 - 3-color scale (low, mid, high)
 
@@ -261,7 +261,7 @@ Display icons based on value thresholds:
 
 ## Using Custom Formulas
 
-The most powerful option—any formula returning TRUE applies the format.
+The most powerful option: any formula returning TRUE applies the format.
 
 ### Examples
 
@@ -303,7 +303,7 @@ Home → Conditional Formatting → Clear Rules
 
 ## Best Practices
 
-1. **Less is more**: Don't over-format—it becomes noise
+1. **Less is more**: Don't over-format. It becomes noise
 2. **Be consistent**: Use the same colors for the same meanings
 3. **Test with data**: Verify rules work with edge cases
 4. **Document**: Note what colors mean if not obvious
