@@ -15,6 +15,69 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "groupby-pivotby-excel-functions-guide-2026",
+    title: "GROUPBY and PIVOTBY: The Excel Functions That Replace Half Your Pivot Tables",
+    description: "GROUPBY and PIVOTBY summarize data with a single formula that updates live, no refresh button required. They went generally available in the Excel Current Channel on September 25, 2024. Here is how the two functions work, when to use each, and the eta lambda shortcut that makes them fast to write.",
+    category: "excel",
+    readTime: "8 min read",
+    publishedAt: "2026-07-09",
+    content: `# GROUPBY and PIVOTBY: The Excel Functions That Replace Half Your Pivot Tables
+
+For years, the answer to "summarize this data by category" was a pivot table. Pivot tables are powerful, but they have a well-known annoyance: they do not update on their own. Change a number in your source data and the pivot table keeps showing the old total until you remember to hit Refresh. For a report that people actually rely on, that stale-until-refreshed behavior is a real trap.
+
+Excel now has a better answer for a large share of these jobs. The GROUPBY and PIVOTBY functions produce the same kind of summary as a pivot table, except they are ordinary formulas. They spill their results across the grid and they recalculate the instant your data changes. No refresh, no manual step to forget.
+
+These are not preview curiosities. Microsoft made GROUPBY and PIVOTBY generally available in the Excel Current Channel on September 25, 2024, and they also work in Excel for the web. If your Microsoft 365 build is current, you have them.
+
+## GROUPBY: Summaries in One Formula
+
+GROUPBY collapses rows into groups and aggregates a value for each group. The simplest version needs just three arguments:
+
+1. **row_fields** - the column you want to group by, for example a list of regions or product names.
+2. **values** - the column you want to aggregate, for example sales amounts.
+3. **function** - how to aggregate, for example SUM or AVERAGE.
+
+Say your data has regions in column B and sales in column D. To get total sales per region, you write GROUPBY(B2:B500, D2:D500, SUM). Excel returns a clean two-column summary, one row per region, that spills automatically. Add a sale next week and the total updates on its own.
+
+That third argument is where a nice piece of modern Excel shows up. You can pass SUM, AVERAGE, COUNT, MAX, and similar functions directly by name. You do not have to wrap them in a LAMBDA. Microsoft calls this the "eta lambda" shortcut, and it is what keeps these formulas short and readable. Under the hood you could write a full custom LAMBDA if you needed unusual math, but for everyday totals and counts, the plain function name is all you need.
+
+## PIVOTBY: When You Need Rows and Columns
+
+GROUPBY handles grouping down the rows. PIVOTBY does the same thing but adds grouping across the columns, which is what turns a list into a true cross-tab.
+
+PIVOTBY takes the row field first, then the column field, then the values and the function. Suppose you want sales broken out by region down the side and by quarter across the top. You give PIVOTBY the region column, the quarter column, the sales column, and SUM. The result is a grid with regions as rows, quarters as columns, and totals in every cell, plus row and column totals that Excel adds by default.
+
+The rule of thumb is simple. If you only need to group one way, reach for GROUPBY. If you need a matrix with categories on both axes, reach for PIVOTBY.
+
+## The Arguments Worth Knowing
+
+Both functions accept several optional arguments that cover the things people usually configure by hand in a pivot table:
+
+- **field_headers** controls whether your data has headers and whether to show them.
+- **total_depth** turns grand totals and subtotals on or off, so you can decide exactly which totals appear.
+- **sort_order** sorts the results by a chosen column without a separate step.
+- **filter_array** lets you include only the rows that meet a condition, so you can summarize a subset without deleting anything.
+
+There is also a companion function, PERCENTOF, that pairs naturally with these to express each group as a share of the whole, which is handy when you want percentages instead of raw counts.
+
+You do not need to memorize all of these to get value. Start with the three-argument form, get a working summary on screen, then layer in sorting or filtering once you see what the report needs.
+
+## When to Still Use a Pivot Table
+
+GROUPBY and PIVOTBY do not make pivot tables obsolete. Pivot tables still win when you want to explore data interactively by dragging fields around, when you need slicers for a dashboard, or when you are grouping dates into custom buckets with a few clicks. The functions shine in the opposite situation: a summary that lives inside a larger model, feeds other formulas, and must always reflect the latest numbers without anyone remembering to refresh it.
+
+A good way to decide is to ask who maintains the file. If it is a report that updates on a schedule and gets read by people who will not think to refresh anything, a formula that recalculates on its own removes a whole category of quiet errors.
+
+## A Faster Way to Write Them
+
+If you are not sure of the exact argument order, you do not have to guess. Excel's newer AI features can draft one of these formulas from a plain-language description of what you want to summarize. If you use Copilot or another AI assistant to build formulas, our sister site [How Do I Use AI](https://howdoiuse.ai) has practical guides on writing prompts that return working spreadsheet formulas the first time, which pairs well with functions like these where the argument list is easy to forget.
+
+## The Bottom Line
+
+GROUPBY and PIVOTBY bring pivot-table style summaries into the world of live formulas. Three arguments get you a working total, the eta lambda shortcut keeps the syntax short, and the results update themselves the moment your data changes. For any recurring report where a stale number is worse than no number, they are the tools to reach for. They have been generally available since September 2024, so there is a good chance they are already sitting in your copy of Excel, waiting to be used.
+`,
+  },
+  {
     slug: "textsplit-textbefore-textafter-excel-functions",
     title: "Stop Wrestling With Text to Columns: TEXTSPLIT, TEXTBEFORE, and TEXTAFTER",
     description: "TEXTSPLIT, TEXTBEFORE, and TEXTAFTER replace the Text to Columns wizard and long LEFT/MID/FIND formula chains with dynamic, self-updating splits. Syntax confirmed against Microsoft's docs, plus where a formula stops and AI begins.",
