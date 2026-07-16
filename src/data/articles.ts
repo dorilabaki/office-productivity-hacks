@@ -15,6 +15,79 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-copilot-plan-mode-review-edits-2026",
+    title: "Excel's New Plan Mode: How to Review Copilot's Edits Before They Touch Your Data",
+    description: "Excel's April 2026 update lets Copilot rewrite your workbook directly, but two new controls, the Chat/Edit switcher and Plan mode, let you see exactly what it intends to do first. Here's how to use them so Copilot never silently breaks a sheet you care about.",
+    category: "excel",
+    readTime: "8 min read",
+    publishedAt: "2026-07-16",
+    content: `# Excel's New Plan Mode: How to Review Copilot's Edits Before They Touch Your Data
+
+For most of the last two years, Copilot in Excel was a talker. You asked it a question, it suggested a formula or explained a feature, and you did the actual work of typing things into cells. That arrangement had one quiet advantage: Copilot could not break anything, because it never touched your data.
+
+That has changed. In the April 2026 update, Microsoft moved Copilot from suggesting edits to making them. It now writes formulas into your cells, reformats ranges, restructures tables, and builds content directly in the workbook. Useful, and also a little nerve-wracking, because a tool that can fix your sheet in one prompt can also mangle it in one prompt.
+
+Microsoft clearly anticipated the nervousness, because the same release added two controls whose entire job is to keep you in charge of what Copilot does. If you use Excel with Copilot at all, these two features are the ones worth learning first. Here is what they are and how to use them so the AI never surprises you.
+
+## What Actually Changed in April 2026
+
+According to Microsoft's official Excel blog for April 2026, the update centers on new Edit with Copilot capabilities across Excel for Windows, Mac, and the web. The headline additions are a Chat/Edit switcher, a Plan mode, clearer change tracking, and the ability to use Python directly from Copilot. The release also brought newer underlying models into the experience, including OpenAI's GPT-5.5 and Anthropic's Claude Opus 4.7. Separately, Microsoft announced that Copilot's agentic capabilities in Word, Excel, and PowerPoint reached general availability on April 22, 2026.
+
+Strip away the branding and the practical shift is simple. Copilot can now act, not just advise. The rest of this article is about staying in control of that.
+
+## Control One: The Chat/Edit Switcher
+
+The first thing to find is a small switcher that now sits above the Copilot prompt box. It has two positions, and the difference between them is the difference between a consultant and a contractor.
+
+**Chat only** keeps Copilot in its old, safe lane. It answers questions, suggests formulas, and offers guidance, but it does not make direct changes to your file. Nothing it says lands in a cell until you put it there yourself.
+
+**Allow editing** turns Copilot loose on the workbook. It creates content, applies formatting, writes formulas, and makes app-native edits on its own.
+
+Here is the detail that matters most, and that catches people off guard: Microsoft says that for many users with Copilot access, Allow editing is on by default. In other words, unless you check, Copilot may already be in the mode where it can change your sheet the moment you send a prompt. That is fine for a scratch workbook. It is not fine for the quarterly model your finance team depends on.
+
+The habit to build is a two-second glance at the switcher before you prompt. When you are exploring, learning, or working on something you cannot afford to have quietly altered, put it in Chat only. When you genuinely want Copilot to do the work and you have a way to review it, switch to Allow editing. Treat the switch like the difference between asking a colleague what they think and handing them the keyboard.
+
+## Control Two: Plan Mode
+
+The second control is the one that turns Copilot from a black box into something you can actually supervise.
+
+When you give Copilot a multi-step or high-impact task, Plan mode has it outline a clear, step-by-step approach before it changes anything in the workbook. You see what it intends to do, which data and capabilities it plans to use, and in what order. Then you can review the plan, adjust it, and only approve it once it matches what you actually wanted.
+
+This is a bigger deal than it sounds, and the reason is a familiar one to anyone who has been burned by an AI tool. The failure mode with automated edits is not usually a wrong formula you can spot. It is Copilot confidently doing the wrong thing across fifty cells because it misread your intent. When the plan is visible up front, you catch the misunderstanding while it is still just a plan, before it has rewritten anything. The cost of a bad plan is clicking edit. The cost of a bad edit is rebuilding your sheet.
+
+A practical way to use it: for anything beyond a trivial one-cell change, read the plan the way you would read a junior analyst's outline before they run with a task. Look at whether it correctly understood which range you meant, whether it is about to overwrite data you wanted to keep, and whether the steps are in a sensible order. Adjust anything that looks off, and only then let it proceed.
+
+## Control Three: Seeing What It Did
+
+Reviewing the plan handles what Copilot is about to do. The update also makes it easier to see what it already did. Copilot now highlights its changes directly on the grid and marks any modified sheet with a green tab indicator. Those visual cues stay put during a Copilot turn and clear once you are finished, so you can scan exactly what moved without hunting through the workbook cell by cell.
+
+Combined with Excel's normal undo, this gives you a reasonable safety net: preview with Plan mode, execute, scan the highlighted changes, and undo in one keystroke if the result is not what you wanted. It is not a substitute for keeping a backup copy of anything genuinely important, which you should still do. But it closes the gap between Copilot making a change and you noticing it.
+
+## The Python Layer, Briefly
+
+The April update also lets Copilot use Python directly inside Edit with Copilot, so it can transform data, build visualizations, and complete complex multi-step analysis in place rather than just writing worksheet formulas. This is powerful, and it is also exactly the kind of capability where Plan mode earns its keep, because a Python step is far harder to eyeball than a SUM formula. If you want the deeper background on how Python landed in Excel and what it can do, we walked through it in our guide to [using Python in Excel to automate hours of work](/resources/python-in-excel-2026-automate-hours). The short version for this article: when Copilot proposes a Python step, reviewing the plan first is not optional caution, it is the only practical way to know what is about to happen.
+
+## A Simple Workflow That Keeps You in Charge
+
+Putting it together, here is a routine that lets you get the speed of Copilot editing without handing it your workbook blind.
+
+First, check the switcher. Chat only for anything you cannot afford to have changed, Allow editing when you are ready to let it work. Second, keep a copy of any workbook that matters before you turn Copilot loose on it. Thirty seconds of duplication beats an afternoon of reconstruction. Third, use Plan mode for anything multi-step, and actually read the plan rather than clicking through it. Fourth, after the edit, scan the highlighted cells and the green sheet tabs to confirm Copilot did what you approved. Fifth, if anything is off, undo and re-prompt with a tighter instruction.
+
+None of this is heavy process. It is four glances and a habit, and it is the difference between Copilot being a tool you trust and one you are quietly afraid of.
+
+## Where This Fits
+
+This update is part of a broader shift from AI that talks to AI that acts, the same shift showing up across every office tool, not just Excel. If you want to understand the bigger pattern, and how to work with autonomous AI without losing control of the output, our sister site's guide to [how to use AI agents](https://howdoiuse.ai/resources/how-to-use-ai-agents) is a good primer. And if you are specifically interested in how Edit with Copilot handles bigger jobs on files saved to your own machine, we covered that in our piece on [Copilot's multi-step edits on local files](/resources/edit-with-copilot-work-iq-excel-local-files-2026).
+
+The tools are getting more capable fast. The skill worth building is not memorizing every new button. It is keeping a clear line between what you have asked the AI to do and what it is actually about to do to your data. In this release, the switcher and Plan mode are how you hold that line.
+
+## Sources
+
+- Microsoft, What's New in Excel (April 2026), official Excel Blog: details the Chat/Edit switcher, Plan mode, change highlighting with green tab indicators, Python in Edit with Copilot, and the GPT-5.5 and Claude Opus 4.7 models; notes Allow editing is enabled by default for many users. https://techcommunity.microsoft.com/blog/excelblog/whats-new-in-excel-april-2026/4502696
+- Microsoft 365 Blog, Copilot's agentic capabilities in Word, Excel, and PowerPoint are generally available (April 22, 2026). https://www.microsoft.com/en-us/microsoft-365/blog/2026/04/22/copilots-agentic-capabilities-in-word-excel-and-powerpoint-are-generally-available/
+`,
+  },
+  {
     slug: "groupby-pivotby-excel-functions-guide-2026",
     title: "GROUPBY and PIVOTBY: The Excel Functions That Replace Half Your Pivot Tables",
     description: "GROUPBY and PIVOTBY summarize data with a single formula that updates live, no refresh button required. They went generally available in the Excel Current Channel on September 25, 2024. Here is how the two functions work, when to use each, and the eta lambda shortcut that makes them fast to write.",
