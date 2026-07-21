@@ -15,6 +15,86 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "gemini-fix-formula-errors-google-sheets",
+    title: "Gemini Fixes Broken Sheets Formulas in One Click. Here's What to Let It Handle, and What to Fix Yourself.",
+    description: "On June 22, 2026, Google shipped a Gemini capability in Sheets that diagnoses formula errors and hands back a corrected formula. The promotional usage limits ended July 15, so it's worth knowing which errors are worth spending a call on and which you should read yourself.",
+    category: "sheets",
+    readTime: "7 min read",
+    publishedAt: "2026-07-21",
+    content: `# Gemini Fixes Broken Sheets Formulas in One Click. Here's What to Let It Handle, and What to Fix Yourself.
+
+Everyone who lives in spreadsheets has had the same afternoon. A formula that worked yesterday returns #REF!, and you spend twenty minutes tracing nested arguments to find the one range that shifted when a colleague inserted a column.
+
+Google shipped something aimed squarely at that. On June 22, 2026, the Workspace team announced a Gemini capability in Google Sheets that diagnoses and fixes formula errors in one click. When a formula throws an error, Gemini reads the data structure around it, explains what went wrong in plain language, and offers a corrected version.
+
+It's useful. It's also not a substitute for understanding your own spreadsheet, and a billing detail from mid-July changes how you should ration it. Here's the practical version.
+
+## What Google actually shipped
+
+According to the official Google Workspace Updates post, the feature does three things when it meets an error. It analyzes the surrounding data structure, gives an easy-to-understand explanation of the core issue, and supplies a corrected formula. Google says it handles everything from basic arithmetic to highly intricate calculations.
+
+The rollout began June 22, 2026 for both Rapid Release and Scheduled Release domains, with up to 15 days for the feature to appear. If you're on an eligible plan and haven't seen it yet, it should be live by now.
+
+Eligibility is narrower than "anyone with Sheets." Google lists Business Standard and Plus, Enterprise Standard and Plus, Google AI Pro and Ultra for consumers, Google AI Pro for Education, and AI Expanded Access add-ons. Two switches also have to be on. Admins need Gemini for Workspace in Sheets enabled, and individual users need Workspace smart features turned on. If the feature is missing for you, check that pair before filing a ticket.
+
+## The usage limit change most people missed
+
+Here's the detail sitting in a footnote on Google's announcement. Workspace customers got promotional access to higher limits on the improved Gemini in Sheets experience through July 15, 2026. That window has closed. Per-user usage limits now apply, and Google notes that AI Expanded Access licenses get higher allowances.
+
+The practical consequence is a change in habit. During the promo you could throw every trivial error at the fixer without thinking. Now each call draws down a quota, so it pays to spend those calls on the errors that are genuinely opaque and read the obvious ones yourself.
+
+That raises the useful question: which errors are which?
+
+## The four errors you should read yourself
+
+Sheets error values are a diagnostic system, not noise. Four of them tell you almost exactly what went wrong, and reading them is faster than invoking anything.
+
+**#DIV/0!** means you divided by zero or by an empty cell. The fix is nearly always checking the denominator with an IF, or wrapping the division in IFERROR once you've confirmed a zero denominator is legitimate rather than a symptom.
+
+**#NAME?** means Sheets doesn't recognize something you typed. Most of the time it's a misspelled function name or a text string missing its quotation marks. Read the formula and find the typo.
+
+**#REF!** means a reference points at something that no longer exists, usually because a row, column, or sheet got deleted. The question to ask is what changed in the file, not what's wrong with the formula.
+
+**#N/A** from a lookup means the value wasn't found. Before you assume the formula is broken, check whether the value is actually in the lookup range. Often the formula is correct and the data is the problem, and no amount of formula rewriting will fix that.
+
+## Where the one-click fix earns its keep
+
+The fixer is worth a call when the error is buried rather than obvious. A few cases where it genuinely saves time:
+
+**Long nested formulas.** When a single cell contains four levels of nesting, finding which argument produced the error is tedious work. Gemini reading the structure for you is a real shortcut.
+
+**#VALUE! inside a long formula.** This means a type mismatch, typically text where a number was expected. In a short formula you spot it instantly. In a long one it can hide anywhere, especially when the offending value came from an import and looks like a number.
+
+**Array dimension mismatches.** Formulas that combine ranges of different sizes fail in ways that aren't well explained by the error value alone.
+
+**Inherited spreadsheets.** When you didn't write the formula and don't know the file's history, the explanation is the valuable output, more than the fix itself.
+
+The common thread is that Gemini analyzes the surrounding data structure, which is exactly the manual step that eats your time. You already know what #VALUE! means. What you don't know is which of forty cells fed it.
+
+## Read the explanation, not just the fix
+
+If you take one habit from this, take this one: read the explanation before accepting the corrected formula.
+
+Two reasons. The first is that a formula that stops erroring is not the same as a formula that's correct. The classic example is IFERROR. Wrapping a broken lookup in IFERROR makes the red error disappear and returns a clean blank, which feels like a fix and isn't. The error was telling you something true about your data. Suppressing it converts a visible problem into an invisible one, and invisible problems surface later in a report someone else is reading.
+
+The second reason is that the explanation is where the learning is. Fix a #N/A ten times by accepting a suggestion and you've learned nothing. Read why it happened twice and you stop creating it.
+
+A reasonable rule: accept the corrected formula when the explanation matches what you already suspected, and slow down when it doesn't. A mismatch between your mental model and the explanation means one of you is wrong about the spreadsheet, and it's worth finding out which.
+
+## Where this fits
+
+This lands in the same category as the AI features arriving across every office tool right now. The tool proposes, you approve, and the quality of the outcome depends almost entirely on how carefully you review. That review discipline transfers across tools, and it's the same skill whether you're checking a formula fix in Sheets or supervising a longer-running assistant. If you want the broader version of that habit, How Do I Use AI has a practical guide to working with [AI agents without losing control of the output](https://howdoiuse.ai/resources/how-to-use-ai-agents).
+
+## The bottom line
+
+Gemini's formula fixer removes the tedious part of debugging, which is locating the problem, not understanding it. Now that the promotional limits have ended, treat it as a targeted tool rather than a reflex. Read the four self-explanatory errors yourself, spend your calls on the buried ones, and always read the explanation before you accept the formula.
+
+**Sources:**
+- Google Workspace Updates, "Troubleshoot formula errors quickly with Gemini in Google Sheets," June 22, 2026: https://workspaceupdates.googleblog.com/2026/06/troubleshoot-formula-errors-in-sheets.html
+- Google Docs Editors Help, "Collaborate with Gemini in Google Sheets": https://support.google.com/docs/answer/14356410
+`,
+  },
+  {
     slug: "excel-copilot-plan-mode-review-edits-2026",
     title: "Excel's New Plan Mode: How to Review Copilot's Edits Before They Touch Your Data",
     description: "Excel's April 2026 update lets Copilot rewrite your workbook directly, but two new controls, the Chat/Edit switcher and Plan mode, let you see exactly what it intends to do first. Here's how to use them so Copilot never silently breaks a sheet you care about.",
