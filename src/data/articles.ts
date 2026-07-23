@@ -57,7 +57,7 @@ They stack. Your Personalization applies everywhere; a workbook's .Rules sheet a
 
 The same habits that make a good prompt make a good rule. Be concrete and testable: "dates in YYYY-MM-DD" beats "format dates consistently." Show, don't just tell: pointing rules at an example range gives Copilot a reference implementation, which is more reliable than prose alone. And start small. Five rules that encode your real non-negotiables will serve you better than thirty aspirational ones you can't verify.
 
-If you've read our guides to [Copilot's plan mode](/articles/excel-copilot-plan-mode-guide/) and [agent mode](/articles/excel-copilot-agent-mode-guide/), you'll recognize the theme: the value of AI in Excel keeps shifting from clever one-off prompts to durable setup that pays off every session. Writing persistent instructions for an AI assistant is a skill of its own, and our sister site How Do I Use AI covers it in depth at howdoiuse.ai.
+If you've read our guides to [Copilot's plan mode](/resources/excel-copilot-plan-mode-guide) and [agent mode](/resources/excel-copilot-agent-mode-guide), you'll recognize the theme: the value of AI in Excel keeps shifting from clever one-off prompts to durable setup that pays off every session. Writing persistent instructions for an AI assistant is a skill of its own, and our sister site How Do I Use AI covers it in depth at howdoiuse.ai.
 
 ## The bottom line
 
