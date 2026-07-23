@@ -15,6 +15,61 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "copilot-excel-workbook-rules-personalization-guide",
+    title: "Copilot in Excel Now Follows Written Rules. Here's How to Set Up a .Rules Sheet for Your Team",
+    description: "In June 2026 Microsoft shipped two ways to stop re-typing the same Copilot instructions: Personalization, which follows you across every workbook, and Workbook Rules, a .Rules sheet that travels with the file so everyone's Copilot edits follow the same standards. Here's what each one does, which to use when, and how to write rules that actually get followed.",
+    category: "excel",
+    readTime: "7 min read",
+    publishedAt: "2026-07-23",
+    content: `# Copilot in Excel Now Follows Written Rules. Here's How to Set Up a .Rules Sheet for Your Team
+
+If you use Copilot in Excel regularly, you've probably developed a ritual: every prompt starts with the same throat-clearing. No merged cells. Keep the header row frozen. Currency in EUR, two decimals. Name tables with the tbl prefix. You type it, Copilot complies, and tomorrow you type it all again.
+
+Microsoft shipped the fix in June 2026. Two features, announced together on the Excel blog, let you write those instructions down once so Copilot applies them every time: Personalization, which follows you, and Workbook Rules, which follow the file. The distinction matters, so here's the practical breakdown.
+
+## Personalization: your preferences, every workbook
+
+Personalization lets you save persistent instructions that apply to everything you do with Copilot in Excel, in any workbook you open. Microsoft says preferences can cover chart colors, currency formatting, table naming, preferred formulas, and PivotTable layouts.
+
+Think of it as the settings you'd give a new colleague on their first day. If you always want charts in your company palette, dates in ISO format, and XLOOKUP instead of VLOOKUP, those belong in Personalization. Set them once and stop repeating yourself.
+
+Availability is the good news here: Personalization is generally available now across Excel for the web, Windows, and Mac for Copilot license holders.
+
+## Workbook Rules: the file carries its own standards
+
+Workbook Rules solve a different problem, and for teams it's the bigger one. These rules live inside the workbook itself, on a dedicated sheet using the ".Rules" naming convention, and they travel with the file when you share it. Whoever opens the workbook and edits it with Copilot gets the same guidance, regardless of whose Copilot it is.
+
+That's the piece that makes this a team feature rather than a convenience. A shared budget template, a monthly reporting file, a client tracker that five people touch: the file itself can now state how it should look and behave, and every Copilot edit follows it.
+
+According to Microsoft's announcement, rules can capture structure, formatting, naming conventions, formula conventions, and worked examples, and they can reference formulas, ranges, and other sheets in the workbook. There's a dynamic layer too: because rules can use Excel's calculation engine, a rule can change behavior based on cell values or project status. A tracker could format differently once a status column flips to Closed, for example.
+
+You can build a .Rules sheet three ways: write the rules manually in plain language, point Copilot at a sample range and tell it to treat that as the reference, or ask Copilot to generate rules automatically from your existing worksheets. That last option is the fastest starting point for a template you've already polished by hand.
+
+One rollout caveat: as of the June announcement, Workbook Rules were available to Insiders on Windows and Mac, with broad rollout following in the coming weeks. If you don't see them yet, that's likely why.
+
+## Which one do you actually need?
+
+Use Personalization for taste and defaults: your chart colors, your formula preferences, your naming habits. Use Workbook Rules for anything where consistency across people matters more than personal preference: shared templates, files that get handed between departments, and any workbook where a colleague's well-meaning Copilot edit has ever wrecked your formatting.
+
+They stack. Your Personalization applies everywhere; a workbook's .Rules sheet adds file-specific standards on top. Where they conflict on a shared file, the workbook's rules are the ones designed to win, since their whole purpose is uniformity across users.
+
+## Writing rules that get followed
+
+The same habits that make a good prompt make a good rule. Be concrete and testable: "dates in YYYY-MM-DD" beats "format dates consistently." Show, don't just tell: pointing rules at an example range gives Copilot a reference implementation, which is more reliable than prose alone. And start small. Five rules that encode your real non-negotiables will serve you better than thirty aspirational ones you can't verify.
+
+If you've read our guides to [Copilot's plan mode](/articles/excel-copilot-plan-mode-guide/) and [agent mode](/articles/excel-copilot-agent-mode-guide/), you'll recognize the theme: the value of AI in Excel keeps shifting from clever one-off prompts to durable setup that pays off every session. Writing persistent instructions for an AI assistant is a skill of its own, and our sister site How Do I Use AI covers it in depth at howdoiuse.ai.
+
+## The bottom line
+
+Repeating yourself to Copilot was always a tax. Personalization removes it for you personally, and Workbook Rules remove it for your whole team by letting the file enforce its own standards. If you maintain any spreadsheet that more than one person edits, creating a .Rules sheet is thirty minutes of setup that buys you consistency on every edit after. Start with the template your team breaks most often.
+
+## Sources
+
+- Microsoft Excel Team, "New ways to customize how Copilot edits your workbooks," Microsoft Tech Community Excel Blog, June 2026. Primary announcement of Personalization (generally available on web, Windows, and Mac) and Workbook Rules (Insiders on Windows and Mac at announcement, broad rollout to follow), including the .Rules sheet convention, supported rule types, and creation methods.
+- Windows Report, "Copilot in Excel Gets Smarter With Personalized Rules and Shared Workbook Standards," June 17, 2026. Independent coverage confirming feature scope, platform availability, and the calculation-engine-driven dynamic rules capability.
+`,
+  },
+  {
     slug: "gemini-fix-formula-errors-google-sheets",
     title: "Gemini Fixes Broken Sheets Formulas in One Click. Here's What to Let It Handle, and What to Fix Yourself.",
     description: "On June 22, 2026, Google shipped a Gemini capability in Sheets that diagnoses formula errors and hands back a corrected formula. The promotional usage limits ended July 15, so it's worth knowing which errors are worth spending a call on and which you should read yourself.",
