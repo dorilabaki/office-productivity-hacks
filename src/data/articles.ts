@@ -3447,7 +3447,7 @@ Canvas is the most visible piece of the broader push to make Gemini do real work
 
 The pattern is consistent across both ecosystems. The model is no longer a chat panel that suggests what you might do. It is an editor that does it, with the spreadsheet as the canvas. Canvas extends that pattern from cell-level fills to layout-level visualizations.
 
-If you have not used Fill with Gemini yet, it pairs naturally with canvas. Use Fill with Gemini to populate or clean up the source table, then build a canvas on top of the cleaned data. The two features compound. For a deeper look at how to prompt these AI features inside Sheets specifically, see [our companion piece on Fill with Gemini in Google Sheets](/articles/fill-with-gemini-google-sheets/). For the broader pattern of AI features that operate as editors rather than chat tools, our partner site has a piece on [adaptive thinking in modern AI tools](https://howdoiuse.ai/) that translates well to spreadsheet work.
+If you have not used Fill with Gemini yet, it pairs naturally with canvas. Use Fill with Gemini to populate or clean up the source table, then build a canvas on top of the cleaned data. The two features compound. For a deeper look at how to prompt these AI features inside Sheets specifically, see [our companion piece on Fill with Gemini in Google Sheets](/resources/fill-with-gemini-google-sheets). For the broader pattern of AI features that operate as editors rather than chat tools, our partner site has a piece on [adaptive thinking in modern AI tools](https://howdoiuse.ai/) that translates well to spreadsheet work.
 
 ## What to Do This Week
 
