@@ -15,6 +15,72 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-copilot-finance-skills-guide-2026",
+    title: "Copilot in Excel Can Now Learn Your Recurring Finance Workflows. Here's How Skills Work",
+    description: "In June 2026 Microsoft announced skills for Copilot in Excel: saved, repeatable instruction sets for routine work like monthly reporting, variance analysis, and closing the books. There's a ready-made finance skills library, a way to build your own, and a coming marketplace with partners like Vena and Velixo. Here's what shipped, who it's for, and how to decide between a skill, a workbook rule, and a plain prompt.",
+    category: "excel",
+    readTime: "6 min read",
+    publishedAt: "2026-08-13",
+    content: `# Copilot in Excel Can Now Learn Your Recurring Finance Workflows. Here's How Skills Work
+
+Most spreadsheet work isn't one-off analysis. It's the same job on a schedule: the monthly report, the variance walk, the model refresh, the close checklist. Until now, using Copilot for that recurring work meant re-explaining the whole procedure every time, and hoping this month's output matched last month's.
+
+On June 25, 2026, Microsoft announced the fix in a blog post from Brian Jones, VP of the Excel Product Group: skills for Copilot in Excel. A skill is a saved set of instructions that teaches Copilot how to perform a specific recurring task, so it applies the same steps, structure, and formatting every time you run it.
+
+## What a skill actually is
+
+Think of a skill as a recipe Copilot follows. You define the instructions for a routine task once. From then on, instead of writing a long prompt from scratch, you invoke the skill and Copilot walks through the defined steps, applying the right structure and formatting along the way. In Jones's words, a skill guides Copilot to "produce an output that is easier to review, reuse, and trust."
+
+Microsoft's launch examples are aimed squarely at finance: building financial models, closing the books, updating monthly reports, and running variance analysis. That focus isn't accidental. The Association for Financial Professionals found in a 2025 survey that 96% of FP&A professionals use spreadsheets for planning and 93% use them for reporting on a daily or weekly basis. Recurring, structured, high-stakes spreadsheet work is exactly where a saved procedure beats an improvised prompt.
+
+## What shipped, and what's coming
+
+Three pieces, at different stages of rollout.
+
+A sample skills library is available now. Microsoft published a set of ready-made finance skills covering common workflows, which is the fastest way to see what the feature can do before you invest in building your own.
+
+Custom skills are here too. You can define your own instruction sets for the tasks your team actually runs, in your formats, with your conventions.
+
+Distribution is the forward-looking piece. Microsoft plans to let developers and partners build and distribute skills through Microsoft Marketplace and the Microsoft 365 Admin Center, with an initial partner group that includes LSEG, Ramp, Rogo, Samaya AI, Velixo, and Vena. The realistic read: your FP&A platform or data vendor may eventually ship a maintained skill you install rather than a procedure you write.
+
+Alongside skills, Microsoft is also widening the data Copilot in Excel can reach, adding third-party financial data providers including CB Insights, Daloopa, FactSet, Morningstar, PitchBook, and S&P Global. For anyone building comps or market models, that means Copilot can pull from governed sources instead of whatever a web search returns.
+
+One credibility note worth knowing: Jones says Microsoft's own finance organization has been running Copilot in Excel across FP&A, accounting, tax, compliance, and treasury, so the finance skills reaching general users have been, as he puts it, "pressure-tested by a finance organization operating at the frontier."
+
+## Skill, workbook rule, or prompt?
+
+Excel now has three layers of Copilot instruction, and they solve different problems.
+
+A prompt is for one-off work. Exploring a dataset, drafting a formula, answering a question. No setup, no reuse.
+
+A workbook rule travels with a file and enforces standards on whoever edits it: formatting conventions, naming, structure. It answers "how should this workbook always behave?" We covered the .Rules sheet in detail in our [guide to Workbook Rules and Personalization](/resources/copilot-excel-workbook-rules-personalization-guide).
+
+A skill captures a procedure: a multi-step task you run repeatedly, possibly across many workbooks. It answers "how do we do the monthly variance analysis?" If the task has a name in your team's vocabulary and a slot on the calendar, it's a skill candidate.
+
+They compound. A monthly reporting skill run inside a workbook with a .Rules sheet gives you both a consistent process and a consistent output format.
+
+## How to start without regretting it
+
+Start with one task you repeat at least monthly and can describe as numbered steps. If you can't write the steps down for a new hire, Copilot can't follow them either.
+
+Run the sample library first. Watching a Microsoft-built skill execute teaches you the level of specificity that works better than any documentation.
+
+Keep review in the loop. A skill makes Copilot's output more consistent and easier to check. It doesn't make the output correct by definition, and for financial work the check still matters. Our guide to [building auditable financial models in Excel](/resources/excel-financial-model-auditable) applies unchanged: transparent structure and traceable numbers are what make AI-assisted output reviewable at all. If you use Copilot's more autonomous modes for multi-step work, the same supervision advice from our [agent mode guide](/resources/excel-copilot-agent-mode-guide) applies here.
+
+Writing a good skill is prompt engineering with a longer shelf life: concrete steps, explicit formats, worked examples. For the general craft of writing durable instructions for AI tools, our sister site How Do I Use AI covers it in depth at [howdoiuse.ai](https://howdoiuse.ai).
+
+## The bottom line
+
+Skills move Copilot in Excel from a clever assistant you brief every time to a trained one that remembers the briefing. For finance teams, whose spreadsheet work is overwhelmingly recurring and format-sensitive, that's the difference between a demo and a tool. Start with one named, scheduled task, steal the structure from the sample library, and keep a human review on anything that feeds a decision.
+
+## Sources
+
+- Brian Jones, "Copilot in Excel: built for the era of frontier finance," Microsoft 365 Blog (June 25, 2026). Primary announcement of skills, the sample finance skills library, custom skills, planned Marketplace and Microsoft 365 Admin Center distribution with partners LSEG, Ramp, Rogo, Samaya AI, Velixo, and Vena, expanded data providers (CB Insights, Daloopa, FactSet, Morningstar, PitchBook, S&P Global), and Microsoft's internal finance use across FP&A, accounting, tax, compliance, and treasury.
+- Alexei Alexis, "Microsoft beefs up Copilot in Excel for finance work," CFO Dive (June 26, 2026). Independent coverage confirming feature scope and market context.
+- Association for Financial Professionals, FP&A technology survey (2025). Source of the figures that 96% of FP&A professionals use spreadsheets for planning and 93% for reporting on a daily or weekly basis.
+`,
+  },
+  {
     slug: "copilot-excel-workbook-rules-personalization-guide",
     title: "Copilot in Excel Now Follows Written Rules. Here's How to Set Up a .Rules Sheet for Your Team",
     description: "In June 2026 Microsoft shipped two ways to stop re-typing the same Copilot instructions: Personalization, which follows you across every workbook, and Workbook Rules, a .Rules sheet that travels with the file so everyone's Copilot edits follow the same standards. Here's what each one does, which to use when, and how to write rules that actually get followed.",
