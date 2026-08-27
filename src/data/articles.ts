@@ -15,6 +15,169 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-importtext-importcsv-import-functions-guide",
+    title: "IMPORTTEXT and IMPORTCSV: Load a CSV Into Excel With One Formula",
+    description: "Microsoft shipped two functions that collapse the Power Query import wizard into a single formula. IMPORTCSV handles standard UTF-8 comma files with one argument. IMPORTTEXT covers odd delimiters, non-UTF-8 encodings and fixed-width layouts. Here is the full syntax for both, the tab-not-comma default that catches everyone, the negative row arguments that trim from the end, and an honest account of availability: this is still Beta Channel on Windows as of August 2026.",
+    category: "excel",
+    readTime: "7 min read",
+    publishedAt: "2026-08-27",
+    content: `# IMPORTTEXT and IMPORTCSV: Load a CSV Into Excel With One Formula
+
+Getting a CSV into Excel has always been a small ceremony. Open the Data tab, launch Get Data, walk the Power Query wizard, set the delimiter, check the type detection, load to a sheet. It works. It also takes six clicks and produces a query object you now have to maintain.
+
+Microsoft shipped a shortcut. Two new functions, IMPORTTEXT and IMPORTCSV, pull a text file into the grid as a dynamic array from a single formula.
+
+One caveat up front, because it decides whether the rest of this article is useful to you today: this is still a Beta Channel feature on Windows. More on exactly what that means at the end. If you're not in the Insider programme, treat this as a preview of where Excel is heading rather than something you can put in a workbook this afternoon.
+
+## What the two functions do
+
+Both read a text-based file and spill its contents into the grid as a dynamic array. No query, no connection object in the Queries pane, no wizard. Just a formula in a cell.
+
+The array is refreshable, which is the part that makes these more than a novelty. Point the formula at a file, and when that file changes you can pull the new contents without rebuilding anything.
+
+IMPORTTEXT is the flexible one. IMPORTCSV is a stripped-down version of it with sensible defaults baked in for the most common case.
+
+## IMPORTTEXT, argument by argument
+
+The full syntax:
+
+\`\`\`
+IMPORTTEXT(path, [delimiter], [skip_rows], [take_rows], [encoding], [locale])
+\`\`\`
+
+Only \`path\` is required. Microsoft's documentation defines it as the local file path or URL of the text-based file you want to import.
+
+\`delimiter\` is a character or string specifying how columns are separated.
+
+\`skip_rows\` is how many rows to skip. A negative value skips rows from the end of the array instead of the start.
+
+\`take_rows\` is how many rows to return. A negative value takes rows from the end.
+
+\`encoding\` sets the file encoding. UTF-8 by default.
+
+\`locale\` determines regional formatting for dates and numbers. Your OS locale by default.
+
+## The default that will trip you up
+
+IMPORTTEXT's default delimiter is **tab**, not comma.
+
+This is the single most likely thing to waste ten minutes of your day. Point IMPORTTEXT at a comma-separated file without specifying a delimiter and you get one column containing every row as a single string, which looks like the function failed when it did exactly what it was told.
+
+For a comma-separated file with IMPORTTEXT, be explicit:
+
+\`\`\`
+=IMPORTTEXT("C:\\Data\\example.csv", ",")
+\`\`\`
+
+Or skip the argument entirely and use the function built for that case.
+
+## IMPORTCSV: the short version
+
+\`\`\`
+IMPORTCSV(path, [skip_rows], [take_rows], [locale])
+\`\`\`
+
+Four arguments. Note what's missing: there's no \`delimiter\` and no \`encoding\`. Microsoft describes IMPORTCSV as a simplified version of IMPORTTEXT that expects comma delimiters and UTF-8 encoding.
+
+That's the whole difference. If your file is a standard UTF-8 CSV, use IMPORTCSV and stop thinking about it:
+
+\`\`\`
+=IMPORTCSV("C:\\Data\\example.csv")
+\`\`\`
+
+If you need a pipe delimiter, a semicolon, a fixed-width layout, or a file that isn't UTF-8, you need IMPORTTEXT.
+
+## Skipping and taking rows, including from the end
+
+The \`skip_rows\` and \`take_rows\` arguments handle the two most common cleanup jobs before you've even landed the data.
+
+Skip a header block of junk rows above the real headers:
+
+\`\`\`
+=IMPORTCSV("C:\\Data\\example.csv", 1)
+\`\`\`
+
+Pull only the first two rows, useful for eyeballing structure before you commit to importing a large file:
+
+\`\`\`
+=IMPORTCSV("C:\\Data\\example.csv", , 2)
+\`\`\`
+
+The negative-value behaviour is the genuinely useful bit and it's easy to miss in the docs. A negative \`skip_rows\` skips from the end of the array, and a negative \`take_rows\` takes from the end. That gives you a clean way to drop a trailing totals row, or to grab only the most recent entries from an append-only log file, without writing a single helper formula.
+
+## Fixed-width files
+
+Fixed-width exports from older systems are the reason Text to Columns still exists. IMPORTTEXT handles them through the \`delimiter\` argument, which accepts a comma-separated array of ascending integers marking the column boundaries. Microsoft's own example:
+
+\`\`\`
+=IMPORTTEXT("C:\\Data\\fixedwidth.txt", {1,3})
+\`\`\`
+
+For delimiters you can't type directly, Microsoft documents using the CHAR function inside the \`delimiter\` argument.
+
+## Importing from a URL
+
+The \`path\` argument takes a URL as well as a local path, which opens up pulling from a published endpoint or a file on a web server.
+
+If the source needs credentials, Excel prompts you with an authentication dialog offering Anonymous, Windows, Basic, Web API, or Organizational account. Once you've authenticated, those permissions persist. To clear them later, go to Data, then Get Data, then Data Source Settings, open the Global Permissions tab and choose Clear Permissions.
+
+Worth knowing before you build something on this: Microsoft's documentation says local file path or URL. It doesn't specifically document OneDrive or SharePoint paths, so test those yourself rather than assuming.
+
+## Refreshing is not automatic
+
+This is the behaviour to internalise before you build a report on top of it.
+
+Microsoft's documentation is unambiguous: Import Functions do not automatically refresh. To update imported data, use the Refresh All button on the Data tab.
+
+So the formula doesn't recalculate when the underlying file changes. It doesn't pick up changes when you press F9. It updates when you explicitly hit Data, then Refresh All.
+
+For most reporting work that's the right default. You don't want a file read firing every time a volatile function recalculates somewhere else in the workbook. But it does mean that if you hand this workbook to a colleague, "press Refresh All" needs to be written down somewhere, because nothing on screen indicates the data is stale.
+
+## When you should still use Power Query
+
+These functions don't retire Power Query. They cover a narrower job much faster.
+
+Use IMPORTTEXT or IMPORTCSV when you need the contents of a file in the grid, roughly as-is, with light row trimming. That's a large share of everyday imports and the wizard was always overkill for it.
+
+Stay in Power Query when you need real transformation: merging multiple files from a folder, joining sources, unpivoting, conditional column logic, type enforcement across a schema, or any multi-step pipeline you need documented and repeatable.
+
+A reasonable middle path is to land raw data with IMPORTCSV and do the shaping with formulas. Excel's modern text and array functions cover a lot of what used to require a query step. Our guides to [TEXTSPLIT, TEXTBEFORE and TEXTAFTER](/resources/textsplit-textbefore-textafter-excel-functions) and to [the REGEX functions](/resources/excel-regex-functions-regextest-regexextract-regexreplace) handle parsing, [GROUPBY and PIVOTBY](/resources/groupby-pivotby-excel-functions-guide-2026) handle aggregation, and [TRIMRANGE and trim refs](/resources/trimrange-trim-refs-excel-formulas-growing-data) keep the whole chain stable when the imported range changes size on refresh. That last one matters more than it sounds: an imported array that grows by 200 rows next month will break any formula that assumed a fixed range.
+
+If the incoming file is genuinely messy rather than just inconveniently shaped, our guide to [cleaning messy data in Excel](/resources/how-to-clean-messy-data-in-excel) is the better starting point.
+
+One more that's easy to miss: Microsoft notes you can use Import Functions as context for the COPILOT function and ask questions about the imported data. That means you can land a CSV and interrogate it in the grid without an intermediate step. We covered the mechanics of that function in [the COPILOT() formula guide](/resources/excel-copilot-function-formula-guide).
+
+## Availability, stated precisely
+
+Microsoft's wording on both support pages is worth quoting exactly, because it gets shortened misleadingly: the feature is currently generally available to Microsoft 365 subscribers enrolled to the Insiders Beta channel, running Version 2502 (Build 18604.20002) or later in Excel for Windows.
+
+Read that carefully. "Generally available" is scoped to the Beta Channel population. It is not a statement that this has shipped to Current Channel.
+
+As of late August 2026, that hasn't changed. The functions appeared in the January 2026 "What's New in Excel" post flagged as Insiders, and haven't appeared in a monthly Excel release post since. They're absent from Current Channel release notes.
+
+Mac, Excel for the web, iOS and Android: Microsoft's Applies To listing covers Excel for Microsoft 365, and the availability note specifies Excel for Windows. There's no Microsoft source claiming support on other platforms.
+
+Microsoft also doesn't publish a file size cap, row or column limits, or a list of error values for these functions. If you find a guide that quotes such limits, it's inventing them.
+
+## The bottom line
+
+IMPORTCSV replaces a six-click wizard with one formula for the most common import job in Excel. IMPORTTEXT covers the awkward files: odd delimiters, non-UTF-8 encodings, fixed-width layouts.
+
+Two things to remember and you'll avoid the common mistakes. IMPORTTEXT defaults to tab, so specify the comma yourself or use IMPORTCSV. And nothing refreshes on its own, so Data then Refresh All is part of the process, not an afterthought.
+
+If you're on Current Channel, you're waiting. Worth setting up now so you're ready: know which of your recurring imports are simple enough to collapse into one formula, because that's the list you'll convert on day one.
+
+For the broader question of when to reach for an AI assistant versus a plain formula on this kind of work, our sister site How Do I Use AI covers it at [howdoiuse.ai](https://howdoiuse.ai).
+
+## Sources
+
+- Gal Zivoni, Product Manager on the Excel team, "Bring data into Excel with the new Import Functions," Microsoft 365 Insider Blog, 15 January 2026. Primary announcement. Source of the description of IMPORTTEXT as a flexible function for .txt, .csv and .tsv files, IMPORTCSV as a simplified experience with comma delimiting and UTF-8 defaults, the refreshable dynamic array behaviour, the note that path can be a local path or a URL, the Beta Channel availability statement, and the tip that Import Functions can be used as context for the COPILOT function.
+- Microsoft Support, "IMPORTTEXT function," support.microsoft.com. Source of the full syntax and argument definitions, the tab default for the delimiter argument, the negative-value behaviour of skip_rows and take_rows, the fixed-width array syntax and its worked example, the note on using CHAR for special delimiters, the web authentication methods and permission-clearing steps, the Refresh All requirement, and the availability statement quoted above.
+- Microsoft Support, "IMPORTCSV function," support.microsoft.com. Source of the four-argument syntax, the description of IMPORTCSV as a simplified version of IMPORTTEXT expecting comma delimiters and UTF-8 encoding, and the worked examples.
+- Microsoft, "What's New in Excel (January 2026)," Microsoft Community Hub. Source confirming the functions were released to Excel for Windows flagged as Insiders. Subsequent monthly Excel release posts through August 2026 contain no further announcement, and the functions do not appear in Current Channel release notes.
+`,
+  },
+  {
     slug: "excel-copilot-finance-skills-guide-2026",
     title: "Copilot in Excel Can Now Learn Your Recurring Finance Workflows. Here's How Skills Work",
     description: "In June 2026 Microsoft announced skills for Copilot in Excel: saved, repeatable instruction sets for routine work like monthly reporting, variance analysis, and closing the books. There's a ready-made finance skills library, a way to build your own, and a coming marketplace with partners like Vena and Velixo. Here's what shipped, who it's for, and how to decide between a skill, a workbook rule, and a plain prompt.",
