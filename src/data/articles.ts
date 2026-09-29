@@ -15,6 +15,57 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "google-sheets-20-million-cells-manual-calculation-2026",
+    title: "Google Sheets Just Doubled Its Cell Limit to 20 Million and Quietly Added Manual Calculation",
+    description: "Google Sheets moved from a 10 million to a 20 million cell limit and added an off-by-default manual calculation setting. Here's what changed, the rollout dates, and the one real risk: a formula that hasn't recalculated looks identical to one that has.",
+    category: "sheets",
+    readTime: "6 min read",
+    publishedAt: "2026-09-29",
+    content: `# Google Sheets Just Doubled Its Cell Limit to 20 Million and Quietly Added Manual Calculation
+
+Two changes shipped to Google Sheets in September 2026. One raises the ceiling on how big a spreadsheet can get. The other, off by default, gives you control over when it recalculates. Neither requires an add-on, and most users won't notice either unless they know to look.
+
+## The Cell Limit Doubled
+
+Google Sheets moved from a 10 million cell limit per spreadsheet to "up to 20 million," according to Google's Workspace Updates announcement of September 10, 2026. The expanded capacity applies to new files, existing files, and imported files.
+
+The rollout is staged. Rapid Release domains started seeing it gradually from September 10, 2026. Scheduled Release domains follow from September 28, 2026, with up to 15 days for full visibility either way. It's available to all Google Workspace customers, Workspace Individual subscribers, and personal Google accounts. There's no admin control and nothing to turn on.
+
+Put the number in context. A sheet with 50 columns used to top out around 200,000 rows before hitting the old ceiling. At 20 million cells, that same 50-column sheet can hold roughly 400,000 rows. For anyone importing a full year of transaction-level data, event logs, or a large customer list straight into Sheets, that's the difference between a file that fits and one that doesn't.
+
+Google also said it plans to raise the file byte-size limit for imported spreadsheets, without giving a date. That matters separately, since a file can hit a byte-size ceiling before it hits a cell-count one.
+
+One caution: a higher cell limit is not a higher performance ceiling. Sheets can slow down well before 20 million cells if the sheet is heavy with volatile functions, cross-sheet references, or array formulas that recalculate on every edit. That's the problem the second change addresses.
+
+## Manual Calculation Is Now an Option
+
+Starting September 21, 2026, Google began rolling out a manual calculation setting to Rapid and Scheduled Release domains, again with up to 15 days for full visibility. It's off by default. To find it, open File, then Settings, then Calculation settings. Google says there is no admin control for it.
+
+With it on, Sheets stops recalculating formulas automatically as you edit. Google's announcement says you can trigger a sheet-wide update at the moment you're ready to review results. It doesn't spell out the exact control, so check the Calculation settings panel in your own account.
+
+Google names three use cases. First, high-volume data updates without a recalculation after every change. Second, financial or forecasting models where you adjust several input variables in sequence before you want to see a result. Third, sheets with volatile functions, such as random-number generators or live timestamps, where you want the values to hold still.
+
+Excel has long offered a manual calculation mode, so people who split time between the two tools have worked around its absence in Sheets, usually by pasting large data in smaller batches. This setting removes the need for that workaround.
+
+## The Catch: Stale Numbers Look Identical to Current Ones
+
+Manual mode has one real risk, and Google's announcement doesn't flag it: a formula that hasn't recalculated looks the same as one that has. Nothing marks a number as out of date. If you turn manual mode on for a big paste and forget it's on, a chart built on that data, or a colleague opening the sheet later, can end up trusting a number that's already wrong.
+
+Treat manual mode as a temporary tool. Turn it on for the specific paste or model-building session, run the sheet-wide update when you're done, and switch back to automatic before you hand the file off. On a shared file, agree as a team whether manual mode belongs on it at all, since the setting changes what everyone sees.
+
+## Using Both Together
+
+The cell limit means a bigger dataset can live in one sheet. Manual calculation means loading that data doesn't trigger a recalculation after every edit. For a first-time import of a large export, the sensible sequence is: turn on manual calculation, paste the full dataset, run one update, then switch back to automatic.
+
+If formulas across large sheets are still slow, ARRAYFORMULA remains the more permanent fix for repeated calculations across a growing range. See [Stop Repeating Formulas in Google Sheets](/resources/arrayformula-stop-repeating-formulas-in-google-sheets). For what Sheets' AI tools can do on top of a large dataset, see the [Google Sheets AI Features Guide](/resources/google-sheets-ai-features-guide). And if you're using Gemini in Docs to write up what the data shows, [How to Ground Gemini in Your Own Sources in Google Docs](https://howdoiuse.ai/resources/gemini-notebook-google-docs-grounded-ai-prompts-2026) covers that workflow.
+
+## Sources
+
+- Google Workspace Updates, "Doubled cell limits in Google Sheets now generally available," September 10, 2026
+- Google Workspace Updates, "New manual calculation setting in Google Sheets," September 21, 2026
+`,
+  },
+  {
     slug: "excel-importtext-importcsv-import-functions-guide",
     title: "IMPORTTEXT and IMPORTCSV: Load a CSV Into Excel With One Formula",
     description: "Microsoft shipped two functions that collapse the Power Query import wizard into a single formula. IMPORTCSV handles standard UTF-8 comma files with one argument. IMPORTTEXT covers odd delimiters, non-UTF-8 encodings and fixed-width layouts. Here is the full syntax for both, the tab-not-comma default that catches everyone, the negative row arguments that trim from the end, and an honest account of availability: this is still Beta Channel on Windows as of August 2026.",
