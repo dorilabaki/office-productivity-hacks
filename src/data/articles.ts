@@ -15,6 +15,80 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-lists-arrays-in-cells-flatten-has-functions-2026",
+    title: "Excel Is Testing Multiple Values in One Cell: Lists, FLATTEN, and HAS Explained",
+    description: "Microsoft is testing lists and arrays inside single Excel cells, plus four new functions: FLATTEN, HAS, HASANY and HASALL. Here's how they work, who can try them now, and the limits to know before you build on them.",
+    category: "excel",
+    readTime: "7 min read",
+    publishedAt: "2026-10-01",
+    content: `# Excel Is Testing Multiple Values in One Cell: Lists, FLATTEN, and HAS Explained
+
+For about 40 years, an Excel cell has held one value. If a project had five team members, you either crammed them into one text string and fought it with text functions, or you built a second table. Microsoft announced on September 24, 2026 that it's testing a different model: a single cell that holds a list or an array of values, with four new functions to work with them.
+
+It's a preview, not a finished feature. Here's what's confirmed, how it works, and what to hold off on.
+
+## Who Can Try It Right Now
+
+The feature is opt-in for Microsoft 365 Insiders in the Excel Beta Channel, on both Windows and Mac. You need Excel for Windows Version 2610 (Build 20520.20000) or later, or Excel for Mac Version 16.114 (Build 26092111) or later. Rollout is gradual, so having the right build doesn't guarantee you'll see it immediately.
+
+Microsoft's own guidance, as reported by coverage of the announcement, is to avoid relying on it in important workbooks until it reaches general availability. Treat everything below as something to test on a copy.
+
+## Lists: Several Values in One Cell
+
+A list is a set of separate values stored in one cell. You can create one from the Insert menu (Insert, then List) or by selecting cells containing comma-separated text and pressing Ctrl+J, which toggles between a list and plain text. The separator follows your regional settings, so it may be a comma or a semicolon. You edit a list like any other cell, with F2 or a double-click.
+
+The difference from a text string is that Excel treats each item as its own value. You can filter and calculate on individual items instead of parsing a string. A formula that references a list spills its items into separate cells.
+
+## Arrays in Cells and Nested Arrays
+
+The second half is arrays. Normally a formula returning several values spills across neighboring cells. The new behavior lets you keep the result inside one cell by typing curly braces right after the equals sign. For example:
+
+\`={SORT(B3)}\`
+
+This is different from the legacy Ctrl+Shift+Enter array formulas. Here you type the braces yourself, inside the formula. Arrays in cells can be different sizes and can contain other arrays.
+
+That last point fixes an old limitation. Microsoft says formulas that return one array per row used to produce a shortened result or a #CALC! error, and with nested arrays, supported formulas return the full result. The catch is that nested arrays require Compatibility Version 3, which Microsoft says can change results in some existing formulas. Don't switch it on in a workbook other people depend on without checking results first.
+
+## The Four New Functions
+
+- **FLATTEN** removes levels of nesting from an array. In practice it splits lists back out into rows. A combination from the coverage, \`=SORT(UNIQUE(FLATTEN(B3:B27)))\`, would give you a sorted list of every distinct item across a column of lists.
+- **HAS** checks whether an array contains a specified value. In one published example, \`=HAS(A2, "Ann")\` returns TRUE for a list containing Ann, and doesn't match "Anna". That whole-item matching is the advantage over searching inside a text string.
+- **HASANY** returns TRUE if at least one of several supplied values is present.
+- **HASALL** returns TRUE only if all supplied values are present.
+
+Take a task tracker with a "Team members" column. With a list in each cell, \`=HASANY(C2, $F$1:$G$1)\` could flag every task that involves either of two people, without helper columns or wildcard text matching. We haven't tested this ourselves, since the build isn't generally available. It's an illustration of the syntax shown in published examples, so confirm it in your own Beta build.
+
+## What Doesn't Work Yet
+
+The limits are significant, and they decide whether this is usable for your work:
+
+- PivotTables can't use these cell types as a source.
+- Charts don't turn array entries into data points.
+- Power Query can't load or output array columns.
+- Data validation drop-down sources don't support them.
+- Find and Replace can't change individual list or array items.
+- Most conditional formatting isn't supported.
+
+Coverage also notes that it's undecided how these values are stored in .xlsx files, so third-party tools that read your workbooks may need updates. That matters if your spreadsheet feeds other software.
+
+The workaround for the first group is the new function itself: use FLATTEN to split lists into ordinary rows before building a PivotTable or chart.
+
+## Should You Switch Anything Over Today?
+
+Not in production. For a test copy of a tracker, a tags column, or a survey export where one answer holds several choices, try it. Those are the cases where a one-cell-one-value limit has always forced awkward workarounds. If you've been splitting strings with TEXTSPLIT, our [TEXTSPLIT, TEXTBEFORE and TEXTAFTER guide](/resources/textsplit-textbefore-textafter-excel-functions) still applies, and it works in today's general release. For summarizing data once it's in rows, see [GROUPBY and PIVOTBY](/resources/groupby-pivotby-excel-functions-guide-2026).
+
+Wait for general availability before sharing a workbook that depends on any of this. Anyone opening it in an older version won't get the same results.
+
+## Sources
+
+- Microsoft 365 Insider Blog, "Put multiple values in one cell with lists and arrays in Excel," September 24, 2026
+- Microsoft Excel Blog, "Excel now supports multiple values in a single cell," September 24, 2026
+- Xelplus, "Excel Lists in Cells: Put Multiple Values in One Cell" (function syntax and limitations)
+- GHacks, "Microsoft Tests Multiple Values per Cell in Excel," September 29, 2026 (availability and limitations)
+- TechSpot, "After 40 years, Excel is breaking one of its oldest rules: one cell, one value"
+`,
+  },
+  {
     slug: "google-sheets-20-million-cells-manual-calculation-2026",
     title: "Google Sheets Just Doubled Its Cell Limit to 20 Million and Quietly Added Manual Calculation",
     description: "Google Sheets moved from a 10 million to a 20 million cell limit and added an off-by-default manual calculation setting. Here's what changed, the rollout dates, and the one real risk: a formula that hasn't recalculated looks identical to one that has.",
