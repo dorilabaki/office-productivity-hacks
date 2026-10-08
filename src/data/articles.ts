@@ -15,6 +15,61 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "google-sheets-pivot-table-manual-reorder-custom-sort-2026",
+    title: "Google Sheets Pivot Tables Now Let You Drag Rows Into Any Order",
+    description: "Since September 22, 2026, Google Sheets lets you drag and drop pivot table rows and columns into a custom order, and it keeps that order when you open or export Excel files. Here's how it works, who gets it, and what to check.",
+    category: "sheets",
+    readTime: "5 min read",
+    publishedAt: "2026-10-08",
+    content: `# Google Sheets Pivot Tables Now Let You Drag Rows Into Any Order
+
+Anyone who has built a pivot table of monthly sales in Google Sheets knows the annoyance. April comes first, then August, then December, because the default sort is alphabetical. The usual workaround was a helper column with month numbers, or a sort rule that never quite did what you wanted. Google has now added a direct fix.
+
+## What Google Announced
+
+On September 22, 2026, Google Workspace Updates announced that you can manually reorder pivot table rows and columns in Google Sheets, and apply a custom sort. Per the announcement, it works like this:
+
+- You drag row and column headers into the order you want, with drop zones showing where the item will land.
+- You can select several items and move them together.
+- When you move a parent item in a nested pivot table, its child items move with it.
+- The order you set persists across sessions, refreshes, filter changes, and layout changes.
+
+That last point is the one that matters. Earlier manual tweaks tended to snap back when the data changed. Google says this order sticks.
+
+## Excel Compatibility
+
+Google states that custom sort order is kept when you import or export Excel files. If your team passes workbooks between Sheets and Excel, that's useful, because pivot ordering is one of the details that usually gets lost. We haven't tested round trips ourselves, so check your own files before relying on it.
+
+## Who Gets It and When
+
+The rollout started on September 22, 2026 for Rapid Release domains and on October 5, 2026 for Scheduled Release domains. Google says the rollout can take up to 15 days to reach everyone. There is no admin control for the feature, and it's available to all Google Workspace customers and to personal Google accounts. If you don't see it yet, wait a few days before assuming something is wrong.
+
+## How to Use It
+
+1. Open a Sheet that has a pivot table, or build one. If you're new to pivots, start with [How to Create a Pivot Table in 5 Minutes](/resources/how-to-create-pivot-table-in-5-minutes).
+2. Click a row or column header inside the pivot table.
+3. Drag it to the position you want. Watch for the drop zone indicator before you release.
+4. To move several items at once, select them first, then drag them as a group.
+
+## A Checklist Before You Trust It
+
+A saved order only helps if it survives real use. Test these on a copy before you build a report around it:
+
+- Refresh the data and confirm the order holds.
+- Add a new category to the source data, such as a new product or region, and see where it lands. New items are the likeliest place for a custom order to need attention.
+- Apply a filter, clear it, and check the order again.
+- If you share files with Excel users, export, open the file in Excel, and look at the pivot.
+
+## When a Formula Is Still Better
+
+Manual ordering is right for a fixed list that doesn't change much, like months, quarters, or a regional hierarchy your leadership reads in a set order. If the order should follow the numbers, such as top ten customers by revenue, a sort rule or a formula-driven table is the better fit because it updates itself. Our guides to [GROUPBY and PIVOTBY in Excel](/resources/groupby-pivotby-excel-functions-guide-2026) and the [formula alternative to pivot tables](/resources/groupby-pivotby-excel-formula-alternative-pivot-tables) cover the formula route. If a pivot behaves oddly, [Gemini can help fix formula errors in Google Sheets](/resources/gemini-fix-formula-errors-google-sheets), and very large files are covered in [Google Sheets 20 Million Cells and Manual Calculation](/resources/google-sheets-20-million-cells-manual-calculation-2026).
+
+## Sources
+
+- Google Workspace Updates, "Manually reorder and custom sort pivot tables in Google Sheets," September 22, 2026. Source of the behaviors, rollout dates, and Excel import/export statement above.
+`,
+  },
+  {
     slug: "excel-lists-arrays-in-cells-flatten-has-functions-2026",
     title: "Excel Is Testing Multiple Values in One Cell: Lists, FLATTEN, and HAS Explained",
     description: "Microsoft is testing lists and arrays inside single Excel cells, plus four new functions: FLATTEN, HAS, HASANY and HASALL. Here's how they work, who can try them now, and the limits to know before you build on them.",
