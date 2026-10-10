@@ -410,7 +410,7 @@ Run the sample library first. Watching a Microsoft-built skill execute teaches y
 
 Keep review in the loop. A skill makes Copilot's output more consistent and easier to check. It doesn't make the output correct by definition, and for financial work the check still matters. Our guide to [building auditable financial models in Excel](/resources/excel-financial-model-auditable) applies unchanged: transparent structure and traceable numbers are what make AI-assisted output reviewable at all. If you use Copilot's more autonomous modes for multi-step work, the same supervision advice from our [agent mode guide](/resources/excel-copilot-agent-mode-guide) applies here.
 
-Writing a good skill is prompt engineering with a longer shelf life: concrete steps, explicit formats, worked examples. For the general craft of writing durable instructions for AI tools, our sister site How Do I Use AI covers it in depth at [howdoiuse.ai](https://howdoiuse.ai).
+Writing a good skill is prompt engineering with a longer shelf life: concrete steps, explicit formats, worked examples. For the general craft of writing durable instructions for AI tools, our sister site How Do I Use AI covers it in depth at [howdoiuse.ai](https://howdoiuse.ai). Google is making a similar move in Gemini, where skills are replacing Gems, and How Do I Use AI explains [what to do before the deprecation dates](https://howdoiuse.ai/resources/gemini-skills-replace-gems-what-to-do-before-march-2027).
 
 ## The bottom line
 
@@ -4639,6 +4639,8 @@ Automation is a tool, not a goal. The goal is to spend your time on work that ma
 The workflow that took the analyst three days to automate? After payback, she could have spent those three days on analysis that generated $50,000 in business value. The automation worked mathematically, but strategically, it was the wrong choice.
 
 Choose your automations carefully. Most of the time, the answer isn't "automate it." It's "stop doing it."
+
+The same logic applies to your own pace. If constant speed is part of what is wearing you down, our colleagues at Growth Mindset make the case for [slow productivity and depth over speed](https://growthmindset.academy/resources/slow-productivity-burnout-2026).
     `,
   },
   {
