@@ -4536,7 +4536,7 @@ The investment is 30 minutes of learning this week. The return is hours of time 
 
 The appeal is obvious: automate a task, save time. But here's the uncomfortable truth that most productivity books skip over: the cost of setting up automation often exceeds the time it saves.
 
-A senior analyst at a Fortune 500 company once spent three full days building an Excel macro to automate a weekly data import that took 20 minutes to complete manually. The macro saved her 20 minutes per week. At 52 weeks per year, she saved roughly 17 hours, but spent 24 hours building it. It took nearly two years for the "automation investment" to pay off. And that's before accounting for the mental energy spent debugging it when something broke.
+Picture this scenario: an analyst spends three full days building an Excel macro to automate a weekly data import that takes 20 minutes by hand. The macro saves her 20 minutes per week. At 52 weeks per year, she saves roughly 17 hours, but spent 24 hours building it. It took nearly two years for the "automation investment" to pay off. And that's before accounting for the mental energy spent debugging it when something broke.
 
 This is the automation paradox: the easier a task is to automate, the less time it actually saves.
 
@@ -4636,7 +4636,7 @@ The most efficient people aren't those with the most automations. They're those 
 
 Automation is a tool, not a goal. The goal is to spend your time on work that matters.
 
-The workflow that took the analyst three days to automate? After payback, she could have spent those three days on analysis that generated $50,000 in business value. The automation worked mathematically, but strategically, it was the wrong choice.
+Those three days could have gone to analysis that moved a real decision. The automation worked mathematically, but strategically, it was the wrong choice.
 
 Choose your automations carefully. Most of the time, the answer isn't "automate it." It's "stop doing it."
 
