@@ -15,6 +15,63 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-canvas-copilot-report-from-workbook-data-2026",
+    title: "Excel Canvas: Copilot Turns Workbook Data Into a Live Report",
+    description: "Microsoft's message center says Excel canvas starts rolling out in mid-October 2026. It builds a report of charts, key metrics, and insights from your workbook and refreshes it when the data changes. Here's what's confirmed, what isn't, and how to test it.",
+    category: "excel",
+    readTime: "5 min read",
+    publishedAt: "2026-10-13",
+    content: `# Excel Canvas: Copilot Turns Workbook Data Into a Live Report
+
+Most Excel reports start the same way. You have a sheet of raw numbers, and you spend an hour building charts, a summary block, and a few call-out numbers so someone else can read it in thirty seconds. Microsoft is rolling out a Copilot feature called Excel canvas that aims to do that first draft for you.
+
+This guide sticks to what Microsoft has published, flags what it hasn't said, and gives you a short test plan so you can judge it on your own data.
+
+## What Microsoft Has Announced
+
+Microsoft message center post MC1485411, published October 2, 2026 and last updated October 6, describes Excel canvas as a Copilot capability that turns workbook data into a report combining charts, key metrics, and insights. Two behaviors are stated directly:
+
+- The report refreshes when the underlying data changes.
+- You can refine it by asking Copilot in natural language.
+
+The post lists Excel for Windows, Excel Online, and Microsoft 365 Copilot as the platforms. It names the affected audience as "users with access to Copilot in Microsoft Excel." It says no administrator action is required and no compliance considerations were identified.
+
+## When It Arrives
+
+The message center post says general availability worldwide begins in mid-October 2026 and is expected to finish by the end of October 2026.
+
+There's a wrinkle worth knowing. In early September, Windows Report cited Microsoft 365 Roadmap item 569424 as planning the feature for Excel on Windows and the web in September 2026. The later message center post pushes the rollout to mid-to-late October. If you see an older article promising September, the newer date is the one to plan around.
+
+## What Microsoft Hasn't Said
+
+The announcement is short. It does not specify the Copilot license required, the chart types canvas can produce, any limits on workbook size, or whether Excel for Mac is included. We haven't used the feature yet, so we won't describe how it behaves in practice. When it appears in your account, check Microsoft's support documentation for current requirements before rolling it out to a team.
+
+## How This Differs From Google's Sheets Canvas
+
+Google announced a similarly named feature earlier this year. Our guide to [Sheets canvas](/resources/google-sheets-canvas-build-live-dashboard-without-add-ons) covers how it builds interactive dashboards, kanban boards, and heat maps on top of a sheet. The names match, but the two products come from different companies and we can't assume they behave the same way. Based on Microsoft's description, Excel canvas is framed as a report built from workbook data rather than the multi-view app layer Google describes. Treat any feature-by-feature comparison as unproven until both are in your hands.
+
+## A Test Plan for the First Week
+
+When canvas shows up, don't start with your quarterly board pack. Run it on a copy of a workbook where you already know the right answers.
+
+1. **Use a clean table.** Format your data as an Excel table with one header row, no merged cells, and consistent data types in each column. AI features read structured data far better than messy ranges. If your data isn't there yet, our guide on [cleaning messy data in Excel](/resources/how-to-clean-messy-data-in-excel) walks through the fixes.
+2. **Check every number against the source.** Pick three metrics canvas shows and recalculate them yourself with SUM, AVERAGE, or a pivot table. A report that looks right and is wrong is worse than no report.
+3. **Read each insight critically.** Copilot's written insights are generated text. Confirm each claim against the data before it goes in front of anyone. The same habit applies to any AI output, as we cover in [AI research without wrong answers](https://howdoiuse.ai/resources/ai-research-without-wrong-answers).
+4. **Change the data and watch the refresh.** Add a row, edit a value, and confirm the charts and metrics move. Microsoft says they should. Verify it.
+5. **Try a refinement prompt.** Ask for something specific, such as showing only the top five regions by revenue, and see whether the result matches what you asked for.
+6. **Check sharing.** Open the file as a colleague would, in a different account, and confirm they see what you expect.
+
+## Where Formulas and Pivots Still Win
+
+A generated report is a starting point. If you need a figure that's auditable cell by cell, a pivot table or a formula is still the right tool because you can see exactly how every number was built. Our guides to [GROUPBY and PIVOTBY](/resources/groupby-pivotby-excel-functions-guide-2026) and [building an auditable financial model](/resources/excel-financial-model-auditable) cover that route. Canvas looks most useful for fast exploration and for reports you'll update often. For anything audited or regulated, keep the underlying calculations visible.
+
+## Sources
+
+- Microsoft 365 message center, MC1485411, "Microsoft Excel: Excel canvas," published October 2, 2026, updated October 6, 2026 (mirrored at mc.merill.net/message/MC1485411). Source for the description, platforms, audience, and October rollout dates.
+- Windows Report, "Microsoft Excel Canvas Turns Spreadsheet Data Into Interactive Dashboards," September 3, 2026, citing Microsoft 365 Roadmap item 569424. Source for the earlier September target.
+`,
+  },
+  {
     slug: "google-sheets-pivot-table-manual-reorder-custom-sort-2026",
     title: "Google Sheets Pivot Tables Now Let You Drag Rows Into Any Order",
     description: "Since September 22, 2026, Google Sheets lets you drag and drop pivot table rows and columns into a custom order, and it keeps that order when you open or export Excel files. Here's how it works, who gets it, and what to check.",
