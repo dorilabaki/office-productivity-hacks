@@ -133,6 +133,23 @@ export default async function ArticlePage({ params }: Props) {
         <section className="py-8 border-t border-slate-200">
           <div className="container-custom">
             <div className="max-w-3xl mx-auto">
+              <div className="rounded-2xl border border-primary-200 bg-white p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-primary-700 mb-1">Free cheat sheets</p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-1">Keep the formulas and shortcuts handy</h3>
+                  <p className="text-slate-600 text-sm">Excel formulas, Google Sheets functions and keyboard shortcuts in one free bundle.</p>
+                </div>
+                <Link href="/toolkit" className="btn-primary flex-shrink-0 whitespace-nowrap">
+                  Get the cheat sheets
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-8 border-t border-slate-200">
+          <div className="container-custom">
+            <div className="max-w-3xl mx-auto">
               <div className="bg-primary-50 rounded-2xl p-6 md:p-8 text-center">
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Found this helpful?</h3>
                 <p className="text-slate-600 mb-4">Follow us on LinkedIn for daily productivity tips.</p>
