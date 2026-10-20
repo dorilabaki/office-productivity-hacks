@@ -15,6 +15,90 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-merge-cells-sort-error-center-across-selection-2026",
+    title: "Stop Merging Cells in Excel: Why Sorting Breaks and What to Use Instead",
+    description: "Merging cells deletes data and triggers the 'merged cells to be identically sized' sort error. Here's what Microsoft documents, how to find and fix merged cells, and how Center Across Selection gives you the same look safely.",
+    category: "excel",
+    readTime: "5 min read",
+    publishedAt: "2026-10-20",
+    content: `# Stop Merging Cells in Excel: Why Sorting Breaks and What to Use Instead
+
+You select a header range, hit Sort, and Excel refuses with a message about merged cells. If you've seen it, someone (maybe you) merged cells to make a sheet look tidy. The look is nice. The side effects aren't.
+
+This guide covers what Microsoft documents about merged cells, how to find and undo them, and the formatting option that gives you the same centered title without the damage. One related update is also worth knowing: Microsoft's September 2026 Excel recap reports that Center Across Selection is now being added to the Merge & Center menu for Insiders.
+
+## What Merging Actually Does to Your Data
+
+Microsoft's support page on merging cells is blunt about it. When you merge multiple cells, the contents of only one cell appear in the merged cell. For left-to-right languages that's the upper-left cell. The contents of the other cells you merge are deleted.
+
+That means merging a first name column and a last name column "to save space" keeps one and throws the other away. Excel warns you before it does this, but it's easy to click through when you're formatting quickly.
+
+## The Sort Error, Explained
+
+Microsoft documents the error text as: "This operation requires the merged cells to be identically sized." Excel shows it when you sort a range and either of these is true:
+
+- Some of the cells in the sort range are merged, but not all of them.
+- All of them are merged, but the merged cells aren't the same size.
+
+Microsoft's stated fix is to split all the merged cells in the range, or merge them so every merged cell covers the same number of rows and columns. Its general solution, step by step:
+
+1. Select the entire range you want to sort.
+2. On the Home tab, open the Alignment dialog box launcher in the Alignment group.
+3. On the Alignment tab, clear the Merge cells check box.
+4. Select OK.
+
+Microsoft adds a caution that this can alter the layout of the data in the range, so work on a copy if the sheet matters.
+
+## How to Find Merged Cells Before They Bite
+
+Microsoft's page says you can use the Find command to locate merged cells quickly. Here's one way to do it on Windows (our steps, not quoted from Microsoft):
+
+1. Press Ctrl+F and select Options.
+2. Choose Format, open the Alignment tab, tick Merge cells, and select OK.
+3. Select Find All. Excel lists every merged cell on the sheet.
+
+Do this on any workbook someone else built before you sort, filter, or hand it to a pivot table or an AI feature. Our canvas guide recommends a clean table with no merged cells for that reason, and our [data cleaning guide](/resources/how-to-clean-messy-data-in-excel) covers the rest of the prep work.
+
+## The Better Option: Center Across Selection
+
+Center Across Selection centers a title over several columns without merging anything. The text stays in its original cell. The cells beneath and around it stay separate, so sorting, filtering, and selecting a column all work normally.
+
+On Windows, the long-standing way to apply it:
+
+1. Type your title in the leftmost cell of the span, for example A1.
+2. Select the span, for example A1:F1. The other cells in the row should be empty.
+3. Press Ctrl+1 to open Format Cells and go to the Alignment tab.
+4. Under Horizontal, choose Center Across Selection and select OK.
+
+The title now appears centered over A to F. Click any cell in that span and you'll see the text still lives in A1.
+
+## What's New: A Shortcut in the Merge & Center Menu
+
+Windows Report's recap of Microsoft's September 2026 Excel updates lists Center Across Selection as now sitting inside the Merge & Center drop-down, so you can apply it without opening Format Cells. The Eleven Forum roundup describes the feature as new this month to Insiders of Excel for Windows and Excel for Mac. Neither source gives a build number, and we haven't tested it, so check your own Insider build before relying on it. If you're not on the Insider channel, the Format Cells route above works today.
+
+## When Merging Is Still Fine
+
+Merging is harmless on a one-off printed form, a poster-style cover sheet, or a header block that sits outside any data range. The trouble starts when merged cells sit inside or beside data you'll sort, filter, copy to another tool, or reference with formulas. If a person or a tool needs to read the sheet row by row, keep every cell separate.
+
+## A Quick Checklist
+
+1. Run Find with the Merge cells format on any inherited workbook.
+2. Unmerge cells inside data ranges and fill the values down if needed.
+3. Use Center Across Selection for titles and group labels.
+4. Keep a one-row header with one value per column, then format the data as a table.
+5. Test a sort on a copy before you run it on the original.
+
+## Sources
+
+- Microsoft Support: Merge and unmerge cells (support.microsoft.com/office/merge-and-unmerge-cells-5cbd15d5-9375-4540-907f-c673a93fcedf)
+- Microsoft Learn: Error when you sort a range that contains merged cells in Excel (learn.microsoft.com/en-us/troubleshoot/office/excel/error-sort-a-range-merged-cell)
+- Windows Report: Everything Microsoft Added to Excel in September 2026
+- Eleven Forum: What is New in Excel for September 2026
+
+If you're also building Excel work with AI tools, our sister site covers how to check what a chatbot tells you before you trust it in [evaluating AI answers when you are not the expert](https://howdoiuse.ai/resources/ai-research-without-wrong-answers).
+`,
+  },
+  {
     slug: "excel-canvas-copilot-report-from-workbook-data-2026",
     title: "Excel Canvas: Copilot Turns Workbook Data Into a Live Report",
     description: "Microsoft's message center says Excel canvas starts rolling out in mid-October 2026. It builds a report of charts, key metrics, and insights from your workbook and refreshes it when the data changes. Here's what's confirmed, what isn't, and how to test it.",
