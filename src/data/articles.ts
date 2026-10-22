@@ -15,6 +15,100 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-drop-down-list-data-validation-paste-bypass-circle-invalid-data",
+    title: "Excel Drop-Down Lists: Build Them Right, and Why Pasted Data Slips Past Them",
+    description: "How to build an Excel drop-down list from a table, which error alert style actually blocks bad entries, and why pasted or filled values bypass validation. Includes the Circle Invalid Data audit step.",
+    category: "excel",
+    readTime: "6 min read",
+    publishedAt: "2026-10-22",
+    content: `# Excel Drop-Down Lists: Build Them Right, and Why Pasted Data Slips Past Them
+
+A drop-down list looks like a lock on a cell. It isn't one. Microsoft's documentation says data validation applies only when users type data directly into a cell. Paste a value in, or drag the fill handle, and Excel skips the check.
+
+That gap is why a sheet with drop-downs can still end up with "Marketing", "marketing " and "Mktg" in the same column. This guide covers how to build the list properly, which setting really blocks bad entries, and how to audit a sheet that's already messy.
+
+## Build the List From a Table
+
+Microsoft's own steps start with the list, not the cell. Here's the sequence, with our notes on where people trip.
+
+1. **Type your entries in a column on a separate worksheet or area.** Leave the header out of the source range. Microsoft's example excludes the header row because "we don't want that to be a selection option."
+2. **Convert the list to a table.** Select any cell in the list and press Ctrl+T. Microsoft notes that with a table, drop-downs based on it update automatically when you add or remove items.
+3. **Select the cell or cells that should have the drop-down.**
+4. **Go to Data > Data Validation.** If the option is unavailable, Microsoft says the worksheet may be protected or shared. Unprotect it or stop sharing, then retry.
+5. **On the Settings tab, set Allow to List.** Click the Source box and select your list range.
+6. **Check "In-cell dropdown."** Check "Ignore blank" only if people may legitimately leave the cell empty.
+
+If you want the same list on many sheets, Microsoft also describes naming the range with Formulas > Defined Names > Define Name. You can then hide the worksheet that holds the list and protect the workbook.
+
+## The Setting That Actually Blocks Bad Entries
+
+The Error Alert tab has three styles, and they behave differently.
+
+- **Stop:** blocks entries that aren't in the list. The user can only retry or cancel.
+- **Warning:** shows a message, but the user can accept the invalid entry by clicking Yes.
+- **Information:** shows a message, and the user can accept with OK.
+
+Microsoft's own description says Information and Warning still allow entries that aren't in the list. If the column feeds a report, a lookup or a pivot table, choose Stop.
+
+If you leave the alert title and message empty, Excel falls back to a generic message that reads: "The value you entered is not valid. A user has restricted values that can be entered into this cell." Write your own. Something like "Pick a department from the list" saves a support question.
+
+The optional input message, which pops up when someone selects the cell, accepts up to 225 characters, per Microsoft.
+
+## Why Pasted Values Bypass the List
+
+This is the part most tutorials skip. Microsoft's support pages state that validation messages appear only when users type directly in a cell. Pasted data and fill-handle data don't trigger them. Microsoft's circle-invalid-data page adds that values produced by formulas or entered by macros can bypass validation too.
+
+Two more details from the same documentation are worth knowing:
+
+- Excel doesn't warn you about invalid data that was already in the cells when you applied validation.
+- Validation is ignored in cells whose formulas return errors until the errors are fixed.
+
+In practice that means a drop-down protects a sheet from careless typing, not from a careless paste. If the sheet collects data from several people, plan for that.
+
+## Reduce the Bypass (Partly)
+
+Microsoft describes one way to block drag-and-drop and fill: clear the "Enable fill handle and cell drag-and-drop" option under File > Options > Advanced > Editing options, then protect the worksheet. If you protect the sheet, unlock the validated cells first, or nobody can type in them.
+
+We haven't found Microsoft documentation that stops a plain Ctrl+V paste from overwriting validation, so don't promise your team a fully locked cell. The reliable defense is the audit below.
+
+## Audit a Messy Sheet With Circle Invalid Data
+
+You can check a whole range after the fact, whatever way the values arrived. Microsoft's steps:
+
+1. Select the cells you want to evaluate.
+2. Go to Data > Data Tools, open the Data Validation arrow, and choose **Circle Invalid Data**.
+
+Excel draws a red circle around every cell that fails its criteria. Fix a value and its circle disappears. To clear all circles at once, choose **Clear Validation Circles** from the same menu.
+
+Microsoft notes circling still catches pasted, filled and formula-produced entries, because it checks the cell against its rule regardless of how the value got there. For a shared tracker, running this before you send the file is a two-click habit.
+
+## Find and Remove Validation You Inherited
+
+- To find every validated cell: Home > Editing > Find & Select > Data Validation.
+- To remove it from selected cells: Data > Data Validation > Settings > Clear All.
+- You can't change validation settings while a workbook is shared or protected.
+- You can't add validation to an Excel table that's linked to a SharePoint site. Microsoft says to unlink the table or convert it to a range first.
+
+One small layout tip from Microsoft: the drop-down's width matches the width of the cell, so widen the cell if long entries are cut off.
+
+## A Quick Checklist
+
+- Source list kept in a table, header excluded
+- Error alert style set to Stop, with a message you wrote
+- Validated cells unlocked before sheet protection
+- Circle Invalid Data run before the file leaves your hands
+
+For more on keeping a sheet clean from the start, see [how to clean messy data in Excel](/resources/how-to-clean-messy-data-in-excel), and if merged cells are what's breaking your sorting, read [why merging cells causes the sort error](/resources/excel-merge-cells-sort-error-center-across-selection-2026).
+
+## Sources
+
+- Microsoft Support: Create a drop-down list (support.microsoft.com/en-us/office/create-a-drop-down-list-7693307a-59ef-400a-b769-c5402dce407b)
+- Microsoft Support: Apply data validation to cells (support.microsoft.com/en-us/office/apply-data-validation-to-cells-29fecbcc-d1b9-42c1-9d76-eff3ce5f7249)
+- Microsoft Support: More on data validation (support.microsoft.com/office/f38dee73-9900-4ca6-9301-8a5f6e1f0c4c)
+- Microsoft Support: Display or hide circles around invalid data (support.microsoft.com/en-us/office/display-or-hide-circles-around-invalid-data-69144e43-fc71-48e0-8d4f-0b9f1ea96c03)
+`,
+  },
+  {
     slug: "excel-merge-cells-sort-error-center-across-selection-2026",
     title: "Stop Merging Cells in Excel: Why Sorting Breaks and What to Use Instead",
     description: "Merging cells deletes data and triggers the 'merged cells to be identically sized' sort error. Here's what Microsoft documents, how to find and fix merged cells, and how Center Across Selection gives you the same look safely.",
