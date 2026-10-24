@@ -4544,6 +4544,8 @@ You'll probably be surprised by how much time goes away.
 
 The spreadsheet work of the future isn't filling cells and writing formulas. It's asking the right questions and deciding what to do with the answers. AI handles the execution. You focus on what matters.
 
+AI-generated formulas and summaries still need checking before they reach a report. How Do I Use AI covers that habit in [How to Use AI for Research Without Getting Wrong Answers](https://howdoiuse.ai/resources/ai-research-without-wrong-answers).
+
 ---
 
 *Sources: Google Workspace Blog on Duet AI capabilities (2025-2026); Microsoft research on knowledge worker time allocation in spreadsheet tasks (2024-2026); user adoption studies of AI-assisted spreadsheet tools (2025).*
