@@ -6,16 +6,16 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'You\'re in! Access Your Cheat Sheet Bundle',
-  description: 'Your free Office Productivity Cheat Sheet Bundle is ready. Excel formulas, Google Sheets functions, and keyboard shortcuts — all in one place.',
+  description: 'Your free Office Productivity Cheat Sheet Bundle is ready. Excel formulas, Google Sheets functions, and keyboard shortcuts, all in one place.',
   robots: { index: false, follow: false },
 };
 
 const excelFormulas = [
   { formula: '=VLOOKUP(value, range, col, 0)', desc: 'Look up a value in the first column of a range and return a value from another column.' },
-  { formula: '=XLOOKUP(value, lookup, return)', desc: 'Modern replacement for VLOOKUP — searches any direction, handles errors natively.' },
+  { formula: '=XLOOKUP(value, lookup, return)', desc: 'Modern replacement for VLOOKUP, searches any direction, handles errors natively.' },
   { formula: '=SUMIF(range, criteria, sum_range)', desc: 'Add up cells that meet a single condition.' },
   { formula: '=SUMIFS(sum_range, r1, c1, r2, c2)', desc: 'Add up cells that meet multiple conditions at once.' },
-  { formula: '=INDEX(range, MATCH(val, col, 0))', desc: 'Flexible two-way lookup — faster and more powerful than VLOOKUP.' },
+  { formula: '=INDEX(range, MATCH(val, col, 0))', desc: 'Flexible two-way lookup, faster and more powerful than VLOOKUP.' },
   { formula: '=IFERROR(formula, "fallback")', desc: 'Catch formula errors and show a custom message instead.' },
   { formula: '=COUNTIF(range, criteria)', desc: 'Count how many cells match a condition.' },
   { formula: '=TEXT(value, "format")', desc: 'Convert a number or date to a formatted text string (e.g. "0.00%", "DD-MMM-YYYY").' },
@@ -25,11 +25,11 @@ const sheetsFormulas = [
   { formula: '=QUERY(range, "SELECT * WHERE...")', desc: 'Use SQL-style syntax to filter and reshape your data in one formula.' },
   { formula: '=ARRAYFORMULA(formula)', desc: 'Apply any formula to an entire column or range without dragging it down.' },
   { formula: '=IMPORTRANGE("url", "Sheet!A:Z")', desc: 'Pull live data from another Google Sheet into the current one.' },
-  { formula: '=FILTER(range, condition)', desc: 'Return only the rows that match your conditions — no helper columns needed.' },
+  { formula: '=FILTER(range, condition)', desc: 'Return only the rows that match your conditions, no helper columns needed.' },
   { formula: '=UNIQUE(range)', desc: 'Return a list with duplicate values removed.' },
   { formula: '=SORT(range, col, TRUE)', desc: 'Sort a range by any column, ascending or descending.' },
   { formula: '=SPARKLINE(range, {"charttype","bar"})', desc: 'Embed a tiny inline chart directly inside a cell.' },
-  { formula: '=IFS(cond1, val1, cond2, val2)', desc: 'Nested IF without the nesting — much easier to read and maintain.' },
+  { formula: '=IFS(cond1, val1, cond2, val2)', desc: 'Nested IF without the nesting, much easier to read and maintain.' },
 ];
 
 const shortcuts = [
@@ -49,7 +49,7 @@ const shortcuts = [
 
 const proTips = [
   { icon: '❄️', title: 'Freeze Panes', desc: 'Keep headers visible while scrolling: View → Freeze Panes → Freeze Top Row.' },
-  { icon: '🎨', title: 'Conditional Formatting', desc: 'Highlight cells automatically based on value rules — Home → Conditional Formatting → Highlight Cells Rules.' },
+  { icon: '🎨', title: 'Conditional Formatting', desc: 'Highlight cells automatically based on value rules, Home → Conditional Formatting → Highlight Cells Rules.' },
   { icon: '✅', title: 'Data Validation', desc: 'Create drop-down lists in cells: Data → Data Validation → List. Prevents typos in shared sheets.' },
   { icon: '📊', title: 'PivotTable in 3 Steps', desc: 'Select your data → Insert → PivotTable → drag fields into Rows, Columns, and Values. Done.' },
   { icon: '🏷️', title: 'Named Ranges', desc: 'Name a range (Formulas → Define Name) and use it in formulas like =SUM(Revenue) instead of =SUM(B2:B100).' },

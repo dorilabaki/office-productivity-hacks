@@ -118,7 +118,7 @@ export default function AboutPage() {
           <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <StaggerItem>
               <div className="bg-white rounded-xl p-6 h-full border border-slate-200">
-                <p className="text-slate-600 text-sm mb-4 italic">&quot;Great visualization of how holistic habits drive professional performance. I especially agree with the &apos;Focus Systems&apos; section—digital minimalism is becoming a superpower in today&apos;s distraction-heavy world.&quot;</p>
+                <p className="text-slate-600 text-sm mb-4 italic">&quot;Great visualization of how holistic habits drive professional performance. I especially agree with the &apos;Focus Systems&apos; section, digital minimalism is becoming a superpower in today&apos;s distraction-heavy world.&quot;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-800 font-bold text-sm">BK</div>
                   <div>

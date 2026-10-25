@@ -17,13 +17,13 @@ export default function LeadMagnetBanner() {
               <div>
                 <div className="inline-flex items-center gap-2 bg-primary-500/20 text-primary-300 px-4 py-1.5 rounded-full text-sm font-medium mb-5">
                   <Download className="w-4 h-4" />
-                  Free download — no credit card
+                  Free download, no credit card
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 text-balance">
                   The Ultimate Office Productivity Cheat Sheet Bundle
                 </h2>
                 <p className="text-slate-400 mb-6 text-balance">
-                  50+ Excel formulas, Google Sheets functions, and keyboard shortcuts — everything
+                  50+ Excel formulas, Google Sheets functions, and keyboard shortcuts, everything
                   you actually use, in one quick-reference bundle.
                 </p>
                 <Link

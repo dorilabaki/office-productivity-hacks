@@ -29,7 +29,7 @@ const pageSchema = {
     price: '0',
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
-    description: 'Free productivity cheat sheet bundle — instant access on email signup.',
+    description: 'Free productivity cheat sheet bundle, instant access on email signup.',
   },
   provider: {
     '@type': 'Organization',
@@ -46,7 +46,7 @@ const bundleSections = [
     labelColor: 'bg-excel-100 text-excel-700',
     title: 'Top Excel Formulas',
     description:
-      'The formulas that power analysts, accountants, and managers — explained in plain English.',
+      'The formulas that power analysts, accountants, and managers, explained in plain English.',
     items: ['VLOOKUP & XLOOKUP', 'SUMIF / SUMIFS', 'INDEX + MATCH', 'IF / IFS / IFERROR', 'COUNTIF & COUNTIFS', 'TEXT & DATE functions'],
   },
   {
@@ -66,7 +66,7 @@ const bundleSections = [
     labelColor: 'bg-primary-100 text-primary-700',
     title: 'Essential Keyboard Shortcuts',
     description:
-      'The shortcuts that save hours every week — for Excel, Google Sheets, and Windows.',
+      'The shortcuts that save hours every week, for Excel, Google Sheets, and Windows.',
     items: ['Navigation shortcuts', 'Formatting in seconds', 'Selection mastery', 'Formula entry tricks', 'Data entry speed-ups', 'Undo / redo like a pro'],
   },
   {
@@ -76,7 +76,7 @@ const bundleSections = [
     labelColor: 'bg-word-100 text-word-700',
     title: 'Productivity Pro Tips',
     description:
-      'Techniques that separate power users from everyone else — quick to learn, lasting in impact.',
+      'Techniques that separate power users from everyone else, quick to learn, lasting in impact.',
     items: ['Freeze panes & split views', 'Conditional formatting rules', 'Data validation drop-downs', 'PivotTable quick setup', 'Named ranges', 'Find & Replace tricks'],
   },
 ];
@@ -102,7 +102,7 @@ export default function ToolkitPage() {
             <FadeInUp>
               <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
                 <Star className="w-4 h-4 fill-primary-500" />
-                Free — instant access, no credit card
+                Free, instant access, no credit card
               </div>
             </FadeInUp>
 
@@ -115,7 +115,7 @@ export default function ToolkitPage() {
 
             <FadeInUp delay={0.2}>
               <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto text-balance">
-                50+ Excel formulas, Google Sheets functions, and keyboard shortcuts — curated from
+                50+ Excel formulas, Google Sheets functions, and keyboard shortcuts, curated from
                 the content trusted by {siteConfig.followersAggregated} professionals. Enter your
                 email for instant access.
               </p>
@@ -225,7 +225,7 @@ export default function ToolkitPage() {
               </p>
               <div className="bg-white/10 border border-white/20 rounded-2xl p-6 md:p-8 text-left">
                 <p className="text-sm font-semibold text-white/80 mb-4 text-center">
-                  Get the free bundle — join thousands of smart professionals
+                  Get the free bundle, join thousands of smart professionals
                 </p>
                 <EmailCaptureForm />
               </div>
@@ -244,7 +244,7 @@ export default function ToolkitPage() {
               </h2>
               <p className="text-slate-600 mb-8">
                 You&apos;ll get instant access to the full cheat sheet bundle. No waiting, no
-                confirmation emails to hunt for — just the content.
+                confirmation emails to hunt for, just the content.
               </p>
               <StaggerContainer className="grid sm:grid-cols-3 gap-6 text-left">
                 {[
@@ -261,7 +261,7 @@ export default function ToolkitPage() {
                   {
                     icon: '♾️',
                     title: 'Always free',
-                    desc: 'The bundle is free — always has been, always will be.',
+                    desc: 'The bundle is free, always has been, always will be.',
                   },
                 ].map((item) => (
                   <StaggerItem key={item.title}>
