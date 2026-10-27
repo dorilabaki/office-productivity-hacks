@@ -15,6 +15,93 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-name-your-table-at-creation-naming-rules-structured-references-2026",
+    title: "Name Your Excel Table When You Create It: Naming Rules and Why It Pays Off",
+    description: "Excel's Create Table dialog now has a name field. Here's how to use it, Microsoft's exact naming rules, and how a good table name makes formulas readable and keeps them from breaking.",
+    category: "excel",
+    readTime: "5 min read",
+    publishedAt: "2026-10-27",
+    content: `# Name Your Excel Table When You Create It: Naming Rules and Why It Pays Off
+
+Every table you've ever made in Excel started life as Table1, Table2 or Table3. Most people leave it that way. Then six months later a formula says =SUM(Table7[Amount]) and nobody remembers what Table7 is.
+
+Excel is now making the better habit easier. The Create Table dialog has a name field, so you can name the table in the same step that creates it. This guide covers how that works, the naming rules Microsoft documents, and why a clear name changes how readable your formulas are.
+
+## What Changed in the Create Table Dialog
+
+The dialog that opens from Format as Table, the Insert tab's Table button, or Ctrl+T used to ask one thing: where is your data, and does it have headers. According to Excel Campus, the update adds a second field that asks "What is the name of your table?" It defaults to Table1, and you can replace it before clicking OK.
+
+The fast route, per the same article: press Ctrl+T, then Tab. Focus lands in the name field with the default text selected, so you can type the name immediately and press Enter.
+
+A caution on availability. Chris Menard's training site reported the feature rolling out on the Beta Channel as of August 30, 2026, and the September 2026 Excel recap on Eleven Forum lists "naming a table at creation" among features new to Insiders on Windows and Mac. Excel Campus described it as having just shipped on September 9, 2026, without naming channels. If you don't see the field yet, you're probably on a build that doesn't have it. Nothing is lost: the older way still works in every version.
+
+## The Older Way (Works Everywhere)
+
+Click any cell inside the table. On Windows, open the Table Design tab, find Properties, and select Table Name. On Mac, use the Table tab and select Table Name. Type the new name and press Enter. Excel Campus gives the keyboard route as Alt, J, T, A.
+
+## Microsoft's Naming Rules
+
+Microsoft Support documents these rules for table names:
+
+- Begin the name with a letter, an underscore, or a backslash. After that, use letters, numbers, periods or underscores.
+- No spaces. Use an underscore or a period instead, such as Sales_2026.
+- Don't use "C", "c", "R" or "r" as the whole name. Excel treats those as shortcuts for selecting a column or row.
+- The name can't look like a cell reference, such as Z$100 or R1C1.
+- A name can be up to 255 characters.
+- Names must be unique in the workbook. Excel ignores letter case, so Sales conflicts with an existing SALES.
+
+A name can follow every rule and still be a bad name, which is the next problem.
+
+## Why a Good Name Matters
+
+Tables give you structured references. Instead of A2:A500, a formula points at a table and a column by name. Microsoft's guide to structured references gives the pattern as the table name followed by the column in brackets, for example =SUM(DeptSales[Sales Amount]). Two behaviors are worth knowing:
+
+- The references adjust automatically. Microsoft states that names in structured references adjust whenever you add or remove data from the table. Add 50 rows and the formula still covers them.
+- They're easier to read. Microsoft notes that explicit cell references inside a calculated column make it harder to see what the formula is calculating.
+
+Compare these two formulas that do the same job:
+
+=SUM(Table4[Amount])
+
+=SUM(Invoices_2026[Amount])
+
+The second one tells the next person what they're looking at. That person is often you, a few months from now.
+
+## A Simple Naming Habit
+
+Microsoft doesn't prescribe a convention, so this part is our suggestion. Excel Campus recommends a consistent prefix such as "tbl" so that your tables group together in the Name Box dropdown. A workable pattern:
+
+- Name the contents, not the sheet: Invoices, Customers, Timesheets.
+- Add a year or scope only if you keep several versions: Invoices_2026.
+- Use the same style everywhere. If one table is tblInvoices, the next shouldn't be customers_list.
+- Keep it short enough to type inside a formula.
+
+## Why to Name It Early
+
+Renaming is easy, but it isn't always free. Excel Campus warns that renaming a table already in use can break formulas in other workbooks that point to it, and can break Power Query connections tied to the old name. If you share files or feed data into other reports, picking the right name on day one avoids that cleanup.
+
+## Special Characters in Column Names
+
+While you're tidying names, check your column headers. Microsoft documents that when a column header contains special characters, the whole header must be wrapped in an extra set of brackets, as in DeptSalesFYSummary[[Total $ Amount]]. Several characters need an escape using a single quotation mark: the left bracket, right bracket, pound sign, single quotation mark and at sign. Plain headers like Amount or Invoice_Date avoid the problem entirely.
+
+## Try It Now
+
+1. Click into your most-used data range and press Ctrl+T.
+2. Press Tab, type a descriptive name, and press Enter. (If your build has no name field, name it afterward with the Table Name box.)
+3. Write one formula that points at a column, such as a SUM or an AVERAGE, and add a row to watch it update.
+4. Open the Name Box dropdown and check that your tables read like a list you'd understand next year.
+
+Naming tables pairs well with the modern formula functions. A named table feeds cleanly into [GROUPBY and PIVOTBY](/resources/groupby-pivotby-excel-functions-guide-2026), and once you start building longer formulas, [LET](/resources/excel-let-function-cleaner-formulas) lets you name intermediate results the same way. If you're cleaning an import before turning it into a table, start with our guide to [cleaning messy data in Excel](/resources/how-to-clean-messy-data-in-excel).
+
+**Sources:**
+- [Microsoft Support: Rename an Excel table](https://support.microsoft.com/en-us/excel/rename-an-excel-table)
+- [Microsoft Support: Using structured references with Excel tables](https://support.microsoft.com/en-us/office/using-structured-references-with-excel-tables-f5ed2452-2337-4f71-bed3-c8ae6d2b276e)
+- [Excel Campus: New Excel Feature, Create Table Name Box](https://www.excelcampus.com/tables/create-table-name-feature/) (published September 9, 2026)
+- [Chris Menard Training: You can now name your table when you create it](https://chrismenardtraining.com/post/new-in-excel-you-can-now-name-your-table-when-you-create-it/) (August 30, 2026)
+- [Eleven Forum: What is new in Excel for September 2026](https://www.elevenforum.com/t/what-is-new-in-excel-for-september-2026.49786/)
+`,
+  },
+  {
     slug: "excel-drop-down-list-data-validation-paste-bypass-circle-invalid-data",
     title: "Excel Drop-Down Lists: Build Them Right, and Why Pasted Data Slips Past Them",
     description: "How to build an Excel drop-down list from a table, which error alert style actually blocks bad entries, and why pasted or filled values bypass validation. Includes the Circle Invalid Data audit step.",
