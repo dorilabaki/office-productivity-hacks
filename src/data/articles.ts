@@ -15,6 +15,115 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "google-sheets-pivot-table-calculated-field-formula-editor-2026",
+    title: "Google Sheets Pivot Table Calculated Fields: How to Use the New Formula Editor",
+    description: "Google Sheets now has a dedicated formula editor for pivot table calculated fields. Here's how to add one, a worked example with every number checked, and the mistake that gives you the wrong average.",
+    category: "sheets",
+    readTime: "7 min read",
+    publishedAt: "2026-10-29",
+    howToSteps: [
+      { name: "Build the Pivot Table First", text: "Select your data with a header in every column, then choose Insert > Pivot table and add your Rows and Values." },
+      { name: "Open the Calculated Field Editor", text: "Click Edit under the pivot table, then in the side panel next to Values click Add and choose Calculated field." },
+      { name: "Name the Field and Write the Formula", text: "Give the field a name, then enter a formula such as =SUM(Revenue)/SUM(Units) or pick columns and functions from the editor's menus." },
+      { name: "Set Summarize by to Custom", text: "Under the input box, choose Custom next to Summarize by, then click Add." },
+      { name: "Check the Result Against a Total You Know", text: "Compute one row by hand and compare it with the pivot output before you share the sheet." }
+    ],
+    content: `# Google Sheets Pivot Table Calculated Fields: How to Use the New Formula Editor
+
+A pivot table adds things up. That's fine until someone asks for an average price, a revenue per order, or a margin, which are ratios, not totals. Until you know about calculated fields, the usual workaround is a helper column in the source data. It works, but it clutters the sheet and often gives the wrong answer.
+
+Google has just made the better option easier to use. In a Workspace Updates post dated September 9, 2026, Google announced a dedicated formula editor for creating and editing calculated fields in pivot tables. This article covers what changed, how to add a calculated field step by step, a worked example with every number checkable, and the most common way to get it wrong.
+
+## What Changed
+
+According to Google, the new editor replaces the older inline cards in the pivot table sidebar. It opens as a dedicated dialog with these features:
+
+- Menus for picking field (column) names, so you don't have to type them exactly.
+- Menus for inserting functions.
+- Real-time checks of your syntax and formula, so errors show before you apply the change.
+
+Availability, per Google's post: it's for all Google Workspace customers and for people with personal Google accounts. Rollout is gradual and can take up to 15 days to become visible. It started on September 8, 2026 for Rapid Release domains and September 21, 2026 for Scheduled Release domains. Admins have no control over the feature. If you don't see it yet, give it a few more days.
+
+One thing to be clear about: Google's announcement describes the editor but doesn't walk through a full example. The steps below follow Google's Help Center article "Create & use pivot tables," and the numbers in the example are ones I worked out by hand from a small table. I haven't tested them in a live account, so check the results against your own sheet.
+
+## The Practice Data
+
+Enter this in A1:D7, with headers in row 1.
+
+| Region | Product | Units | Revenue |
+|---|---|---|---|
+| North | Laptop | 3 | 3600 |
+| North | Monitor | 5 | 1500 |
+| South | Laptop | 2 | 2200 |
+| South | Monitor | 4 | 1280 |
+| East | Laptop | 4 | 5200 |
+| East | Monitor | 2 | 640 |
+
+Totals: 20 units and 14,420 in revenue. Keep those in mind. Any calculated field you build should reconcile to them.
+
+## Step by Step: Add a Calculated Field
+
+1. **Select A1:D7**, then choose **Insert > Pivot table**. Create it in a new sheet.
+2. In the side panel, next to **Rows**, click **Add** and choose **Region**.
+3. Next to **Values**, click **Add** and choose **Units**. Add **Revenue** the same way. Both summarize by SUM, which is the default for numbers.
+4. If the side panel isn't showing, click **Edit** under the pivot table.
+5. Next to **Values**, click **Add**, then **Calculated field**. The formula editor opens.
+6. Enter a name, for example "Avg price per unit".
+7. Enter the formula: \`=SUM(Revenue)/SUM(Units)\`
+8. Under the input box, next to **Summarize by**, choose **Custom**, then click **Add**.
+
+Per Google's documentation, a green check in the input box means the syntax is valid. A red exclamation mark means it isn't. If a field name has spaces, Google says to wrap values in quotation marks.
+
+## What You Should See
+
+| Region | Units | Revenue | Avg price per unit |
+|---|---|---|---|
+| East | 6 | 5840 | 973.33 |
+| North | 8 | 5100 | 637.50 |
+| South | 6 | 3480 | 580.00 |
+| Grand Total | 20 | 14420 | 721.00 |
+
+Check one row by hand. North sold 3 + 5 = 8 units for 3,600 + 1,500 = 5,100. That's 5,100 / 8 = 637.50. The grand total row also works: 14,420 / 20 = 721.00.
+
+## The Mistake That Gives You the Wrong Average
+
+Suppose you'd added a helper column in the source data, price per unit for each row, and then asked the pivot table to average it. The North rows would show 3,600 / 3 = 1,200 for the laptops and 1,500 / 5 = 300 for the monitors. The average of those two is 750.
+
+But North's real average price per unit is 637.50. The laptop line has fewer units than the monitor line, so a simple average of row prices overstates it. The formula \`=SUM(Revenue)/SUM(Units)\` weights each line by its units, which is what you want. Whenever you need a rate, a price, or a percentage, build it from totals, not from an average of ratios.
+
+## A Second Example: Revenue per Line
+
+Google's own help page uses a formula of this shape: \`=SUM(Price)/COUNTA(Product)\`. Applied to our data, \`=SUM(Revenue)/COUNTA(Product)\` gives revenue per row:
+
+| Region | Rows | Revenue per line |
+|---|---|---|
+| East | 2 | 2920.00 |
+| North | 2 | 2550.00 |
+| South | 2 | 1740.00 |
+| Grand Total | 6 | 2403.33 |
+
+Again, check one: North's 5,100 over 2 rows is 2,550. The grand total is 14,420 / 6 = 2,403.33.
+
+## When Not to Use a Calculated Field
+
+- **You need one number, not a table.** A single SUMIFS or QUERY formula is simpler. See the [Google Sheets QUERY function guide](/guides/google-sheets-query-function-guide).
+- **The calculation depends on individual rows.** Row-level logic, such as a discount rule per order, belongs in the source data before you build the pivot.
+- **You want a different sort order.** That's a separate feature. We covered it in [reordering Google Sheets pivot tables manually or by custom sort](/resources/google-sheets-pivot-table-manual-reorder-custom-sort-2026).
+
+New to pivot tables altogether? Start with [how to create a pivot table in 5 minutes](/resources/how-to-create-pivot-table-in-5-minutes). And if you want help writing the formula itself, our guide to [Google Sheets AI features](/resources/google-sheets-ai-features-guide) covers what Gemini can and can't do there.
+
+## The Takeaway
+
+Calculated fields let a pivot table answer ratio questions without cluttering your source data, and the new editor catches syntax errors before you apply them. Build rates from sums, give each field a clear name, and reconcile one row and the grand total by hand before you share the sheet.
+
+---
+
+**Sources:**
+- [Google Workspace Updates: Create and edit calculated fields in Google Sheets pivot tables with an improved editor (Sept 9, 2026)](https://workspaceupdates.googleblog.com/2026/09/create-and-edit-calculated-fields-in-Google-Sheets-pivot-tables-with-an-improved-editor.html)
+- [Google Docs Editors Help: Create & use pivot tables](https://support.google.com/docs/answer/1272900)
+    `,
+  },
+  {
     slug: "excel-name-your-table-at-creation-naming-rules-structured-references-2026",
     title: "Name Your Excel Table When You Create It: Naming Rules and Why It Pays Off",
     description: "Excel's Create Table dialog now has a name field. Here's how to use it, Microsoft's exact naming rules, and how a good table name makes formulas readable and keeps them from breaking.",
