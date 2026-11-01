@@ -18,7 +18,7 @@ const features = [
   },
   {
     title: "Google Sheets",
-    description: "Unlock the power of QUERY, ARRAYFORMULA, and cloud collaboration.",
+    description: "Learn QUERY, ARRAYFORMULA, and shared-workbook workflows in Google Sheets.",
     icon: FileSpreadsheet,
     color: "bg-sheets-100 text-sheets-600",
     href: "/resources?category=sheets"

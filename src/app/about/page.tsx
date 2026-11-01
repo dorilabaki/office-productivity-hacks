@@ -23,7 +23,7 @@ const values = [
   {
     icon: Heart,
     title: "Always Free",
-    description: "We believe productivity knowledge should be accessible to everyone, everywhere."
+    description: "Productivity knowledge should be accessible to everyone, everywhere."
   }
 ];
 
