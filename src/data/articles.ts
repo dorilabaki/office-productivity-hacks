@@ -15,6 +15,118 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-spill-error-causes-and-fixes-2026",
+    title: "Excel #SPILL! Error: The 7 Causes and How to Fix Each One",
+    description: "Microsoft documents seven causes of the #SPILL! error in Excel. Here's each one with the documented fix, the Select Obstructing Cells shortcut, and a one-minute practice exercise.",
+    category: "excel",
+    readTime: "6 min read",
+    publishedAt: "2026-11-03",
+    howToSteps: [
+      { name: "Click the #SPILL! Cell", text: "Select the cell. Excel draws a dashed border around the range the formula is trying to fill." },
+      { name: "Select Obstructing Cells", text: "Open the error-checking alert next to the cell and choose Select Obstructing Cells to jump to whatever is blocking the range." },
+      { name: "Clear the Path", text: "Delete or move the contents of the blocking cells, or unmerge them if they are merged." },
+      { name: "Check for Tables and Whole-Column References", text: "Spilled formulas are not supported in Excel tables, and a whole-column reference such as A:A can return more results than the sheet has rows." },
+      { name: "Confirm the Formula Spills", text: "Once the range is clear, the results fill automatically. Edit only the top-left cell to change the formula." }
+    ],
+    content: `# Excel #SPILL! Error: The 7 Causes and How to Fix Each One
+
+You type a formula, press Enter, and instead of a column of results you get #SPILL!. It looks like Excel is broken. It isn't. It's telling you that the formula wants to return more than one value and something is in the way.
+
+Microsoft's support page on the error lists seven specific causes. This guide walks through each one in the order you're most likely to hit them, with the fix Microsoft documents, plus the one tool that finds the problem in seconds.
+
+## First, What "Spilling" Means
+
+A dynamic array formula returns several values from one formula. You enter it once in the top-left cell, and Excel fills the cells below and to the right on its own. For example, Microsoft's support page shows =SORT(D2:D11,1,-1) entered in F2 spilling down to F11.
+
+That filled area is the spill range. If Excel can't fill it, you get #SPILL!. Two related rules from the same documentation:
+
+- Only the top-left cell of a spill range is editable. The other cells show the formula as ghosted text. To change it, edit the top-left cell and press Enter.
+- Legacy array formulas entered with Ctrl+Shift+Enter fill a fixed number of cells and don't spill. They still work, but Microsoft says they shouldn't be used going forward.
+
+## Find the Problem in 10 Seconds
+
+Click the cell showing #SPILL!. Excel draws a dashed border around the range the formula intends to fill. Then open the error-checking alert next to the cell and choose **Select Obstructing Cells**. Excel jumps to whatever is blocking the range. Microsoft documents this for the "not blank" and merged-cell causes below.
+
+## The 7 Causes
+
+### 1. The spill range isn't blank
+
+This is the most common cause. Something is sitting in a cell the result needs: a value, a space, a formula returning an empty string.
+
+**Fix:** Select the obstructing cells with the alert menu, then delete or move what's there. The formula spills as soon as the path is clear.
+
+### 2. The spill range is merged cells
+
+A spilled formula can't spill into merged cells.
+
+**Fix:** Unmerge the affected cells, or move the formula to a range that doesn't touch them. If merged cells are scattered through your sheet, our guide on [why merged cells break sorting and what to use instead](/resources/excel-merge-cells-sort-error-center-across-selection-2026) covers the cleaner alternative.
+
+### 3. The formula is inside an Excel table
+
+Spilled array formulas aren't supported in Excel tables.
+
+**Fix:** Move the formula outside the table, or convert the table to a range with **Table Design > Tools > Convert to range**. If you want to keep the table, use a formula that returns one value per row instead. For more on how tables behave, see our piece on [naming your Excel table when you create it](/resources/excel-name-your-table-at-creation-naming-rules-structured-references-2026).
+
+### 4. The result would run past the edge of the worksheet
+
+This one catches people who reference whole columns. Microsoft's example is =VLOOKUP(A:A,A:C,2,FALSE) entered in E2. A:A holds 1,048,576 cells, so the formula would try to return 1,048,576 results starting at row 2, which doesn't fit.
+
+Microsoft gives three fixes:
+
+1. Reference only the lookup values: =VLOOKUP(A2:A7,A:C,2,FALSE). This returns a dynamic array, but it doesn't work inside an Excel table.
+2. Reference one same-row value and copy the formula down: =VLOOKUP(A2,A:C,2,FALSE). This works in tables but doesn't return a dynamic array.
+3. Use the @ operator and copy down: =VLOOKUP(@A:A,A:C,2,FALSE). This also works in tables without returning a dynamic array.
+
+Pick based on whether you want one formula that spills (option 1) or a column of ordinary formulas (options 2 and 3). If your data keeps growing, our guide to [TRIMRANGE and trim references](/resources/trimrange-trim-refs-excel-formulas-growing-data) shows another way to avoid whole-column references.
+
+### 5. The size of the result keeps changing
+
+Excel can't spill if the array's size changes between calculation passes. Microsoft's example is =SEQUENCE(RANDBETWEEN(1,1000)), where the number of rows is random each time. RAND, RANDARRAY, and RANDBETWEEN are the usual sources.
+
+Microsoft's page doesn't give a fix for this cause beyond describing it. In practice, that means making the size of the result stable, for example by not driving the row count with a random function. The same page notes that OFFSET, INDIRECT, and TODAY don't cause this error.
+
+### 6. Excel ran out of memory
+
+The formula asks for an array too large for the available memory.
+
+**Fix:** Reference a smaller array or range.
+
+### 7. Unrecognized or fallback
+
+If Excel can't tell what's wrong, it falls back to a generic #SPILL!.
+
+**Fix:** Check that the formula has all the arguments it needs for what you're trying to do.
+
+## A Quick Diagnostic Order
+
+When you see the error, work through this order. It follows the likelihood of each cause, which is our own ordering, not Microsoft's:
+
+1. Click the cell and look at the dashed border. Is anything inside it?
+2. Use **Select Obstructing Cells**. Delete or move what you find.
+3. Check whether the cell is inside a table.
+4. Check whether your formula references an entire column.
+5. Check for RAND, RANDARRAY, or RANDBETWEEN in the formula.
+
+## Two Things to Know Before You Rely on Spilled Formulas
+
+**Linked workbooks.** According to Microsoft, cross-workbook dynamic arrays work only while both workbooks are open. If the source workbook closes, the linked formulas return #REF! on refresh.
+
+**PivotTable #SPILL! errors.** Microsoft's page says the PivotTable version of this error is currently available only to Microsoft 365 Insider program participants, so you may not see it in a standard build.
+
+**Version support.** Microsoft's page lists a long set of Excel versions under "Applies To" but doesn't say which of them support spilled arrays. If you share files with people on older Excel, test the file on their version before you depend on it.
+
+## Try It Now
+
+Open a blank sheet. In A1 type =SEQUENCE(5). Five numbers spill down. Now type anything in A3 and watch A1 turn into #SPILL!. Select the cell, choose Select Obstructing Cells, delete A3, and the numbers return. Doing it once on purpose takes about a minute and makes the real error much less stressful.
+
+**Sources:**
+- [Microsoft Support: How to correct a #SPILL! error](https://support.microsoft.com/en-us/Excel/how-to-correct-a-spill-error)
+- [Microsoft Support: Dynamic array formulas and spilled array behavior](https://support.microsoft.com/en-us/office/dynamic-array-formulas-and-spilled-array-behavior-205c6b06-03ba-4151-89a1-87a7eb36e531)
+
+*The formulas and fixes above come from those two Microsoft pages. The diagnostic order is our own suggestion.*
+    `,
+  },
+  {
     slug: "google-sheets-pivot-table-calculated-field-formula-editor-2026",
     title: "Google Sheets Pivot Table Calculated Fields: How to Use the New Formula Editor",
     description: "Google Sheets now has a dedicated formula editor for pivot table calculated fields. Here's how to add one, a worked example with every number checked, and the mistake that gives you the wrong average.",
