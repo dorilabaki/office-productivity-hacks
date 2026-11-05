@@ -15,6 +15,118 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-filter-function-multiple-criteria-and-or-calc-error-2026",
+    title: "Excel FILTER Function: Multiple Criteria, AND vs OR, and Fixing #CALC!",
+    description: "How the FILTER function works, how to combine criteria with * for AND and + for OR, and how to stop the #CALC! error with the if_empty argument. Based on Microsoft's documentation.",
+    category: "excel",
+    readTime: "6 min read",
+    publishedAt: "2026-11-05",
+    howToSteps: [
+      { name: "Write the basic formula", text: "Enter =FILTER(array, include) where array is the data to return and include is a TRUE/FALSE test on one column, such as C5:C20=H2." },
+      { name: "Combine criteria", text: "Multiply two tests with * to require both (AND). Add them with + to accept either (OR)." },
+      { name: "Add if_empty", text: "Add a third argument such as \"No matches\" so the formula returns a message instead of #CALC! when nothing qualifies." },
+      { name: "Sort the result", text: "Wrap the formula in SORT to order the filtered rows, for example by the units column in descending order." },
+      { name: "Leave room to spill", text: "Keep the cells below and to the right of the formula empty so the results can spill." }
+    ],
+    content: `# Excel FILTER Function: Multiple Criteria, AND vs OR, and Fixing #CALC!
+
+FILTER pulls the rows you want out of a table and ignores the rest. You write one formula, and the matching rows appear on their own. No helper columns, no copying down, no manual filter buttons to reset.
+
+This guide covers the syntax, the AND and OR patterns from Microsoft's documentation, and the one error everyone hits first. The formulas below follow the patterns on Microsoft's FILTER and #CALC! support pages. The sample data is my own.
+
+## The Syntax
+
+=FILTER(array, include, [if_empty])
+
+- **array** (required): the data you want back. It can be a range or an array, and it can have many columns.
+- **include** (required): a TRUE/FALSE test the same height as the array (or the same width, if you're filtering columns). Rows where the test is TRUE are returned.
+- **if_empty** (optional): what to return when nothing matches.
+
+Microsoft's page lists FILTER as available in Excel for Microsoft 365, Excel 2024, and Excel 2021, including Mac, iPad, iPhone, and Android. Like other dynamic array functions, it spills: you enter it once and Excel fills the cells below and to the right. If something blocks that range, you'll see #SPILL!. Our guide to [the seven causes of #SPILL! and how to fix each](/resources/excel-spill-error-causes-and-fixes-2026) covers that.
+
+## A Sample Table to Practice On
+
+Put this in A4:D9, with headers in row 4:
+
+- Region | Product | Salesperson | Units
+- East | Apples | Rivera | 120
+- West | Apples | Chen | 85
+- East | Pears | Chen | 60
+- North | Apples | Okafor | 140
+- West | Pears | Rivera | 95
+
+Type East in H1 and Apples in H2. The two cells let you change the criteria without editing the formula.
+
+## Pattern 1: One Criterion
+
+To return every row for the product in H2:
+
+=FILTER(A5:D9, B5:B9=H2, "")
+
+The second argument is a test: is each product equal to H2? Excel returns the three Apples rows. Change H2 to Pears and the result updates instantly. Microsoft's own example works the same way, using a range of A5:D20 and a product name in a cell.
+
+## Pattern 2: AND (Both Conditions)
+
+To return rows where the region is East AND the product is Apples, multiply the two tests:
+
+=FILTER(A5:D9, (A5:A9=H1)*(B5:B9=H2), "")
+
+Each test produces a column of TRUE/FALSE values. Multiplying them turns TRUE into 1 and FALSE into 0, so a row survives only if both tests are TRUE. With the sample data you get one row: East, Apples, Rivera, 120.
+
+## Pattern 3: OR (Either Condition)
+
+To return rows where the region is East OR the product is Apples, add the tests:
+
+=FILTER(A5:D9, (A5:A9=H1)+(B5:B9=H2), "")
+
+Now a row survives if at least one test is TRUE. With the sample data that's four rows: both East rows, plus the West and North Apples rows. Wrap parentheses around each test. Without them, Excel evaluates the math in the wrong order.
+
+## Pattern 4: Sort the Result
+
+FILTER returns rows in their original order. To sort them, wrap the formula in SORT. Microsoft's example sorts the filtered result by the fourth column in descending order:
+
+=SORT(FILTER(A5:D9, (A5:A9=H1)+(B5:B9=H2), ""), 4, -1)
+
+The 4 means "sort by the fourth column," here Units, and -1 means descending. The biggest sales come first.
+
+## Fixing #CALC!
+
+This is the error you will meet first. According to Microsoft's #CALC! page, it appears when an array formula returns an empty set, because Excel can't return one. The page's example is =FILTER(C3:D5, D3:D5<100) returning #CALC! because no values in D3:D5 are below 100.
+
+Microsoft gives two fixes: change the criterion, or add the if_empty argument. Its example is:
+
+=FILTER(C3:D5, D3:D5<100, 0)
+
+Now the formula returns 0 when nothing qualifies. For a report other people will read, a text message works better:
+
+=FILTER(A5:D9, B5:B9=H2, "No matches")
+
+This is why the formulas above all end with a third argument. Make it a habit. A formula that works today can break the day your criteria stop matching anything.
+
+## Common Mistakes
+
+**Mismatched sizes.** The include test must be the same height as the array. Filtering A5:D9 with a test on B5:B20 won't work.
+
+**Missing parentheses.** In AND and OR formulas, each test needs its own parentheses.
+
+**Blocked spill range.** The cells where the results will land must be empty. A stray value in one of them gives you #SPILL!.
+
+**Fixed ranges on growing data.** If you add rows below row 9, a formula pointing at A5:D9 won't see them. Convert the data to a table, or see our guide to [TRIMRANGE and trim refs](/resources/trimrange-trim-refs-excel-formulas-growing-data) for ranges that grow with your data.
+
+## Try It Now
+
+Open a blank sheet, paste the sample table, and put East and Apples in H1 and H2. Enter the OR formula in F4, then change H1 to a region that doesn't exist, such as South, and H2 to a product that doesn't exist. Remove the third argument and watch the result turn into #CALC!. Add "No matches" back and it clears. That takes about two minutes and teaches the error better than reading about it.
+
+To go further and summarize the filtered data without a PivotTable, see our guide to [GROUPBY and PIVOTBY](/resources/groupby-pivotby-excel-functions-guide-2026).
+
+**Sources:**
+- [Microsoft Support: FILTER function](https://support.microsoft.com/en-us/excel/functions/filter-function)
+- [Microsoft Support: How to correct a #CALC! error](https://support.microsoft.com/en-us/office/how-to-correct-a-calc-error-d6ee03c5-daf6-426a-8df5-4b284730ab1b)
+
+*The syntax, the AND/OR approach, and the #CALC! fix come from those two Microsoft pages. The sample table and the worked results are my own.*
+    `,
+  },
+  {
     slug: "excel-spill-error-causes-and-fixes-2026",
     title: "Excel #SPILL! Error: The 7 Causes and How to Fix Each One",
     description: "Microsoft documents seven causes of the #SPILL! error in Excel. Here's each one with the documented fix, the Select Obstructing Cells shortcut, and a one-minute practice exercise.",
