@@ -15,6 +15,85 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "copilot-excel-clean-data-skill-what-it-checks-how-to-review-2026",
+    title: "Copilot's Clean Data Skill in Excel: What It Checks, How to Run It, and How to Review Its Fixes",
+    description: "Microsoft's October 2026 Excel update added a clean-data skill to Copilot that flags extra spaces, mixed formats, inconsistent dates, duplicates, and wrong data types. Here's what Microsoft says it does, what it doesn't say, and a five-step review routine.",
+    category: "excel",
+    readTime: "6 min read",
+    publishedAt: "2026-11-10",
+    content: `# Copilot's Clean Data Skill in Excel: What It Checks, How to Run It, and How to Review Its Fixes
+
+Bad data rarely announces itself. A lookup returns #N/A because one customer ID has a trailing space. A PivotTable splits "Acme Ltd" and "Acme Ltd " into two rows. A column of dates sorts wrong because half of them are text. You find these problems after the report is already wrong.
+
+In its October 2026 Excel update, Microsoft listed a Copilot skill built for exactly this job. It's called clean-data, and it's now rolling out in Excel. Here's what Microsoft says it does, how to run it, and a review routine that keeps you in control of what changes.
+
+## What Microsoft Has Said About It
+
+The feature appears in the "What's New in Excel (October 2026)" post on the Microsoft Community Hub, published October 27, 2026. Microsoft describes the clean data skill as one that finds and corrects data issues that can affect formulas, lookups, PivotTables, reports, and AI-generated insights. The post says it's rolling out to general availability on all platforms, and lists Excel for Windows, Mac, and web.
+
+Microsoft's support page for Copilot's built-in skills (dated November 2, 2026) adds the details. The skill looks at your data for five kinds of problems:
+
+- Extra spaces
+- Inconsistent text and number formats
+- Inconsistent dates
+- Duplicate values
+- Values stored as the wrong data type
+
+It then explains what it found and why it matters, and proposes corrections in the workbook. You review the proposed fixes and select which changes to apply.
+
+That last step is the important one. This isn't a silent find-and-replace. It's a proposal you accept or reject.
+
+## How to Run It
+
+Microsoft's support page says to type "@" followed by the skill name in your prompt to Copilot. For this skill, that's @clean-data. You can also find it in the Data and Analysis folder of the "Manage plugins & skills" dialog. Microsoft says clean-data is enabled by default in Copilot in Excel.
+
+A practical prompt looks like this:
+
+@clean-data Check the Customers table on this sheet. I'm about to use the Customer ID column in an XLOOKUP, so flag anything that would make matches fail.
+
+Pointing it at a specific range and telling it what the data will be used for gives it a narrower job than "clean my workbook." That's our suggestion, not a Microsoft instruction. The support page doesn't specify how prompts should be phrased.
+
+## What Microsoft Hasn't Said
+
+Several things aren't stated on the pages we read, so don't assume them:
+
+- **License requirements.** Neither the October post nor the support page says which Microsoft 365 or Copilot license is needed.
+- **Availability for your account.** The support page says the skill is "rolling out to production and may not be available for all customers." If you don't see it, that's the likely reason.
+- **Limits.** No row count, file size, or data type limits are given beyond the five issue types above.
+- **Accuracy.** Microsoft publishes no accuracy or testing figures for clean-data.
+
+On the accuracy point, treat the output as a draft. Microsoft's own page, in its accounting section, says Copilot output might be inaccurate or incomplete and should be checked against source records. That sentence is about the accounting skills, but it's a fair rule for any AI-proposed edit to your data.
+
+## A Review Routine That Works
+
+This is our own method, not Microsoft's. It takes about five minutes on a typical sheet and protects you against the two ways automated cleaning goes wrong: changing something that was correct, and missing something that wasn't.
+
+1. **Work on a copy.** Save a duplicate of the file before you run the skill, or at least a duplicate of the sheet. Undo is available, but a copy is the only thing that survives a save-and-close.
+2. **Count before you start.** Note the row count and, for numeric columns, a SUM. Duplicates removal should change the first. Format fixes should change neither.
+3. **Read every proposed change before applying.** Look hardest at duplicates. Two rows that look identical may be two real transactions.
+4. **Be careful with dates.** If your data mixes day-first and month-first formats, a proposed fix such as 03/04/2026 can be read two ways. Confirm which one your source system uses.
+5. **Recount after.** Check that the totals match your notes, and that your lookup now returns values where it returned #N/A before.
+
+If you prefer to do the same fixes by hand, or want to understand what the skill is automating, our guide to [cleaning messy data in Excel](/resources/how-to-clean-messy-data-in-excel) covers TRIM, text-to-columns, and duplicate removal step by step.
+
+## Where This Fits With Other Copilot Skills
+
+Clean-data is one of several built-in skills. Microsoft's October post also describes a skill builder, which turns a described workflow into a reusable skill, and a skill recorder, which is in Insider preview on desktop. We covered how skills work in general, and the finance skills library, in [Copilot in Excel Can Now Learn Your Recurring Finance Workflows](/resources/excel-copilot-finance-skills-guide-2026). If you want to limit what Copilot can change before it changes it, read [Plan Mode in Excel Copilot](/resources/excel-copilot-plan-mode-guide).
+
+For the prompting side, including how to describe a task so an AI assistant gets it right the first time, [How Do I Use AI](https://howdoiuse.ai) has a growing library of guides.
+
+## The Bottom Line
+
+Data cleaning is the least glamorous part of spreadsheet work and the part that most often causes wrong answers downstream. A skill that finds the five most common problems and lets you approve each fix is a reasonable use of Copilot, as long as you treat it as a reviewer's assistant and not an autopilot. Run it on a copy, count before and after, and read what it proposes.
+
+**Sources:**
+- [Microsoft Excel Team: What's New in Excel (October 2026)](https://techcommunity.microsoft.com/blog/excelblog/whats-new-in-excel-october-2026/4549758)
+- [Microsoft Support: Copilot in Excel built-in skills](https://support.microsoft.com/en-us/excel/copilot/copilot-in-excel-built-in-skills)
+
+*Details above come from these two Microsoft pages as published in early November 2026. Availability is rolling out and may differ by account. The review routine and sample prompt are our own suggestions.*
+`,
+  },
+  {
     slug: "excel-filter-function-multiple-criteria-and-or-calc-error-2026",
     title: "Excel FILTER Function: Multiple Criteria, AND vs OR, and Fixing #CALC!",
     description: "How the FILTER function works, how to combine criteria with * for AND and + for OR, and how to stop the #CALC! error with the if_empty argument. Based on Microsoft's documentation.",
