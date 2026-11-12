@@ -15,6 +15,117 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "excel-conditional-formatting-formula-highlight-entire-row-2026",
+    title: "Excel Conditional Formatting With Formulas: Highlight a Whole Row, Flag Duplicates, and Fix Rules That Don't Fire",
+    description: "Built-in conditional formatting only colors the cell it tests. A formula rule can color a whole row, flag repeats, or mark overdue dates. Here's how to set one up, the dollar-sign rule that makes or breaks it, and how to fix a rule that does nothing.",
+    category: "excel",
+    readTime: "7 min read",
+    publishedAt: "2026-11-12",
+    howToSteps: [
+      { name: "Select the whole range", text: "Select every cell you want formatted, starting from the top-left cell, for example A2:D20 for a table with headers in row 1." },
+      { name: "Open a formula rule", text: "Go to Home > Conditional Formatting > New Rule and choose Use a formula to determine which cells to format." },
+      { name: "Write the formula for the top-left cell", text: "Write the test as if it only applied to the first row of your selection, for example =$C2=\"Overdue\". Lock the column with $ and leave the row number unlocked." },
+      { name: "Pick a format", text: "Click Format, choose a fill or font, and click OK until the dialogs close." },
+      { name: "Check the order", text: "Open Home > Conditional Formatting > Manage Rules to see every rule on the sheet, and move the most important rule to the top." }
+    ],
+    content: `# Excel Conditional Formatting With Formulas: Highlight a Whole Row, Flag Duplicates, and Fix Rules That Don't Fire
+
+The preset conditional formatting rules in Excel are fine for simple jobs: color numbers above 100, shade the top 10, add data bars. They all share one limit. They test a cell and format that same cell.
+
+Most real requests are different. Highlight the whole order when the status says Overdue. Shade the row for any invoice older than 30 days. Flag a customer ID that appears twice. For those, you need a formula rule. This guide shows how to write one, why the dollar sign matters more than anything else, and what to check when a rule does nothing.
+
+The setup steps and the first three example formulas follow Microsoft's support article on using a formula to apply conditional formatting. The sample table and the row-highlighting patterns are our own.
+
+## How a Formula Rule Works
+
+A formula rule is a TRUE/FALSE test. For each cell in the range you selected, Excel works out the formula. If the result is TRUE, the cell gets the format. If it's FALSE, nothing happens.
+
+You write the formula once, from the point of view of the top-left cell in your selection. Excel then shifts any relative references as it moves across and down the range, the same way it does when you copy a formula. That's the part that trips people up, and it's covered below.
+
+## Setting Up a Rule
+
+1. Select the cells you want formatted, starting with the top-left one.
+2. On the Home tab, click **Conditional Formatting**, then **New Rule**.
+3. Choose **Use a formula to determine which cells to format**. On Excel for Mac, Microsoft's article says to set the Style box to Classic first, then pick this option from the list.
+4. Type the formula. It starts with an equal sign.
+5. Click **Format** (or choose a custom format on Mac), pick a fill or font, and click OK until the dialogs close.
+
+## Three Examples From Microsoft's Documentation
+
+**Dates in the future.** With A2:A7 selected, =A2>TODAY() formats any date later than today. Because TODAY() recalculates, the formatting updates on its own each day.
+
+**A text match.** With C2:C7 selected, =C2="Y" formats every cell that contains Y. The quotation marks tell Excel that Y is text.
+
+**Duplicates.** With D2:D11 selected, =COUNTIF($D$2:$D$11,D2)>1 formats every value that appears more than once in the range. The range is locked with dollar signs so it never moves. D2 isn't locked, so it moves to D3, D4 and so on as Excel works down the list.
+
+## The Dollar Sign Rule (Highlighting a Whole Row)
+
+Here's a sample table to try this on. Put it in A1:D6:
+
+- Order | Customer | Status | Amount
+- 1001 | Harper | Paid | 420
+- 1002 | Nguyen | Overdue | 1,150
+- 1003 | Silva | Paid | 260
+- 1004 | Adeyemi | Overdue | 780
+- 1005 | Brooks | Pending | 330
+
+You want every column of an Overdue order shaded, not only the Status cell.
+
+Select A2:D6. Create a formula rule with:
+
+=$C2="Overdue"
+
+The dollar sign in front of C locks the column. As Excel moves across the row from A to D, it keeps checking column C. The row number has no dollar sign, so it moves down: row 3 checks C3, row 4 checks C4. Orders 1002 and 1004 get shaded across all four columns.
+
+Compare the three ways you could write it:
+
+- **=$C2="Overdue"** locks the column only. This is the one you want for whole-row highlighting.
+- **=C2="Overdue"** locks nothing. Column B would check column B's neighbor, column D would check column E, and the shading ends up in the wrong cells.
+- **=$C$2="Overdue"** locks both. Every cell checks C2 only, so the whole range is either all shaded or all plain.
+
+One more thing to watch: when you click a cell while writing the rule, Excel often inserts a fully locked reference like $C$2. Delete the second dollar sign before you click OK.
+
+## More Patterns Worth Keeping
+
+These use the same idea. Lock the column you're testing and leave the row free.
+
+- **Amount over a threshold:** =$D2>1000 shades rows where the amount is above 1,000.
+- **Two conditions at once:** =AND($C2="Overdue",$D2>500) shades only overdue orders above 500. Swap AND for OR to shade rows that meet either test.
+- **Older than 30 days:** if column E held a due date, =$E2<TODAY()-30 would shade rows more than 30 days past due.
+- **Banded rows:** =MOD(ROW(),2)=0 shades every even-numbered row. It doesn't depend on any column, so it needs no dollar signs.
+- **Blank required field:** =$B2="" shades rows where the customer name is missing.
+
+## When a Rule Doesn't Fire
+
+If nothing gets formatted, or the wrong cells do, work through this list:
+
+1. **Check the reference style.** Most broken rules have a dollar sign in the wrong place. See the three versions above.
+2. **Check the starting row.** The formula must point at the first row of your selection. If you selected A2:D6 but wrote =$C1="Overdue", every row checks the row above it.
+3. **Check for an error result.** A formula that returns an error is treated as not TRUE, so nothing gets formatted. Test the same formula in a spare cell to see what it returns.
+4. **Check for text that looks like a number or date.** A date stored as text won't compare properly with TODAY(). Neither will a number with a stray space.
+5. **Check the rule order.** Go to Home > Conditional Formatting > Manage Rules. Set "Show formatting rules for" to This Worksheet to see every rule on the sheet. Rules higher in the list take priority when two of them try to set the same format. Use the move arrows to reorder.
+6. **Check the Applies to range.** In the same Rules Manager, the Applies to box shows exactly which cells each rule covers. Copying and pasting cells inside the range can split one rule into several fragments, which is worth tidying up.
+
+## Tips That Save Time Later
+
+- **Put thresholds in a cell.** Instead of =$D2>1000, type 1000 in a cell such as H1 and use =$D2>$H$1. Change the threshold and every row updates.
+- **Use a table.** If your data is an Excel table, rules applied to a whole column usually extend as you add rows. It also gives the data a name. See our guide to [naming your Excel table when you create it](/resources/excel-name-your-table-at-creation-naming-rules-structured-references-2026).
+- **Clean before you format.** Trailing spaces and text-numbers break formula rules the same way they break lookups. Our guide to [cleaning messy data in Excel](/resources/how-to-clean-messy-data-in-excel) covers the usual fixes, and the [drop-down list guide](/resources/excel-drop-down-list-data-validation-paste-bypass-circle-invalid-data) shows how to keep status values consistent so rules like =$C2="Overdue" keep matching.
+
+If you'd rather describe the rule in plain English and let an assistant draft the formula, [How Do I Use AI](https://howdoiuse.ai) has guides on prompting for spreadsheet work. Check whatever it gives you against the dollar sign rule above.
+
+## The Bottom Line
+
+A formula rule is just a TRUE/FALSE test written for the top-left cell. Lock the column you're testing with a dollar sign, leave the row free, and you can color whole rows, flag repeats and mark overdue items with one rule. When a rule misbehaves, the dollar signs and the rule order are the first places to look.
+
+**Sources:**
+- [Microsoft Support: Use a formula to apply conditional formatting](https://support.office.com/en-gb/article/Use-a-formula-to-apply-conditional-formatting-34093090-235b-4476-a7ce-1da7880c750f)
+- [Microsoft Support: Use conditional formatting to highlight information in Excel](https://support.microsoft.com/en-us/excel/use-conditional-formatting-to-highlight-information-in-excel)
+
+*Menu names can vary slightly between Excel for Windows, Mac and the web. The sample table and the row-highlighting patterns are our own examples.*
+`,
+  },
+  {
     slug: "copilot-excel-clean-data-skill-what-it-checks-how-to-review-2026",
     title: "Copilot's Clean Data Skill in Excel: What It Checks, How to Run It, and How to Review Its Fixes",
     description: "Microsoft's October 2026 Excel update added a clean-data skill to Copilot that flags extra spaces, mixed formats, inconsistent dates, duplicates, and wrong data types. Here's what Microsoft says it does, what it doesn't say, and a five-step review routine.",
